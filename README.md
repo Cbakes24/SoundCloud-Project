@@ -1,5 +1,5 @@
 # SoundCloud-Project
-# `<name of application here>`
+
 
 ## Database Schema Design
 
