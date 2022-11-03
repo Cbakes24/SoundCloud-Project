@@ -1,0 +1,273 @@
+
+### Get all Songs
+
+Returns a list of all the songs in the db.
+
+[ ] set up the route handler for /songs
+[ ] response should have status code 200
+[ ] header should be: Content-Type: application/json
+[ ] response.json body should contain the following fields:
+
+{
+  "Songs": [
+    {
+      "id": 1,
+      "userId": 1,
+      "albumId": 1,
+      "title": "song name here",
+      "description": "description of the song",
+      "url": "audio url",
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "previewImage": "image url"
+    }
+  ]
+}
+
+
+### Get current userId
+
+Returns information about the currect logged in user
+[ ] set up the route handler for /user/:userId
+[ ] response should have status code 200
+[ ] header should be: Content-Type: application/json
+[ ] response.json body should contain the following fields:
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@gmail.com",
+  "username": "JohnSmith"
+}
+
+### POST a Log in a user login
+Logs in a user and returns the user's information.
+[ ] set up the route handler for /session/login
+[ ] take in params/query data for user credential username and password:
+{
+  "credential": "john.smith@gmail.com",
+  "password": "secret password"
+}
+[ ] response should have status code 200
+[ ] header should be: Content-Type: application/json
+[ ] response.json body should contain the following fields:
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@gmail.com",
+  "username": "JohnSmith",
+  "token": ""
+}
+
+[ ] Create an error response status 401 for 'invalid credentials'
+[ ] Body contains message:
+{
+  "message": "Invalid credentials",
+  "statusCode": 401
+}
+
+
+[ ] Create an error response status 400 for 'validation error'
+[ ] Body contains message:
+{
+  "message": "Validation error",
+  "statusCode": 400,
+  "errors": {
+    "credential": "Email or username is required",
+    "password": "Password is required"
+  }
+}
+
+
+
+### Sign Up a new user
+Creates a new user, logs them in as the current user, returns user information
+[ ] Create a POST route handler for /session/signup
+[ ] The req body should be the following:
+    {
+  "firstName": "John",
+  "lastName": "Smith",
+  "username": "JohnSmith",
+  "email": "john.smith@gmail.com",
+  "password": "secret password"
+}
+[ ] response code of 200 when successful and Content-Type: application/json
+
+If email already exists
+[ ] response status 403
+[ ] res body should contain:
+        {
+    "message": "User already exists",
+    "statusCode": 403,
+    "errors": {
+        "email": "User with that email already exists"
+    }
+    }
+
+If Validation Error:
+[ ]Status code 400
+[ ] res Body should contain:
+    {
+    "message": "Validation error",
+    "statusCode": 400,
+    "errors": {
+        "email": "Invalid email",
+        "username": "Username is required",
+        "firstName": "First Name is required",
+        "lastName": "Last Name is required"
+    }
+    }
+
+
+### Get all songs made by a user
+Get all the songs entered by a userId
+[ ]create route handler got get //user/:userId/songs
+[ ]res status code  200 and header Content-Type: application/json
+[ ] body should be:
+    {
+    "Songs": [
+        {
+        "id": 1,
+        "userId": 1,
+        "albumId": 1,
+        "title": "Yesterday",
+        "description": "A song about the past.",
+        "url": "audio url",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+        "previewImage": "image url"
+        }
+    ]
+    }
+
+
+### Get all Songs from an Artist from artistId
+[ ] create route handler for Get /artists/:artistId/songs
+[ ]res status code  200 and header Content-Type: application/json
+[ ] body should be:
+    {
+    "Songs": [
+        {
+        "id": 1,
+        "userId": 1,
+        "albumId": 1,
+        "title": "song name",
+        "description": "A song description.",
+        "url": "audio url",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+        "previewImage": "image url"
+        }
+    ]
+    }
+
+
+If no artist by Id
+[ ] Status code 494
+[ ] header is Content-Type: application/json
+[ ] body should be:
+    {
+    "message": "Artist couldn't be found",
+    "statusCode": 404
+    }
+
+
+### Get details of a song by its Id
+returns details of a specific song specified by id
+[ ] create get route hander for /songs/:songId
+[ ] status code is 200 and header Content-Type: application/json
+[ ]body res should be:
+        {
+  "id": 1,
+  "userId": 1,
+  "albumId": 1,
+  "title": "Yesterday",
+  "description": "A song about the past.",
+  "url": "audio url",
+  "createdAt": "2021-11-19 20:39:36",
+  "updatedAt": "2021-11-19 20:39:36",
+  "previewImage": "image url",
+  "Artist": {
+    "id": 1,
+    "username": "JohnSmith",
+    "previewImage": "image url"
+  },
+  "Album": {
+    "id": 1,
+    "title": "Time",
+    "previewImage": "image url"
+  }
+}
+
+If cant find song by an ID
+[ ]status code id 404 header Content-Type: application/json
+[ ] {
+  "message": "Song couldn't be found",
+  "statusCode": 404
+}
+
+
+
+### Create A Song
+creates and returns a new song!
+[ ]requires authentication
+[ ]create a post route handler for  /songs
+[ ] request body :
+ {
+  "title": "Song Name",
+  "description": "song description",
+  "url": "audio url",
+  "imageUrl": "image url",
+  "albumId": null
+}
+Body with an album:
+
+{
+  "title": "Tomorrow",
+  "description": "A song about the future.",
+  "url": "audio url",
+  "imageUrl": "image url",
+  "albumId": 1
+}
+
+[ ] success status code 201 Content-Type: application/json
+[ ] response body should be:
+        {
+  "id": 1,
+  "userId": 1,
+  "albumId": null,
+  "title": "Yesterday",
+  "description": "A song about the past.",
+  "url": "audio url",
+  "createdAt": "2021-11-19 20:39:36",
+  "updatedAt": "2021-11-19 20:39:36",
+  "previewImage": "image url"
+}
+
+If body validation error
+[ ] status code should be 400
+[ ] Res Body should be:
+    {
+  "message": "Validation Error",
+  "statusCode": 400,
+  "errors": {
+    "title": "Song title is required",
+    "url": "Audio is required"
+  }
+}
+
+If Error response: Couldn't find an Album with the specified albumId if albumId is not null
+
+[ ]Status Code: 404
+[ ]Headers: Content-Type: application/json
+[ ]Body:
+
+{
+  "message": "Album couldn't be found",
+  "statusCode": 404
+}
+
+
+### Edit a Song
+
