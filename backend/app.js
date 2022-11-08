@@ -42,7 +42,7 @@ const routes = require('./routes');
 
 app.use(routes);
 
-app.use((_req, _res, next) => {
+app.use((_req, _res, next) => { //the understroes are just visual, no effect but but are saying the wares are not being used
   const err = new Error("The requested resource couldn't be found.");
   err.title = "Resource Not Found";
   err.errors = ["The requested resource couldn't be found."];
