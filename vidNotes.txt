@@ -1,2 +1,10 @@
 git notes
 
+How To Start:
+-solidify your SCHEMA set up for each table
+-set up the DB migration model and seeders (dont have to make that many seeders they are just testers)
+
+-work on Kanban
+
+- TEST FREQUENTLY constantly test between coding so you will know what lines of code cause an error
+if you wait too long it will be hard to finf
