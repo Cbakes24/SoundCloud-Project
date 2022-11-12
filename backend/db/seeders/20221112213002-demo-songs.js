@@ -13,14 +13,20 @@ module.exports = {
         previewImage: DataTypes.STRING
       },
       {
-        title: 'Blood Sex Sugar magik',
-        description: 'Come on Anthony gimmie some sugaa',
-        userId: 2
+        title: DataTypes.STRING,
+        description: DataTypes.STRING,
+        url: DataTypes.STRING,
+        userId: DataTypes.INTEGER,
+        albumId: DataTypes.INTEGER,
+        previewImage: DataTypes.STRING
       },
       {
-        title: 'Giving Kids to Candy',
-        description: 'Forever changed the Rock and Roll World',
-        userId: 3
+        title: DataTypes.STRING,
+        description: DataTypes.STRING,
+        url: DataTypes.STRING,
+        userId: DataTypes.INTEGER,
+        albumId: DataTypes.INTEGER,
+        previewImage: DataTypes.STRING
       },
     ]);
   },
