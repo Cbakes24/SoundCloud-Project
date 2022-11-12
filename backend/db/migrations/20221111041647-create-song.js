@@ -16,7 +16,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+  
       },
       userId: {
         type: Sequelize.INTEGER,
