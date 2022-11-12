@@ -8,3 +8,8 @@ How To Start:
 
 - TEST FREQUENTLY constantly test between coding so you will know what lines of code cause an error
 if you wait too long it will be hard to finf
+
+associations
+songs
+fk album id
+fk user id
