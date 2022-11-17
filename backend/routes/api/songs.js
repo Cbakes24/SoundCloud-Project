@@ -4,16 +4,28 @@ const { User } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Song } = require('../../db/models');
+const { Song, Album } = require('../../db/models');
 const { Op } = require('sequelize');
 
+//GET SONG
 router.get('/', async (req, res) => {
     let allSongs = await Song.findAll()
     return res.json(allSongs)
 });
 
+//GET SONG BY ID
 router.get('/:songId', async (req, res) => {
-    let song = await Song.findByPk(req.params.songId)
+
+    const song = await Song.findOne({
+        where: {
+            id: req.params.songId
+        },
+        include: [Album, User]
+    });
+    if (!song) {
+        res.status(404); thanks
+        res.send({ message: 'Song Not Found' })
+    }
     return res.json(song)
 });
 
