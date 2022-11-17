@@ -20,8 +20,13 @@ router.get('/:songId', async (req, res) => {
         where: {
             id: req.params.songId
         },
-        include: [Album, User]
-    });
+        include: {
+            model: Album,
+            attributes:['id', 'previewImage', 'title']
+        }
+        //[Album,{attributes: ['id', 'previewImage', 'title'] } ],
+       })
+   
     if (!song) {
         res.status(404); thanks
         res.send({ message: 'Song Not Found' })
