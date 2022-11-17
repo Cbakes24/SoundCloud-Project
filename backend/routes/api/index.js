@@ -5,12 +5,13 @@ const { User } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const songsRouter = require('./songs.js')
 const { restoreUser } = require("../../utils/auth.js");
 
 router.use(restoreUser);
 
 router.use('/session', sessionRouter);
-
+router.use('/songs', songsRouter)
 router.use('/users', usersRouter);
 
 router.get(

@@ -10,7 +10,6 @@
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
     "rebuild": "rm db/dev.db && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
-
   },
   "keywords": [],
   "author": "",
