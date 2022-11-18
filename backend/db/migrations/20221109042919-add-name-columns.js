@@ -17,7 +17,7 @@ module.exports = {
 
     await queryInterface.addColumn("Users", "previewImage", {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     });
   },
 

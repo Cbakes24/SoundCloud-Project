@@ -26,8 +26,8 @@ const validateSignup = [
 ];
 
 // router.post('/', async (req, res) => {
-//       const { email, password, username } = req.body;
-//       const user = await User.signup({ email, username, password });
+//       const {  firstName, lastName, email, username, password } = req.body;
+//       const user = await User.signup({ firstName, lastName, email, username, , password });
 
 //       await setTokenCookie(res, user);
 
@@ -37,21 +37,23 @@ const validateSignup = [
 //     }
 //   );
 
-//SIGN UP USER
-router.post('/session/signup', async (req, res) => {
-  const { firstName, lastName, username, email, password } = req.body
-  //create or User.createUser
 
-  const newUser = await User.create( {
-    firstName: firstName,
-    lastName: lastName,
-    username: username,
-    email: email,
-    password: password})
+router.post('/', validateSignup, async (req, res) => {
+  const { firstName, lastName, username, email, password } = req.body
+ 
+
+  const newUser = await User.signup( {  username, email, password, firstName, lastName, })
+
+    await setTokenCookie(res, newUser);
+
+    return res.json({
+      user: newUser
+    })
+    
 })
 
 
-router.get('/user/:userId/songs', async (req, res) => {
+router.get('/:userId/songs', async (req, res) => {
 const currUser = await User.findOne( { where: { id: req.params.userId } })
 
 const userSongs = await currUser.getSongs()
