@@ -19,13 +19,22 @@ router.get('/:songId', async (req, res) => {
     const song = await Song.findOne({
         where: {
             id: req.params.songId
-        },
-        include: {
-            model: Album,
-            attributes:['id', 'previewImage', 'title']
-        }
+        }, 
+        include: [ {
+            model: User,
+            attributes:['id', 'previewImage', 'username']
+        }, 
+        {model: Album,
+            attributes:['id', 'previewImage', 'title']}]
+    })
+        //{
+            // model: Album,
+            // attributes:['id', 'previewImage', 'title'],
+            // model: User,
+            // attributes:['id', 'previewImage', 'username']
+        //}
+            
         //[Album,{attributes: ['id', 'previewImage', 'title'] } ],
-       })
    
     if (!song) {
         res.status(404); thanks

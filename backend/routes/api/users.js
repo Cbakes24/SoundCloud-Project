@@ -1,6 +1,6 @@
 const express = require('express')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Song } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -36,6 +36,28 @@ const validateSignup = [
 //       });
 //     }
 //   );
+
+//SIGN UP USER
+router.post('/session/signup', async (req, res) => {
+  const { firstName, lastName, username, email, password } = req.body
+  //create or User.createUser
+
+  const newUser = await User.create( {
+    firstName: firstName,
+    lastName: lastName,
+    username: username,
+    email: email,
+    password: password})
+})
+
+
+router.get('/user/:userId/songs', async (req, res) => {
+const currUser = await User.findOne( { where: { id: req.params.userId } })
+
+const userSongs = await currUser.getSongs()
+console.log(userSongs.id)
+
+})
 
   router.post('/', validateSignup, async (req, res) => {
       const { email, password, username } = req.body;
