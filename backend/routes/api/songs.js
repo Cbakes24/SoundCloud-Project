@@ -1,11 +1,11 @@
 const express = require('express')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Song, Album } = require('../../db/models');
+const { Song, Album, User } = require('../../db/models');
 const { Op } = require('sequelize');
+
 
 //GET SONG
 router.get('/', async (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 //GET SONG BY ID
-router.get('/:songId', async (req, res) => {
+router.get('/:songId(\\d+)', async (req, res, next) => {
 
     const song = await Song.findOne({
         where: {
@@ -27,21 +27,27 @@ router.get('/:songId', async (req, res) => {
         {model: Album,
             attributes:['id', 'previewImage', 'title']}]
     })
-        //{
-            // model: Album,
-            // attributes:['id', 'previewImage', 'title'],
-            // model: User,
-            // attributes:['id', 'previewImage', 'username']
-        //}
 
-        //[Album,{attributes: ['id', 'previewImage', 'title'] } ],
+        if (!song) {
+            //title, status, errors(array), message
+            const err = new Error()
+            err.status = 404
+            err.title = 'songId does not exist'
+            err.message = 'Song could not be found'
+            err.errors = ['Song not found']
 
-    if (!song) {
-        res.status(404);
-        res.send({ message: 'Song Not Found' })
-    }
+            return next(err)
+
+          }
     return res.json(song)
 });
+
+//EDIT A SONG
+router.put('/:songId', requireAuth, async (req, res) => {
+
+
+})
+
 
 
 //CREATE A SONG FOR AN ALBUM
@@ -76,8 +82,18 @@ router.post('/', requireAuth, async (req, res, next) => {
         })
 
 
+//GET ALL SONGS BY CURRENT USER
 
-        
+router.get('/current', requireAuth, async (req, res, next) => {
+
+    const userId = req.user.id
+        const allUserSongs = await Song.findAll( {where: {userId: userId}})
+
+       return res.json(allUserSongs)
+    })
+
+
+
 //ALT ATTEMPT
     // const album = await Album.findByPk(albumId)
     // if(!album)

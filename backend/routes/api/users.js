@@ -53,13 +53,15 @@ router.post('/', validateSignup, async (req, res) => {
 })
 
 
-router.get('/:userId/songs', async (req, res) => {
-const currUser = await User.findOne( { where: { id: req.params.userId } })
+router.get('/:userId/songs', requireAuth, async (req, res) => {
+const userId = req.params.id
 
-const userSongs = await currUser.getSongs()
-console.log(userSongs.id)
+const userSongs = await Song.findAll( { where: {userId: userId}})
 
+
+res.json(userSongs)
 })
+
 
   router.post('/', validateSignup, async (req, res) => {
       const { email, password, username } = req.body;
