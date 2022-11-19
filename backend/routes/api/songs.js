@@ -42,11 +42,45 @@ router.get('/:songId(\\d+)', async (req, res, next) => {
     return res.json(song)
 });
 
+//GET ALL SONGS BY CURRENT USER
+
+router.get('/current', requireAuth, async (req, res, next) => {
+
+    const userId = req.user.id
+        const allUserSongs = await Song.findAll( {where: {userId: userId}})
+
+       return res.json(allUserSongs)
+    })
+
 //EDIT A SONG
-router.put('/:songId', requireAuth, async (req, res) => {
+router.put('/:songId', requireAuth, async (req, res, next) => {
+    const { title, description, url, previewImage } = req.body
+    const song = await Song.findByPk(req.params.songId)
+    if (!song) {
+        //title, status, errors(array), message
+        const err = new Error()
+        err.status = 404
+        err.title = 'songId does not exist'
+        err.message = 'Song could not be found'
+        err.errors = ['Song not found']
 
+        return next(err)
 
+      }
+      
+    song.set({
+        title: title,
+        description: description,
+        url: url,
+        previewImage: previewImage
+    });
+    await song.save();
+
+    const editedSong = await Song.findByPk(req.params.songId)
+    res.json(editedSong)
 })
+
+
 
 
 
@@ -82,15 +116,7 @@ router.post('/', requireAuth, async (req, res, next) => {
         })
 
 
-//GET ALL SONGS BY CURRENT USER
 
-router.get('/current', requireAuth, async (req, res, next) => {
-
-    const userId = req.user.id
-        const allUserSongs = await Song.findAll( {where: {userId: userId}})
-
-       return res.json(allUserSongs)
-    })
 
 
 
