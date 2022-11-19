@@ -1,6 +1,6 @@
 const express = require('express')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Song } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -26,8 +26,8 @@ const validateSignup = [
 ];
 
 // router.post('/', async (req, res) => {
-//       const { email, password, username } = req.body;
-//       const user = await User.signup({ email, username, password });
+//       const {  firstName, lastName, email, username, password } = req.body;
+//       const user = await User.signup({ firstName, lastName, email, username, , password });
 
 //       await setTokenCookie(res, user);
 
@@ -36,6 +36,30 @@ const validateSignup = [
 //       });
 //     }
 //   );
+
+
+router.post('/', validateSignup, async (req, res) => {
+  const { firstName, lastName, username, email, password } = req.body
+ 
+
+  const newUser = await User.signup( {  username, email, password, firstName, lastName, })
+
+    await setTokenCookie(res, newUser);
+
+    return res.json({
+      user: newUser
+    })
+    
+})
+
+
+router.get('/:userId/songs', async (req, res) => {
+const currUser = await User.findOne( { where: { id: req.params.userId } })
+
+const userSongs = await currUser.getSongs()
+console.log(userSongs.id)
+
+})
 
   router.post('/', validateSignup, async (req, res) => {
       const { email, password, username } = req.body;
