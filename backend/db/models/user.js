@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: 'userId', onDelete: 'cascade', hooks: true  });
 
       User.hasMany(models.Album,
-        { foreignKey: 'userId' }); 
+        { foreignKey: 'userId' });
 
       User.hasMany(models.Song,
         { foreignKey: 'userId'  });
@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         lastName,
         username,
         email,
-        hashedPassword
+        hashedPassword,
       });
       return await User.scope('currentUser').findByPk(user.id);
     }

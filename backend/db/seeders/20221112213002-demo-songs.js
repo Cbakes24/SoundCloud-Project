@@ -39,12 +39,16 @@ module.exports = {
       {
         title: 'Blood Sex Sugar magik',
         description: 'Come on Anthony gimmie some sugaa',
-        userId: 2
+        userId: 3,
+        albumId: 3,
+        previewImage: 'image'
       },
       {
         title: 'Giving Kids to Candy',
         description: 'Forever changed the Rock and Roll World',
-        userId: 3
+        userId: 3,
+        albumId: 3,
+        previewImage: 'image'
       },
     ]);
   },

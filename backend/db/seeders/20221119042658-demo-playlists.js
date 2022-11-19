@@ -10,7 +10,7 @@ module.exports = {
         previewImage: 'image url'
       },
       {
-        name: 'My jam sessions',
+        name: 'My chill jam sessions',
         userId: 2,
         previewImage: 'image url'
       },

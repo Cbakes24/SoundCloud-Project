@@ -40,7 +40,7 @@ const validateSignup = [
 
 router.post('/', validateSignup, async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body
- 
+
 
   const newUser = await User.signup( {  username, email, password, firstName, lastName, })
 
@@ -49,7 +49,7 @@ router.post('/', validateSignup, async (req, res) => {
     return res.json({
       user: newUser
     })
-    
+
 })
 
 
@@ -72,6 +72,7 @@ console.log(userSongs.id)
       });
     }
   );
+
 
 
 module.exports = router;
