@@ -100,4 +100,31 @@ router.post('/:albumId/songs', requireAuth, async (req, res, next) => {
             res.json(newSong)
             })
 
+router.put('/:albumId', async (req, res, next) => {
+const { title, description, previewImage } = req.body
+const album = await Album.findByPk(req.params.albumId)
+if (!album) {
+    //title, status, errors(array), message
+    const err = new Error()
+    err.status = 404
+    err.title = 'albumId does not exist'
+    err.message = 'album could not be found'
+    err.errors = ['album not found']
+
+    return next(err)
+
+  }
+
+album.set({
+    title: title,
+    description: description,
+    previewImage: previewImage
+});
+
+await album.save();
+
+const editedAlbum = await Album.findByPk(req.params.albumId)
+res.json(editedAlbum)
+})
+
 module.exports = router;
