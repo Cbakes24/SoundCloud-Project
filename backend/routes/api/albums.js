@@ -100,6 +100,8 @@ router.post('/:albumId/songs', requireAuth, async (req, res, next) => {
             res.json(newSong)
             })
 
+
+//EDIT AN ALBUM
 router.put('/:albumId', async (req, res, next) => {
 const { title, description, previewImage } = req.body
 const album = await Album.findByPk(req.params.albumId)
