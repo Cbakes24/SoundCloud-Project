@@ -13,6 +13,35 @@ router.get('/', async (req, res) => {
    return res.json(allAlbums)
 });
 
+//Get ALBUM DETAILS BASED ON ALBUM ID
+router.get('/:albumId', async (req, res, next) => {
+
+    const albumId = req.params.albumId
+
+    const album = await Album.findByPk( albumId, {
+        include: [ {
+            model: User,
+            attributes:['id', 'previewImage', 'username']
+        },
+        {model: Song,
+            attributes:['id', 'userId', 'albumId', 'title', 'description', 'url', 'createdAt', 'updatedAt', 'previewImage']}]
+        })
+
+
+    if(!album) {
+
+        const err = new Error();
+        err.status = 404;
+        err.title = "album does not exist";
+        err.message = "Album could not be found";
+        err.errors = ["Album not found"];
+
+        return next(err);
+
+    }
+   return res.json(album)
+});
+
 router.get('/current', requireAuth, async (req, res, next) => {
 
     const userId = req.user.id
