@@ -3,7 +3,7 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
-const { Song, Album, Playlist, User, Comment } = require('../../db/models');
+const { User, Song, Album, PLaylist, Comment, PLaylistSong } = require('../../db/models');
 const { Op } = require("sequelize");
 
 
@@ -13,6 +13,13 @@ router.get('/', async (req, res) => {
    return res.json(allAlbums)
 });
 
+router.get('/current', requireAuth, async (req, res, next) => {
+
+    const userId = req.user.id
+        const allUserAlbums = await Album.findAll( {where: {userId: userId}})
+
+       return res.json(allUserAlbums)
+    })
 
 //CREATE AN ALBUM
 router.post('/', requireAuth, async (req, res) => {

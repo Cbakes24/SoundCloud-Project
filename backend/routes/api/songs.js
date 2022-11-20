@@ -3,7 +3,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Song, Album, User } = require('../../db/models');
+const { User, Song, Album, PLaylist, Comment, PLaylistSong } = require('../../db/models');
 const { Op } = require('sequelize');
 
 
@@ -67,7 +67,7 @@ router.put('/:songId', requireAuth, async (req, res, next) => {
         return next(err)
 
       }
-      
+
     song.set({
         title: title,
         description: description,
