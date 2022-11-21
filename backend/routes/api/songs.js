@@ -139,6 +139,29 @@ router.post("/:songId/comments", requireAuth, async (req, res, next) => {
     res.json(newComment);
   });
 
+
+  router.get('/:songId/comments', async (req, res, next) => {
+   const songId = req.params.songId
+
+   const song = await Song.findByPk(songId);
+
+       if (!song || songId === null) {
+         const err = new Error();
+         err.status = 404;
+         err.title = "songId does not exist";
+         err.message = "Song could not be found";
+         err.errors = ["Song not found"];
+
+         return next(err);
+       }
+
+const songComments = await Comment.findAll( { where: {songId: songId},
+
+
+})
+console.log('song')
+res.json(songComments)
+  } )
 //ALT ATTEMPT
 // const album = await Album.findByPk(albumId)
 // if(!album)
