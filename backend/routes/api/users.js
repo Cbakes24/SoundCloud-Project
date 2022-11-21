@@ -88,13 +88,7 @@ router.get("/:userId/albums", requireAuth, async (req, res, next) => {
 router.post("/", validateSignup, async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
 
-  const newUser = await User.signup({
-    username,
-    email,
-    password,
-    firstName,
-    lastName,
-  });
+  const newUser = await User.signup({ username, email, password, firstName, lastName});
 
   await setTokenCookie(res, newUser);
 

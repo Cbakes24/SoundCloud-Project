@@ -139,7 +139,7 @@ router.post("/:songId/comments", requireAuth, async (req, res, next) => {
     res.json(newComment);
   });
 
-
+//Get A COMMENT
   router.get('/:songId/comments', async (req, res, next) => {
    const songId = req.params.songId
 
@@ -156,7 +156,12 @@ router.post("/:songId/comments", requireAuth, async (req, res, next) => {
        }
 
 const songComments = await Comment.findAll( { where: {songId: songId},
-
+    include: [
+        {
+          model: User,
+          attributes: ["id", "username"],
+        }
+      ],
 
 })
 console.log('song')
