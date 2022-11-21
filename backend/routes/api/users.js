@@ -41,24 +41,64 @@ const validateSignup = [
 //     }
 //   );
 
-// GET ALL SONGS BY USER ID
-router.get("/:userId/songs", requireAuth, async (req, res) => {
+//GET DETAILS of  USER BY ID
+router.get("/:userId", async (req, res, next) => {
+
   const userId = req.params.userId;
 
-  if (!userId) {
-    //title, status, errors(array), message
-    const err = new Error();
-    err.status = 404;
-    err.title = "user does not exist";
-    err.message = "User could not be found";
-    err.errors = ["User not found"];
+  if (userId) {
+    const user = await User.findByPk(userId);
 
-    return next(err);
+    if (!user) {
+      const err = new Error();
+      err.status = 404;
+      err.title = "user does not exist";
+      err.message = "User could not be found";
+      err.errors = ["User not found"];
+
+      return next(err);
+    }
+  }
+
+  const totalSongs = await Song.count({ where: { userId: userId } });
+  const totalAlbums = await Album.count({ where: { userId: userId } });
+  const userDetails = await User.findByPk(userId);
+
+  userDetails.totalSongs = totalSongs
+  userDetails.totalAlbums = totalAlbums
+
+  res.json({
+    userDetails,
+    totalSongs,
+    totalAlbums
+  });
+
+});
+
+// GET ALL SONGS BY USER ID
+router.get("/:userId/songs", requireAuth, async (req, res, next) => {
+  const userId = req.params.userId;
+
+  if (userId) {
+    //title, status, errors(array), message
+    const user = await User.findByPk(userId)
+
+    if(!user){
+      const err = new Error();
+      err.status = 404;
+      err.title = "user does not exist";
+      err.message = "User could not be found";
+      err.errors = ["User not found"];
+
+      return next(err);
+    }
+
   }
 
   const userSongs = await Song.findAll({ where: { userId: userId } });
 
   res.json(userSongs);
+
 });
 
 //GET ALL ALBUMS FROM A USER
@@ -83,12 +123,17 @@ router.get("/:userId/albums", requireAuth, async (req, res, next) => {
   res.json(userAlbums);
 });
 
-
 //NEW USER SIGN Up?
 router.post("/", validateSignup, async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
 
-  const newUser = await User.signup({ username, email, password, firstName, lastName});
+  const newUser = await User.signup({
+    username,
+    email,
+    password,
+    firstName,
+    lastName,
+  });
 
   await setTokenCookie(res, newUser);
 
