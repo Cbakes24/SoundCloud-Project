@@ -7,7 +7,7 @@ const {
   User,
   Song,
   Album,
-  PLaylist,
+  Playlist,
   Comment,
   PLaylistSong,
 } = require("../../db/models");

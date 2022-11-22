@@ -8,13 +8,31 @@ const { Op } = require('sequelize');
 
 
 
-router.post('/', requireAuth, async (req, res) => {
+router.post('/', requireAuth, async (req, res, next) => {
     const { name, previewImage } = req.body
+    const userId = req.user.id
 
-    const playlist = await Playlist.create( name, previewImage)
+    if (!name) {
+        //title, status, errors(array), message
+        const err = new Error();
+        err.status = 400;
+        err.title = "Playlist No Name";
+        err.message = "Playlist needs a name";
+        err.errors = ["Playlist needs a name"];
+
+        return next(err);
+      }
+
+    const newPlaylist = await Playlist.create(
+        {
+          userId,
+          name: name,
+          previewImage: previewImage,
+        },
+      );
 
     res.status(201)
-    res.json(playlist)
+    res.json(newPlaylist)
 })
 
 
