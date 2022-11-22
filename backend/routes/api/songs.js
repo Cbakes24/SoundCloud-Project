@@ -9,7 +9,7 @@ const {
   Album,
   Playlist,
   Comment,
-  PLaylistSong,
+  PlaylistSong,
 } = require("../../db/models");
 const { Op } = require("sequelize");
 

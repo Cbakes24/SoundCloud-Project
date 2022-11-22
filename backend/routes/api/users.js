@@ -6,7 +6,7 @@ const {
   Album,
   Playlist,
   Comment,
-  PLaylistSong,
+  PlaylistSong,
 } = require("../../db/models");
 const router = express.Router();
 const { check } = require("express-validator");
@@ -64,9 +64,6 @@ router.get("/:userId", async (req, res, next) => {
   const totalAlbums = await Album.count({ where: { userId: userId } });
   const userDetails = await User.findByPk(userId);
 
-  userDetails.totalSongs = totalSongs
-  userDetails.totalAlbums = totalAlbums
-
   res.json({
     userDetails,
     totalSongs,
@@ -121,6 +118,29 @@ router.get("/:userId/albums", requireAuth, async (req, res, next) => {
   const userAlbums = await Album.findAll({ where: { userId: userId } });
 
   res.json(userAlbums);
+});
+
+
+//GET ALL PLAYLISTS BY USER ID
+router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
+  const userId = req.params.userId;
+
+  const user = await User.findByPk(userId);
+
+  if (!user) {
+    //title, status, errors(array), message
+    const err = new Error();
+    err.status = 404;
+    err.title = "user does not exist";
+    err.message = "User could not be found";
+    err.errors = ["User not found"];
+
+    return next(err);
+  }
+
+  const userPlaylists = await Playlist.findAll({ where: { userId: userId } });
+
+  res.json({userPlaylists});
 });
 
 //NEW USER SIGN Up?

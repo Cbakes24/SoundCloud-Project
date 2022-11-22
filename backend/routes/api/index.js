@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { setTokenCookie } = require('../../utils/auth.js');
-const { User, Song, Album, Playlist, Comment, PLaylistSong } = require('../../db/models');
+const { User, Song, Album, Playlist, Comment, PlaylistSong } = require('../../db/models');
 // const { restoreUser } = require('../../utils/auth.js'); already pulling from the session router I think??
 const { requireAuth } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');

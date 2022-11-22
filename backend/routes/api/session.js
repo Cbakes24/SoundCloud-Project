@@ -1,6 +1,6 @@
 const express = require('express')
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User, Song, Album, Playlist, Comment, PLaylistSong } = require('../../db/models');
+const { User, Song, Album, Playlist, Comment, PlaylistSong } = require('../../db/models');
 // backend/routes/api/session.js
 // ...
 const { check } = require('express-validator');
