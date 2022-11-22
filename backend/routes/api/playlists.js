@@ -34,7 +34,6 @@ router.get('/:playlistId', async (req, res) => {
 
         }
 
-
         const fullPlaylist = await Playlist.findOne( { where: { Id: playlistId},
 
       include: [
