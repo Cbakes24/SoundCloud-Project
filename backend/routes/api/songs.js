@@ -28,9 +28,29 @@ const validateSong = [
 
 
 //GET SONG
-router.get("/", async (req, res) => {
-  let allSongs = await Song.findAll();
-  return res.json(allSongs);
+router.get("/", async (req, res, next) => {
+    let { page, size } = req.query;
+    page = parseInt(page);
+    size = parseInt(size);
+    let pagination = {}
+    if (Number.isInteger(page) && Number.isInteger(size) &&
+        page > 0 && page <= 10 && size > 0 && size <= 20
+    ) {
+        pagination.limit = size,
+        pagination.offset = size * (page - 1)
+    } else if (!(page === 0 && size === 0)) {
+        const err = new Error();
+        err.status = 404;
+        err.title = "Page or Size not integer";
+        err.message = "Page and Size must be a number greater than or equal to 0";
+        err.errors = ["Page and Size must be a number greater than or equal to 0"];
+
+        return next(err);
+    }
+  let allSongs = await Song.findAll({
+    ...pagination
+});
+  return res.json({allSongs, page, size});
 });
 
 //GET SONG BY ID
