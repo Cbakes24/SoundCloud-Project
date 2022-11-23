@@ -46,6 +46,8 @@ router.put("/:commentId", requireAuth, async (req, res, next) => {
   res.json(editedComment);
 });
 
+
+//DELETE A COMMENT
 router.delete("/:commentId", requireAuth, async (req, res, next) => {
   const commentId = req.params.commentId;
   const userId = req.params.id;
@@ -56,7 +58,7 @@ router.delete("/:commentId", requireAuth, async (req, res, next) => {
       where: { userId: userId },
     });
 
-    if (!comment || commentId === null) {
+    if (!comment) {
       const err = new Error();
       err.status = 404;
       err.title = "commentId does not exist";

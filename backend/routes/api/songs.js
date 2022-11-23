@@ -13,6 +13,20 @@ const {
 } = require("../../db/models");
 const { Op } = require("sequelize");
 
+
+
+const validateSong = [
+    check("title")
+      .exists({ checkFalsy: true })
+      .withMessage("Please provide a valid song title."),
+    check("url")
+      .exists({ checkFalsy: true })
+      .withMessage("Please provide song audio"),
+    handleValidationErrors,
+  ];
+
+
+
 //GET SONG
 router.get("/", async (req, res) => {
   let allSongs = await Song.findAll();
@@ -62,6 +76,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
 router.put("/:songId", requireAuth, async (req, res, next) => {
     const { title, description, url, previewImage } = req.body;
     const song = await Song.findByPk(req.params.songId);
+   0
     if (!song) {
         //title, status, errors(array), message
         const err = new Error();
@@ -88,7 +103,7 @@ router.put("/:songId", requireAuth, async (req, res, next) => {
 
 
 //CREATE A SONG FOR AN ALBUM
-router.post("/", requireAuth, async (req, res, next) => {
+router.post("/", requireAuth, validateSong, async (req, res, next) => {
     const { title, description, url, previewImage, albumId } = req.body;
 
     if (albumId) {
