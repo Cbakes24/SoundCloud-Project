@@ -11,6 +11,7 @@ const {
 const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const { Op } = require("sequelize");
 
 const validateSignup = [
   check("email")
@@ -43,7 +44,6 @@ const validateSignup = [
 
 //GET DETAILS of  USER BY ID
 router.get("/:userId", async (req, res, next) => {
-
   const userId = req.params.userId;
 
   if (userId) {
@@ -67,9 +67,8 @@ router.get("/:userId", async (req, res, next) => {
   res.json({
     userDetails,
     totalSongs,
-    totalAlbums
+    totalAlbums,
   });
-
 });
 
 // GET ALL SONGS BY USER ID
@@ -78,9 +77,9 @@ router.get("/:userId/songs", requireAuth, async (req, res, next) => {
 
   if (userId) {
     //title, status, errors(array), message
-    const user = await User.findByPk(userId)
+    const user = await User.findByPk(userId);
 
-    if(!user){
+    if (!user) {
       const err = new Error();
       err.status = 404;
       err.title = "user does not exist";
@@ -89,13 +88,11 @@ router.get("/:userId/songs", requireAuth, async (req, res, next) => {
 
       return next(err);
     }
-
   }
 
   const userSongs = await Song.findAll({ where: { userId: userId } });
 
   res.json(userSongs);
-
 });
 
 //GET ALL ALBUMS FROM A USER
@@ -120,7 +117,6 @@ router.get("/:userId/albums", requireAuth, async (req, res, next) => {
   res.json(userAlbums);
 });
 
-
 //GET ALL PLAYLISTS BY USER ID
 router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
   const userId = req.params.userId;
@@ -140,13 +136,25 @@ router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
 
   const userPlaylists = await Playlist.findAll({ where: { userId: userId } });
 
-  res.json({userPlaylists});
+  res.json({ userPlaylists });
 });
 
 //NEW USER SIGN Up?
-router.post("/", validateSignup, async (req, res) => {
+router.post("/", validateSignup, async (req, res, next) => {
   const { firstName, lastName, username, email, password } = req.body;
+  const existUsers = await User.findOne({
+    where: { [Op.or]: [{ username }, { email }] },
+  });
 
+  if (existUsers) {
+    const err = new Error();
+    err.status = 403;
+    err.title = "user email or username not unique";
+    err.message = "user email or username already exists";
+    err.errors = ["user email or username already exists"];
+
+    return next(err);
+  }
   const newUser = await User.signup({
     username,
     email,
