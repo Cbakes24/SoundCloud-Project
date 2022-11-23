@@ -172,8 +172,9 @@ res.json(editedPlaylist)
 
 })
 
+
 //DELETE A PLAYLIST
-router.delete("/playlistId", requireAuth, async (req, res, next) => {
+router.delete("/:playlistId", requireAuth, async (req, res, next) => {
     const playlistId = req.params.playlistId;
     const userId = req.params.id;
 
@@ -193,9 +194,7 @@ router.delete("/playlistId", requireAuth, async (req, res, next) => {
         return next(err);
       }
 
-      await Playlist.destroy({
-        where: { id: playlistId }, // specific records to delete
-      });
+      await playlist.destroy();
     }
 
     res.json({
@@ -203,6 +202,5 @@ router.delete("/playlistId", requireAuth, async (req, res, next) => {
       statusCode: 200,
     });
   });
-
 
 module.exports = router;

@@ -12,13 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Playlist.belongsToMany(models.Song,
         { through: models.PlaylistSong,
-          foreignKey: 'playlistId'
-
-        })
+          foreignKey: 'playlistId'})
 
       Playlist.belongsTo(models.User,
         { foreignKey: 'userId' });
+
+        Playlist.hasMany(models.PlaylistSong, {
+          foreignKey: 'playlistId', onDelete: 'CASCADE',  hooks: true
+        })
+
     }
+
   }
   Playlist.init({
     name: DataTypes.STRING,

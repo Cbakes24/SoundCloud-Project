@@ -131,4 +131,33 @@ const editedAlbum = await Album.findByPk(req.params.albumId)
 res.json(editedAlbum)
 })
 
+//DELETE AN ALBUM
+router.delete("/:albumId", requireAuth, async (req, res, next) => {
+    const albumId = req.params.albumId;
+    const userId = req.params.id;
+    const { body } = req.body;
+
+    if (albumId) {
+      const album = await Album.findByPk(albumId, {
+        where: { userId: userId },
+      });
+
+      if (!album) {
+        const err = new Error();
+        err.status = 404;
+        err.title = "albumId does not exist";
+        err.message = "album could not be found";
+        err.errors = ["album not found"];
+
+        return next(err);
+      }
+
+      await album.destroy();
+    }
+
+    res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  });
 module.exports = router;

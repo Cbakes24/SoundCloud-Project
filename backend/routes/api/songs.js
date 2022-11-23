@@ -105,7 +105,7 @@ router.put("/:songId", requireAuth, async (req, res, next) => {
 //CREATE A SONG FOR AN ALBUM
 router.post("/", requireAuth, validateSong, async (req, res, next) => {
     const { title, description, url, previewImage, albumId } = req.body;
-
+    const userId = req.user.id
     if (albumId) {
         const album = await Album.findByPk(albumId);
 
@@ -126,6 +126,7 @@ router.post("/", requireAuth, validateSong, async (req, res, next) => {
         url,
         previewImage,
         albumId,
+        userId
     });
     res.status(201);
     res.json(newSong);
@@ -181,7 +182,40 @@ const songComments = await Comment.findAll( { where: {songId: songId},
 })
 console.log('song')
 res.json(songComments)
-  } )
+  })
+
+
+
+//DELETE A SONG
+
+router.delete("/:songId", requireAuth, async (req, res, next) => {
+    const songId = req.params.songId;
+    const userId = req.params.id;
+    const { body } = req.body;
+
+    if (songId) {
+      const song = await Song.findByPk(songId, {
+        where: { userId: userId },
+      });
+
+      if (!song) {
+        const err = new Error();
+        err.status = 404;
+        err.title = "songId does not exist";
+        err.message = "song could not be found";
+        err.errors = ["song not found"];
+
+        return next(err);
+      }
+
+      await song.destroy();
+    }
+
+    res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  });
 //ALT ATTEMPT
 // const album = await Album.findByPk(albumId)
 // if(!album)
