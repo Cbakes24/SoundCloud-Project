@@ -170,9 +170,9 @@ const editedPlaylist = await Playlist.findByPk(playlistId)
 
 res.json(editedPlaylist)
 
+})
 
 //DELETE A PLAYLIST
-
 router.delete("/playlistId", requireAuth, async (req, res, next) => {
     const playlistId = req.params.playlistId;
     const userId = req.params.id;
@@ -203,5 +203,6 @@ router.delete("/playlistId", requireAuth, async (req, res, next) => {
       statusCode: 200,
     });
   });
-})
+
+
 module.exports = router;
