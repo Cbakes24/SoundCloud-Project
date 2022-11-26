@@ -71,6 +71,7 @@ router.get("/:songId(\\d+)", async (req, res, next) => {
     include: [
       {
         model: User,
+        as: 'Artist',
         attributes: ["id", "previewImage", "username"],
       },
       { model: Album, attributes: ["id", "previewImage", "title"] },
