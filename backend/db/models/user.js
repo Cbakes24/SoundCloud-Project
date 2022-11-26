@@ -100,10 +100,6 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60]
         }
       },
-      token: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      }
 
     },
     {
