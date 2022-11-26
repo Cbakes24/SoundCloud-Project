@@ -20,10 +20,6 @@ module.exports = {
       allowNull: true,
     });
 
-    await queryInterface.addColumn("Users", "token", {
-      type: DataTypes.STRING,
-      allowNull: true,
-    });
   },
 
   async down(queryInterface, Sequelize) {
