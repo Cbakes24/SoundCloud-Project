@@ -165,9 +165,7 @@ router.post("/", validateSignup, async (req, res, next) => {
 
   await setTokenCookie(res, newUser);
 
-  return res.json({
-    user: newUser,
-  });
+  return res.json(newUser);
 });
 
 // router.post("/", validateSignup, async (req, res) => {
