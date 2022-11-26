@@ -136,7 +136,7 @@ router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
 
   const userPlaylists = await Playlist.findAll({ where: { userId: userId } });
 
-  res.json({ userPlaylists });
+  return res.json(userPlaylists);
 });
 
 //NEW USER SIGN Up?
