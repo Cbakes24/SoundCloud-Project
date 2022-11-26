@@ -95,7 +95,7 @@ router.get("/:userId/songs", requireAuth, async (req, res, next) => {
   res.json(userSongs);
 });
 
-//GET ALL ALBUMS FROM A USER
+//GET ALL ALBUMS FROM A USER(ARTIST) BY ID
 router.get("/:userId/albums", requireAuth, async (req, res, next) => {
   const userId = req.params.userId;
 

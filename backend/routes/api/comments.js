@@ -35,7 +35,8 @@ router.put("/:commentId", requireAuth, async (req, res, next) => {
     }
 
     comment.set({
-      body: body,
+      userId,
+      body: body
     });
 
     await comment.save();
