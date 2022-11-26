@@ -62,10 +62,10 @@ router.get("/:userId", async (req, res, next) => {
 
   const totalSongs = await Song.count({ where: { userId: userId } });
   const totalAlbums = await Album.count({ where: { userId: userId } });
-  const userDetails = await User.findByPk(userId);
+  const Artist = await User.findByPk(userId);
 
   res.json({
-    userDetails,
+    Artist,
     totalSongs,
     totalAlbums,
   });
