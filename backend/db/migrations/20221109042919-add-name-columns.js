@@ -1,21 +1,27 @@
 "use strict";
 
+let options = {};
+options.tableName = 'Users';
+
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 const { DataTypes } = require("sequelize");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("Users", "firstName", {
+    await queryInterface.addColumn(options, "firstName", {
       type: DataTypes.STRING(50),
       allowNull: false,
     });
 
-    await queryInterface.addColumn("Users", "lastName", {
+    await queryInterface.addColumn(options, "lastName", {
       type: DataTypes.STRING(50),
       allowNull: false,
     });
 
-    await queryInterface.addColumn("Users", "previewImage", {
+    await queryInterface.addColumn(options, "previewImage", {
       type: DataTypes.STRING(50),
       allowNull: true,
     });
