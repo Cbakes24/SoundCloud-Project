@@ -6,7 +6,7 @@ const REMOVE_USER = "session/removeUser";
 const setUser = (user) => {
   return {
     type: SET_USER,
-    payload: user
+    user
   };
 };
 
@@ -72,10 +72,12 @@ const sessionReducer = (state = initialState(), action) => {
   console.log(newState, 'NEWSTATE')
   switch (action.type) {
     case SET_USER:
-      newState[action.user] = action.payload;
+      newState.user = action.user;
+      console.log(newState, 'NEWWWWSTATE')
       return newState;
     case REMOVE_USER:
-      return state;
+      delete newState.user
+      return newState;
     default:
       return state;
   }
