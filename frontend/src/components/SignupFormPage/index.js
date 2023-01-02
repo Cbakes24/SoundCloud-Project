@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
 
@@ -46,6 +46,11 @@ const handleSubmit = (e) => {
 
   };
 
+const history = useHistory()
+  const handleClick = () => {
+    history.replace('/login')
+    console.log('hi')
+  }
   // useEffect((errors) => { HOW DO I POP UP A HIDDEN LOGIN BUTTON WHEN THE USER ALREADY EXISTS
   //   errors.forEach((error, idx) => {
   //     if(error === 'user email or username already exists') {
@@ -124,7 +129,7 @@ const handleSubmit = (e) => {
           />
         </label>
         <button id='signupButton' type="submit">Sign Up</button>
-        <button id='loginButton' type="submit">Log In</button>
+        <button id='loginButton' onClick={handleClick}>Log In</button>
       </form>
     </div>
   );
