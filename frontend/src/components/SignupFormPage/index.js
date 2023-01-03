@@ -49,7 +49,6 @@ const handleSubmit = (e) => {
 const history = useHistory()
   const handleClick = () => {
     history.replace('/login')
-    console.log('hi')
   }
   // useEffect((errors) => { HOW DO I POP UP A HIDDEN LOGIN BUTTON WHEN THE USER ALREADY EXISTS
   //   errors.forEach((error, idx) => {
@@ -65,7 +64,7 @@ const history = useHistory()
         <ul>
           {errors.map((error, idx) => (
 
-            <li key={idx}>{error}, {console.log(error)}</li>
+            <li key={idx}>{error}</li>
             ))}
         </ul>
         <label className="label">
