@@ -1,15 +1,23 @@
-.fa-regular .fa-head-side-headphones {
-    background-color: aqua;
+.navList {
+display: flex;
+justify-content: center;
+}
+
+.profileButton {
+    margin-left: 10px;
+}
+
+.profile-dropdown {
+ display: block;
+
 }
 
 
+i {
+    padding-left: 10px;
+}
 .listItem {
     list-style-type: none;
-    margin: 10px;
-    padding: 5px;
-    width:fit-content;
-
-
 }
 
  ul .listItem:hover {
