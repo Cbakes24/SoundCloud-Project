@@ -20,7 +20,7 @@ const SongsList = () => {
     <div>
       <ul className='song-list'>
         {songsArr.map((song) => {
-          <SingleSong somg={song} key={song.id} />
+          <SingleSong song={song} key={song.id} />
         })}
       </ul>
       <h1>Songs</h1>
