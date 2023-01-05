@@ -1,20 +1,25 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
+import './songs.css'
 
+const SingleSong = ({ song }) => {
+  console.log(song, "HEREEEE SONG");
+  const dispatch = useDispatch();
 
-const SingleSong = ({song}) => {
-const dispatch = useDispatch()
-
- return (
-    <div>
-        <ul>
-            <li>Song Name: {song.title}</li>
-            <li>Description: {song.description}</li>
-        </ul>
+  return (
+    <div className='song-box'>
+      <ul>
+        <li>Song Name: {song.title}</li>
+        <li>Description: {song.description}</li>
+      </ul>
+      <div className="song-buttons">
+        <button>Comment</button>
+        <div>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </div>
     </div>
+  );
+};
 
- )
-
-}
-
-
-export default SingleSong
+export default SingleSong;

@@ -18,12 +18,20 @@ const SongsList = () => {
 
   return (
     <div>
+        <div className="comments">
+        <h1>Songs</h1>
+        <div>
+             <h2>Comments</h2>
+           comment box here
+        </div>
+
+        </div>
       <ul className='song-list'>
-        {songsArr.map((song) => {
-          <SingleSong song={song} key={song.id} />
-        })}
+
+        {songsArr.map((song) =>( <SingleSong song={song} key={song.id} />)
+        )}
       </ul>
-      <h1>Songs</h1>
+
 
       <button>Add Song</button>
     </div>
