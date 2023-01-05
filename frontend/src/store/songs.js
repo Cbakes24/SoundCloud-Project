@@ -26,10 +26,11 @@ const addSong = (payload) => {
 //******* THUNK *******
 export const getSongs = () => async (dispatch) => {
   const res = await fetch("/api/songs");
-
+    console.log(res, 'RESPONSE')
   if (res.ok) {
-    const songs = res.json();
-    dispatch(loadSongs(songs));
+    const songs = await res.json();
+    console.log(songs, 'SONGSSSS')
+    dispatch(loadSongs(songs.allSongs));
   }
 };
 
@@ -53,13 +54,16 @@ const songReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_SONGS:
-      action.songs.forEach((song) => {
-        newState[song.id] = song;
-      });
+
+        action.songs.forEach(song => {
+            newState[song.id] = song
+        })
+      console.log(newState, "NEWSTATE")
       return newState;
     case ADD_SONG:
       return newState;
     case DELETE_SONG:
+        delete newState[action.song.id]
       return newState;
     case EDIT_SONG:
       return newState;
