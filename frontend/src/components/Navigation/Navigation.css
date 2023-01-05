@@ -1,14 +1,16 @@
 .navList {
 display: flex;
-justify-content: center;
+justify-content: flex-start;
+align-items: flex-start;
 }
 
-.profileButton {
-    margin-left: 10px;
+.profileButton:hover {
+    background-color: black;
+    color: white
 }
 
 .profile-dropdown {
- display: block;
+ display: inline;
 
 }
 
@@ -24,4 +26,10 @@ i {
     background-color: black;
     color: white;
     cursor:pointer
+ }
+
+ .active {
+    color: blue;
+    margin-left: 5px;
+    margin-right: 5px;
  }
