@@ -3,14 +3,17 @@ import { getSongs } from "../../store/songs";
 import React, { useState, useEffect } from "react";
 import "./songs.css";
 import SingleSong from "./SingleSong";
+import {NavLink, Link} from 'react-router-dom'
 
 const SongsList = () => {
   const dispatch = useDispatch();
 
+//   The Array of all the songs
   const songs = useSelector((state) => state.songs);
   const songsArr = Object.values(songs);
+//   console.log(songsArr, "SONGARRAYYY");
 
-  console.log(songsArr, "SONGARRAYYY");
+const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     dispatch(getSongs());
@@ -27,13 +30,13 @@ const SongsList = () => {
 
         </div>
       <ul className='song-list'>
-
         {songsArr.map((song) =>( <SingleSong song={song} key={song.id} />)
         )}
+        <Link to='/songs/new'>Add Song</Link>
       </ul>
 
 
-      <button>Add Song</button>
+
     </div>
   );
 };

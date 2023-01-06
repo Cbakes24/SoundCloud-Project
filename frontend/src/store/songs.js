@@ -30,12 +30,12 @@ export const getSongs = () => async (dispatch) => {
   if (res.ok) {
     const songs = await res.json();
     console.log(songs, 'SONGSSSS')
-    dispatch(loadSongs(songs.allSongs));
+    dispatch(loadSongs(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
   }
 };
 
 export const createSong = (payload) => async (dispatch) => {
-  const res = await fetch("/api/songs", {
+  const res = await csrfFetch("/api/songs", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -61,6 +61,8 @@ const songReducer = (state = initialState, action) => {
       console.log(newState, "NEWSTATE")
       return newState;
     case ADD_SONG:
+      //why is it adding a song and there is no code here?
+      newState[action.payload.id] = action.payload
       return newState;
     case DELETE_SONG:
         delete newState[action.song.id]

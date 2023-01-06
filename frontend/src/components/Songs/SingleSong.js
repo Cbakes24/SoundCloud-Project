@@ -2,10 +2,10 @@ import { useDispatch } from "react-redux";
 import './songs.css'
 
 const SingleSong = ({ song }) => {
-  console.log(song, "HEREEEE SONG");
   const dispatch = useDispatch();
 
   return (
+
     <div className='song-box'>
       <ul>
         <li>Song Name: {song.title}</li>
