@@ -1,22 +1,21 @@
 import { useDispatch } from "react-redux";
-import './songs.css'
-import { Link } from 'react-router-dom';
+import "./songs.css";
+import { Link } from "react-router-dom";
 import { deleteSong } from "../../store/songs";
 
 const SingleSong = ({ song }) => {
   const dispatch = useDispatch();
 
+  const handleDelete = (e) => {
+    e.preventDefault();
 
-    const handleDelete = (e) => {
-    e.preventDefault()
-
-    dispatch(deleteSong(song.id))
-}
+    dispatch(deleteSong(song.id));
+  };
 
   return (
-    <div className='song-box'>
-      <ul className='singleSong'>
-<img src={song.previewImage}/>
+    <div className="song-box">
+      <ul className="singleSong">
+        <img src={song.previewImage} />
 
         <li>ID: {song.id}</li>
         <Link to={`/songs/${song.id}`}>Song Name: {song.title}</Link>
@@ -30,13 +29,8 @@ const SingleSong = ({ song }) => {
       <div className="song-buttons">
         <button>Comment</button>
         <div>
-            {/* <a href={`/songs/:songId/edit`}>
-            <button>Edit</button>
-            </a> */}
-        <Link to={`/songs/${song.id}/edit`}>Edit</Link>
-        <a href={`/songs/:songId/edit`}>
-            <button onClick={handleDelete}>Delete</button>
-            </a>
+          <Link to={`/songs/${song.id}/edit`}>Edit</Link>
+          <button className='delete' onClick={handleDelete}>Delete</button>
         </div>
       </div>
     </div>

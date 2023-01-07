@@ -34,3 +34,7 @@ img {
     display:flex;
     justify-content: space-around;
 }
+
+.delete {
+    margin-left: 10px;
+}
