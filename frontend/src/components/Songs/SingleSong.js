@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import "./songs.css";
 import { Link } from "react-router-dom";
-import { deleteSong } from "../../store/songs";
+import { removeSong } from "../../store/songs";
 import { useHistory } from "react-router-dom"
 
 const SingleSong = ({ song }) => {
@@ -17,8 +17,8 @@ const SingleSong = ({ song }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-
-    dispatch(deleteSong(song.id));
+    console.log(song, 'SONG BEING DELETED')
+    dispatch(removeSong(song.id));
   };
 
   return (

@@ -28,7 +28,7 @@ const editSong = (id) => {
   };
 };
 
-export const deleteSong = (id) => {
+export const deleteSong = (id) => { //the songId from the removeSong thunk is passed in here
   return {
     type: DELETE_SONG,
     id
@@ -70,6 +70,17 @@ export const updateSong = (payload) => async (dispatch) => {
     const song = await res.json();
     dispatch(editSong(song));
     return song;
+  }
+};
+
+export const removeSong = (songId) => async (dispatch) => {
+  console.log(songId, 'THUNKKKKKSONG')
+  const res = await csrfFetch(`/api/songs/${songId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (res.ok) {
+    dispatch(deleteSong(songId));
   }
 };
 const initialState = {};
