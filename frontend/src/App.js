@@ -7,6 +7,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation/index";
 import SongsList from "./components/Songs/SongsList";
 import AddSongForm from "./components/Songs/AddSongForm";
+import EditSongForm from "./components/Songs/EditSongForm";
+import CreateSongForm from "./components/Songs/CreateSongForm";
+import SongPage from "./components/Songs/SongPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,9 +33,14 @@ function App() {
             <SongsList />
           </Route>
           <Route path="/songs/new">
-            <AddSongForm />
+            <CreateSongForm />
           </Route>
-
+          <Route path={`/songs/:songId/edit`}>
+            <EditSongForm />
+          </Route>
+          <Route path={`/songs/:songId`}>
+            <SongPage />
+          </Route>
         </Switch>
       )}
     </>

@@ -4,31 +4,38 @@ import { useDispatch } from 'react-redux'
 import { createSong } from '../../store/songs'
 
 
-const AddSongForm = ()  => {
+const AddSongForm = ({song, formType})  => {
 const dispatch = useDispatch()
 const history = useHistory()
 
-const [title, setTitle] = useState('')
-const [description, setDescription] = useState('')
-const [url, setUrl] = useState('')
+const [title, setTitle] = useState(song.title)
+const [description, setDescription] = useState(song.description)
+const [url, setUrl] = useState(song.url)
 // const [userId, setUserId] = useState(`${user.id}`)
-const [albumTitle, setAlbumTitle] = useState('')
-const [image, setImage] = useState('')
+const [albumTitle, setAlbumTitle] = useState(song.albumTitle)
+const [previewImage, setPreviewImage] = useState(song.previewImage)
 
 const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const payload = { //does the order of items matter
+    if(formType === 'New Song') {
+        const payload = { //does the order of items matter
         title,
         description,
         url,
-        image,
+        previewImage,
         albumTitle //they wouldnt enter album id, if they enter album name does that work?
     }
 
     const newSong = await dispatch(createSong(payload))
 
 history.push(`./`)
+    } else {
+
+        history.push(`./`)
+
+    }
+
 }
 
 const handleCancelClick = (e) => {
@@ -39,7 +46,7 @@ const handleCancelClick = (e) => {
 return (
     <section>
          <form onSubmit={handleSubmit}>
-        <h2>Add a Song Form</h2>
+        <h2>{formType}</h2>
         <label>Song Name</label>
         <input
         type="text"
@@ -71,10 +78,11 @@ return (
          <label>Song Picture</label>
         <input
         type="text"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}>
+        value={previewImage}
+        onChange={(e) => setPreviewImage(e.target.value)}>
          </input>
-         <button type="submit">Create new Song</button>
+
+         <button type="submit">Submit Song</button>
         <button type="button" onClick={handleCancelClick}>Cancel</button>
     </form>
 

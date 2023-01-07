@@ -21,15 +21,20 @@ const addSong = (payload) => {
   };
 };
 
-
+const editSong = (id) => {
+  return {
+    type: EDIT_SONG,
+    id,
+  };
+};
 
 //******* THUNK *******
 export const getSongs = () => async (dispatch) => {
   const res = await fetch("/api/songs");
-    console.log(res, 'RESPONSE')
+  console.log(res, "RESPONSE");
   if (res.ok) {
     const songs = await res.json();
-    console.log(songs, 'SONGSSSS')
+    console.log(songs, "SONGSSSS");
     dispatch(loadSongs(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
   }
 };
@@ -48,26 +53,27 @@ export const createSong = (payload) => async (dispatch) => {
   }
 };
 
+
 const initialState = {};
 
 const songReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_SONGS:
-
-        action.songs.forEach(song => {
-            newState[song.id] = song
-        })
-      console.log(newState, "NEWSTATE")
+      action.songs.forEach((song) => {
+        newState[song.id] = song;
+      });
+      console.log(newState, "NEWSTATE");
       return newState;
     case ADD_SONG:
       //why is it adding a song and there is no code here?
-      newState[action.payload.id] = action.payload
+      newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_SONG:
-        delete newState[action.song.id]
+      delete newState[action.song.id];
       return newState;
     case EDIT_SONG:
+      newState[action.id] = action.id
       return newState;
     default:
       return state;
