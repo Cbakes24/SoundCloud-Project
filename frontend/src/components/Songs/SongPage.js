@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 
 
 const SongPage = () => {
-  const { songId } = useParams();
-  const report = useSelector( state => state.songs[songId])
-
-
-    console.log(song.id, 'REEEEEEPPPP')
+    const { songId } = useParams();
+    console.log(songId, 'SONGID')
+    const songs = useSelector((state) => state.songs);
+    console.log(songs, 'SONGS')
+  // const songArr = Object.values(songs)
+  const song = songs[songId]
+      console.log(song, 'SONG')
 
 
   return (
@@ -18,7 +20,10 @@ const SongPage = () => {
       <br/>
       Description: {song.description}
       <br/>
-      <Link to="/">Back to Songs</Link>
+      <a href='/songs'>
+    <button>Back To Songs</button>
+      </a>
+      {/* <Link to="/songs">Back to Songs</Link> */}
     </section>
   );
 }

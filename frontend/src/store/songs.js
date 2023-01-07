@@ -28,6 +28,12 @@ const editSong = (id) => {
   };
 };
 
+const deleteSong = (id) => {
+  return {
+    type: DELETE_SONG,
+    id
+  }
+}
 //******* THUNK *******
 export const getSongs = () => async (dispatch) => {
   const res = await fetch("/api/songs");
@@ -53,7 +59,19 @@ export const createSong = (payload) => async (dispatch) => {
   }
 };
 
+export const updateSong = (payload) => async (dispatch) => {
+  const res = await csrfFetch(`/api/songs/${payload.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
+  if (res.ok) {
+    const song = await res.json();
+    dispatch(editSong(song));
+    return song;
+  }
+};
 const initialState = {};
 
 const songReducer = (state = initialState, action) => {
