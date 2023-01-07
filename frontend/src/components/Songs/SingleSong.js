@@ -2,9 +2,18 @@ import { useDispatch } from "react-redux";
 import "./songs.css";
 import { Link } from "react-router-dom";
 import { deleteSong } from "../../store/songs";
+import { useHistory } from "react-router-dom"
 
 const SingleSong = ({ song }) => {
   const dispatch = useDispatch();
+    const history = useHistory()
+
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+
+    history.push(`/songs/${song.id}/edit`)
+  };
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -29,8 +38,11 @@ const SingleSong = ({ song }) => {
       <div className="song-buttons">
         <button>Comment</button>
         <div>
-          <Link to={`/songs/${song.id}/edit`}>Edit</Link>
-          <button className='delete' onClick={handleDelete}>Delete</button>
+          <button className="editButton" onClick={handleEdit}>Edit</button>
+          {/* <Link to={`/songs/${song.id}/edit`}>Edit</Link> */}
+          <button className="delete" onClick={handleDelete}>
+            Delete
+          </button>
         </div>
       </div>
     </div>
