@@ -1,9 +1,17 @@
 import { useDispatch } from "react-redux";
 import './songs.css'
 import { Link } from 'react-router-dom';
+import { deleteSong } from "../../store/songs";
 
 const SingleSong = ({ song }) => {
   const dispatch = useDispatch();
+
+
+    const handleDelete = (e) => {
+    e.preventDefault()
+
+    dispatch(deleteSong(song.id))
+}
 
   return (
     <div className='song-box'>
@@ -26,7 +34,9 @@ const SingleSong = ({ song }) => {
             <button>Edit</button>
             </a> */}
         <Link to={`/songs/${song.id}/edit`}>Edit</Link>
-          <button>Delete</button>
+        <a href={`/songs/:songId/edit`}>
+            <button onClick={handleDelete}>Delete</button>
+            </a>
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@ const AddSongForm = ({ song, formType }) => {
    console.log(payload, ' EDIT PAYLOAD')
       dispatch(updateSong(payload));
 
-      history.push(`./`);
+      history.push(`/songs`);
     }
   };
 

@@ -28,7 +28,7 @@ const editSong = (id) => {
   };
 };
 
-const deleteSong = (id) => {
+export const deleteSong = (id) => {
   return {
     type: DELETE_SONG,
     id
@@ -88,7 +88,7 @@ const songReducer = (state = initialState, action) => {
       newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_SONG:
-      delete newState[action.song.id];
+      delete newState[action.id];
       return newState;
     case EDIT_SONG:
       newState[action.id] = action.id
