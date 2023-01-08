@@ -21,10 +21,10 @@ const addSong = (payload) => {
   };
 };
 
-const editSong = (id) => {
+const editSong = (song) => {
   return {
     type: EDIT_SONG,
-    id,
+    song
   };
 };
 
@@ -74,7 +74,7 @@ export const updateSong = (payload) => async (dispatch) => {
 };
 
 export const removeSong = (songId) => async (dispatch) => {
-  console.log(songId, 'THUNKKKKKSONG')
+  console.log(songId, 'Remove Song THUNK hits')
   const res = await csrfFetch(`/api/songs/${songId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -102,7 +102,7 @@ const songReducer = (state = initialState, action) => {
       delete newState[action.id];
       return newState;
     case EDIT_SONG:
-      newState[action.id] = action.id
+      newState[action.song.id] = action.song;
       return newState;
     default:
       return state;
