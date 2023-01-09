@@ -10,6 +10,7 @@ const SingleSong = ({ song }) => {
 
 
   const handleEdit = (e) => {
+
     e.preventDefault();
 
     history.push(`/songs/${song.id}/edit`)
@@ -37,13 +38,13 @@ const SingleSong = ({ song }) => {
       </ul>
       <div className="song-buttons">
         <button>Comment</button>
-        <div>
+
           <button className="editButton" onClick={handleEdit}>Edit</button>
           {/* <Link to={`/songs/${song.id}/edit`}>Edit</Link> */}
           <button className="delete" onClick={handleDelete}>
             Delete
           </button>
-        </div>
+    
       </div>
     </div>
   );
