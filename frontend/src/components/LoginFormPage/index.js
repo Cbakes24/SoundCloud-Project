@@ -24,6 +24,21 @@ function LoginFormPage() {
     );
   };
 
+const handleDemoClick = (e) => {
+
+
+setCredential('corybaker24')
+setPassword('hello123')
+
+//works but flashes that invalid login info, its submitting the login before the credentials are set to corybaker24
+return dispatch(sessionActions.login({ credential, password })).catch(
+  async (res) => {
+    const data = await res.json();
+    if (data && data.errors) setErrors(data.errors);
+  }
+);
+}
+
   return (
     <div className='loginDiv'>
       <h1>Login</h1>
@@ -54,6 +69,7 @@ function LoginFormPage() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button onClick={handleDemoClick}>Demo Log In</button>
     </form>
     </div>
 

@@ -4,16 +4,22 @@ import { Link } from "react-router-dom";
 import { removeSong } from "../../store/songs";
 import { useHistory } from "react-router-dom"
 
-const SingleSong = ({ song }) => {
+const SingleSong = ({ song, currentUser }) => {
   const dispatch = useDispatch();
     const history = useHistory()
 
 
   const handleEdit = (e) => {
-
     e.preventDefault();
+   console.log(song.userId, 'USER ID')
+if(song.userId === currentUser.id){
+  history.push(`/songs/${song.id}/edit`)
+} else {
 
-    history.push(`/songs/${song.id}/edit`)
+}
+//add if statement here for being verified to edit this song..
+// if currentuser.id === song[user.id] something like this to only allow the owner of the song to edit
+
   };
 
   const handleDelete = (e) => {
@@ -44,7 +50,7 @@ const SingleSong = ({ song }) => {
           <button className="delete" onClick={handleDelete}>
             Delete
           </button>
-    
+
       </div>
     </div>
   );

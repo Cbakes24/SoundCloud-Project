@@ -9,6 +9,8 @@ const SongsList = () => {
   const dispatch = useDispatch();
 
   //   The Array of all the songs
+  const currentUser = useSelector((state) => state.session.user)
+  console.log(currentUser.id, 'CURR USER ID')
   const songs = useSelector((state) => state.songs);
   const songsArr = Object.values(songs);
   //   console.log(songsArr, "SONGARRAYYY");
@@ -28,7 +30,7 @@ const SongsList = () => {
       <ul className="song-list">
         {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
         {songsArr.map((song) => (
-            <SingleSong song={song} key={song.id} />
+            <SingleSong song={song} key={song.id} currentUser={currentUser} />
         ))}
         <Link to="/songs/new">Add Song</Link>
       </ul>
