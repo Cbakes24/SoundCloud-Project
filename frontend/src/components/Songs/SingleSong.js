@@ -43,7 +43,7 @@ const SingleSong = ({ song, currentUser }) => {
         <li>Album: {song.albumId}</li>
         <li>Description: {song.description}</li>
         <a href={song.url}>
-    <button>Play Song</button>
+    <button>Play <i class="fa-solid fa-play"></i></button>
       </a>
       </ul>
       <div className="song-buttons">
