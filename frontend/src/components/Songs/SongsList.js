@@ -10,12 +10,12 @@ const SongsList = () => {
 
   //   The Array of all the songs
   const currentUser = useSelector((state) => state.session.user)
-  console.log(currentUser.id, 'CURR USER ID')
+
   const songs = useSelector((state) => state.songs);
   const songsArr = Object.values(songs);
   //   console.log(songsArr, "SONGARRAYYY");
 
-  const [showForm, setShowForm] = useState(false);
+  // const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     dispatch(getSongs());

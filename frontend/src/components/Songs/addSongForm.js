@@ -16,11 +16,13 @@ const AddSongForm = ({ song, formType }) => {
   // const [userId, setUserId] = useState(`${user.id}`)
   const [albumTitle, setAlbumTitle] = useState(song.albumTitle);
   const [previewImage, setPreviewImage] = useState(song.previewImage);
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formType === "New Song") {
+        setErrors([]);
       const payload = {
         //does the order of items matter to match the backend?
         title,
@@ -30,7 +32,10 @@ const AddSongForm = ({ song, formType }) => {
         albumTitle, //if I set this to = {album.id it will read the id from the back end if one exists}
       };
 
-      const newSong = await dispatch(createSong(payload)); // sending it to the Thunk and action and reducer to update the state
+      const newSong = await dispatch(createSong(payload)).catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }); // sending it to the Thunk and action and reducer to update the state
 
       history.push(`./`);
     } else {
@@ -44,10 +49,16 @@ const AddSongForm = ({ song, formType }) => {
         albumTitle,
       };
    console.log(payload, ' EDIT PAYLOAD')
-      dispatch(updateSong(payload));
+      dispatch(updateSong(payload)).catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
 
       history.push(`/songs`);
     }
+    return setErrors([
+        "Confirm Password field must be the same as the Password field",
+      ]);
   };
 
   const handleCancelClick = (e) => {
