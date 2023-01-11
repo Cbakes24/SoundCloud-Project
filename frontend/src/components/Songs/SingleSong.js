@@ -34,6 +34,15 @@ const SingleSong = ({ song, currentUser }) => {
       }
   };
 
+//COmment Button
+const handleComment = (e) => {
+  e.preventDefault();
+  if(!currentUser) return window.alert('Please Login')
+
+   history.push(`/songs/${song.id}/comments`);
+}
+
+
   return (
     <div className="song-box">
       <ul className="singleSong">
@@ -47,7 +56,7 @@ const SingleSong = ({ song, currentUser }) => {
       </a>
       </ul>
       <div className="song-buttons">
-        <button>Comment</button>
+        <button className='commentButton' onClick={handleComment}>Comment</button>
 
         <button className="editButton" onClick={handleEdit}>
           Edit

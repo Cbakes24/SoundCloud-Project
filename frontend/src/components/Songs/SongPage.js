@@ -13,10 +13,7 @@ const SongPage = () => {
 
 
   return (
-
     <section>
-      <img src={song.previewImage} />
-      <br />
       ID: {song.id}
       <br/>
       Title: {song.title}
@@ -25,9 +22,6 @@ const SongPage = () => {
       <br/>
       <a href='/songs'>
     <button>Back To Songs</button>
-      </a>
-      <a href={song.url}>
-    <button>Play Song</button>
       </a>
       {/* <Link to="/songs">Back to Songs</Link> */}
     </section>
