@@ -101,7 +101,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
 });
 
 //EDIT A SONG
-router.put("/:songId", requireAuth, async (req, res, next) => {
+router.put("/:songId", validateSong, requireAuth, async (req, res, next) => {
   const { title, description, url, previewImage } = req.body;
   const song = await Song.findByPk(req.params.songId);
   0;
