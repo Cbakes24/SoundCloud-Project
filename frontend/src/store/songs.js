@@ -57,6 +57,7 @@ export const createSong = (payload) => async (dispatch) => {
     dispatch(addSong(song));
     return song;
   }
+  return res
 };
 
 export const updateSong = (payload) => async (dispatch) => {

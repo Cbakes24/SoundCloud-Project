@@ -34,6 +34,7 @@ const AddSongForm = ({ song, formType }) => {
 
       const newSong = await dispatch(createSong(payload)).catch(async (res) => {
         const data = await res.json();
+        console.log(data, 'DATAAA for ERRORSSS')
         if (data && data.errors) setErrors(data.errors);
       }); // sending it to the Thunk and action and reducer to update the state
 
@@ -68,6 +69,9 @@ const AddSongForm = ({ song, formType }) => {
 
   return (
     <section>
+         {errors.length > 0 && errors.map((error, i) => (
+            <div key={i}> {error} </div>
+        ))}
       <form onSubmit={handleSubmit}>
         <h2>{formType}</h2>
         <label>Song Name</label>

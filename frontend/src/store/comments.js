@@ -24,7 +24,7 @@ const loadComments = (comments) => {
   const editComment = (comment) => {
     return {
       type: EDIT_COMMENT,
-      song
+      comment
     };
   };
 
@@ -35,7 +35,7 @@ const loadComments = (comments) => {
     }
   }
 
-initialState = {}
+const initialState = {}
 
 const commentReducer = (state = initialState, action) => {
     let newState = { ...state };
