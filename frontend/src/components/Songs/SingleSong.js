@@ -39,7 +39,7 @@ const handleComment = (e) => {
   e.preventDefault();
   if(!currentUser) return window.alert('Please Login')
 
-   history.push(`/songs/${song.id}/comments`);
+   history.push(`/songs/${song.id}`);
 }
 
 

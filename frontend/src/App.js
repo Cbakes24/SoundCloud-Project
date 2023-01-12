@@ -37,7 +37,7 @@ function App() {
           <Route path="/songs/new">
             <CreateSongForm />
           </Route>
-          <Route path={`/songs/:songId/edit`}>
+          <Route exact path={`/songs/:songId/edit`}>
             <EditSongForm />
           </Route>
           <Route exact path={`/songs/:songId`}>

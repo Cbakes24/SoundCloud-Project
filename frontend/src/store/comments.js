@@ -14,12 +14,7 @@ const loadComments = (comments) => {
     };
   };
 
-  const addComment = (payload) => {
-    return {
-      type: ADD_COMMENT,
-      payload,
-    };
-  };
+
 
   const editComment = (comment) => {
     return {
@@ -42,25 +37,12 @@ export const loadAllComments = () => async (dispatch) => {
     console.log(res, "RESPONSE");
     if (res.ok) {
       const comments = await res.json();
-      console.log(comments, "COMMENTSSS");
+      console.log(comments, "LOADED COMMENTS");
       dispatch(loadComments(comments.comments));
     }
   };
 
 
-  export const createComment =  (payload) => async (dispatch) => {
-    const res = await csrfFetch("/:songId/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (res.ok) {
-        const comment = await res.json();
-        dispatch(addComment(comment));
-        return comment;
-      }
-    };
 
     export const updateComment = (payload) => async (dispatch) => {
         const res = await csrfFetch(`/api/comments/${payload.id}`, {
@@ -81,17 +63,15 @@ const initialState = {}
 const commentReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
+        case ADD_COMMENT:
+            newState[action.payload.id] = action.payload
+            console.log(newState, 'HELLLOOOOOOOO')
+            return newState
         case LOAD_COMMENTS:
-            console.log(action.comments, "ACTION COMMENTS")
             action.comments.forEach(comment => {
                 newState[comment.id] = comment
             })
-            console.log(newState, 'newState COmments')
             return newState
-            // case ADD_COMMENT:
-            //     newState[action.payload.id] = action.payload
-            //     console.log(newState)
-            //     return newState
       default:
         return state;
     }

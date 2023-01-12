@@ -68,6 +68,7 @@ const AddSongForm = ({ song, formType }) => {
 
   return (
     <section>
+       
       <form onSubmit={handleSubmit}>
         <h2>{formType}</h2>
         <label>Song Name</label>
