@@ -13,6 +13,9 @@ const {
 } = require("../../db/models");
 const { Op } = require("sequelize");
 
+
+//GET ALL COMMENTS
+
 //EDIT A COMMENT
 router.put("/:commentId", requireAuth, async (req, res, next) => {
   const commentId = req.params.commentId;
