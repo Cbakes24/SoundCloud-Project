@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createComment, updateComment } from "../../store/comments";
+=======
+import { sanitizeBody } from "express-validator"
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateComment } from "../../store/comments";
+import { createComment } from "../../store/songs";
+>>>>>>> comments
 
 const CommentForm = ({comment, formType}) => {
 const dispatch = useDispatch()

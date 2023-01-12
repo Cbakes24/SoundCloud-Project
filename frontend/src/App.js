@@ -10,6 +10,8 @@ import AddSongForm from "./components/Songs/AddSongForm";
 import EditSongForm from "./components/Songs/EditSongForm";
 import CreateSongForm from "./components/Songs/CreateSongForm";
 import SongPage from "./components/Songs/SongPage";
+import CommentList from "./components/Comments/CommentList";
+import CreateCommentForm from "./components/Comments/CreateCommentForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,11 +37,17 @@ function App() {
           <Route path="/songs/new">
             <CreateSongForm />
           </Route>
-          <Route path={`/songs/:songId/edit`}>
+          <Route exact path={`/songs/:songId/edit`}>
             <EditSongForm />
           </Route>
-          <Route path={`/songs/:songId`}>
+          <Route exact path={`/songs/:songId`}>
             <SongPage />
+          </Route>
+          <Route exact path={`/comments`}>
+            <CommentList />
+          </Route>
+          <Route path={`/songs/:songId/comments`}>
+            <CreateCommentForm />
           </Route>
         </Switch>
       )}

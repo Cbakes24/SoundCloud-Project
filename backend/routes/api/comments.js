@@ -13,6 +13,38 @@ const {
 } = require("../../db/models");
 const { Op } = require("sequelize");
 
+
+//CREATE A COMMENT
+router.post("/", requireAuth, async (req, res, next) => {
+  const { body } = req.body;
+  const songId = req.params.songId;
+  const userId = req.user.id;
+  const song = await Comment.findByPk(req.params.songId);
+
+  if (!song || songId === null) {
+    const err = new Error();
+    err.status = 404;
+    err.title = "songId does not exist";
+    err.message = "Song could not be found";
+    err.errors = ["Song not found"];
+
+    return next(err);
+  }
+
+  const newComment = await song.createComment({ body: body, userId });
+
+  res.json(newComment);
+});
+
+//GET ALL COMMENTs
+
+router.get("/", async (req, res, next) => {
+let comments = await Comment.findAll({
+});
+
+return res.json({ comments });
+});
+
 //EDIT A COMMENT
 router.put("/:commentId", requireAuth, async (req, res, next) => {
   const commentId = req.params.commentId;

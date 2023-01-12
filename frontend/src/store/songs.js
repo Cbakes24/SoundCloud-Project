@@ -5,8 +5,17 @@ const LOAD_SONGS = "load/LOAD_SONGS";
 const ADD_SONG = "add/ADD_SONG";
 const DELETE_SONG = "delete/DELETE_SONG";
 const EDIT_SONG = "edit/EDIT_SONG";
+const ADD_COMMENT = "add/ADD_COMMENT";
 
 //******* Actions *********
+
+const addComment = (payload) => {
+  return {
+    type: ADD_COMMENT,
+    payload,
+  };
+};
+
 const loadSongs = (songs) => {
   return {
     type: LOAD_SONGS,
@@ -35,6 +44,22 @@ export const deleteSong = (id) => { //the songId from the removeSong thunk is pa
   }
 }
 //******* THUNK *******
+export const createComment =  (payload) => async (dispatch) => {
+  console.log(payload, 'HERE IS THE SUBMITTED COMMENT!!!')
+  const res = await csrfFetch(`/api/songs/${payload.songId}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      const comment = await res.json();
+      console.log(comment, 'THIS IS THE RETURNED COMMENT')
+      dispatch(addComment(comment));
+      return comment;
+    }
+  };
+
 export const getSongs = () => async (dispatch) => {
   const res = await fetch("/api/songs");
   console.log(res, "RESPONSE");
@@ -106,6 +131,10 @@ const songReducer = (state = initialState, action) => {
     case EDIT_SONG:
       newState[action.song.id] = action.song;
       return newState;
+  //  case ADD_COMMENT:
+  //     newState[action.payload.id] = action.payload
+  //     console.log(newState, 'HELLLOOOOOOOO')
+  //     return newState
     default:
       return state;
   }

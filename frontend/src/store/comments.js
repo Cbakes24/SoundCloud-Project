@@ -14,12 +14,7 @@ const loadComments = (comments) => {
     };
   };
 
-  const addComment = (payload) => {
-    return {
-      type: ADD_COMMENT,
-      payload,
-    };
-  };
+
 
   const editComment = (comment) => {
     return {
@@ -40,22 +35,15 @@ const initialState = {}
 const commentReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
-      case LOAD_COMMENTS:
-        action.comments.forEach((comment) => {
-          newState[comment.id] = comment;
-        });
-        console.log(newState, "NEWSTATE");
-        return newState;
-      case ADD_COMMENT:
-        //why is it adding a comment and there is no code here?
-        newState[action.payload.id] = action.payload;
-        return newState;
-      case DELETE_COMMENT:
-        delete newState[action.id];
-        return newState;
-      case EDIT_COMMENT:
-        newState[action.comment.id] = action.comment;
-        return newState;
+        case ADD_COMMENT:
+            newState[action.payload.id] = action.payload
+            console.log(newState, 'HELLLOOOOOOOO')
+            return newState
+        case LOAD_COMMENTS:
+            action.comments.forEach(comment => {
+                newState[comment.id] = comment
+            })
+            return newState
       default:
         return state;
     }
