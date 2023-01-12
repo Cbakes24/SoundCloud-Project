@@ -14,12 +14,7 @@ const loadComments = (comments) => {
     };
   };
 
-  const addComment = (payload) => {
-    return {
-      type: ADD_COMMENT,
-      payload,
-    };
-  };
+
 
   const editComment = (comment) => {
     return {
@@ -35,27 +30,48 @@ const loadComments = (comments) => {
     }
   }
 
+
+//******* Thunks *********
+export const loadAllComments = () => async (dispatch) => {
+    const res = await csrfFetch("/api/comments");
+    console.log(res, "RESPONSE");
+    if (res.ok) {
+      const comments = await res.json();
+      console.log(comments, "LOADED COMMENTS");
+      dispatch(loadComments(comments.comments));
+    }
+  };
+
+
+
+    export const updateComment = (payload) => async (dispatch) => {
+        const res = await csrfFetch(`/api/comments/${payload.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          const comment = await res.json();
+          dispatch(editComment(comment));
+          return comment;
+        }
+      };
+
 const initialState = {}
 
 const commentReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
-      case LOAD_COMMENTS:
-        action.comments.forEach((comment) => {
-          newState[comment.id] = comment;
-        });
-        console.log(newState, "NEWSTATE");
-        return newState;
-      case ADD_COMMENT:
-        //why is it adding a comment and there is no code here?
-        newState[action.payload.id] = action.payload;
-        return newState;
-      case DELETE_COMMENT:
-        delete newState[action.id];
-        return newState;
-      case EDIT_COMMENT:
-        newState[action.comment.id] = action.comment;
-        return newState;
+        case ADD_COMMENT:
+            newState[action.payload.id] = action.payload
+            console.log(newState, 'HELLLOOOOOOOO')
+            return newState
+        case LOAD_COMMENTS:
+            action.comments.forEach(comment => {
+                newState[comment.id] = comment
+            })
+            return newState
       default:
         return state;
     }
