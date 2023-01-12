@@ -1,9 +1,8 @@
-
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import {updateComment } from "../../store/comments";
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useState, useEffect } from "react";
 import { createComment } from "../../store/songs";
+import { updateComment } from '../../store/comments';
 
 const CommentForm = ({comment, formType}) => {
 const dispatch = useDispatch()

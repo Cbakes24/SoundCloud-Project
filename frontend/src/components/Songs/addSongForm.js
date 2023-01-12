@@ -77,6 +77,8 @@ const AddSongForm = ({ song, formType }) => {
       {errors.length > 0 &&
         errors.map((error, i) => <div key={i}> {error} </div>)}
 
+
+
       <form onSubmit={handleSubmit}>
         <h2>{formType}</h2>
         <label>Song Name</label>

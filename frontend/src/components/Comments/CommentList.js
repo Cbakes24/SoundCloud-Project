@@ -23,9 +23,9 @@ const CommentList = () => {
 
 
 
-  // useEffect(() => {
-  //   dispatch(loadAllComments());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadAllComments());
+  }, [dispatch]);
 
 //   useEffect(() => {
 //     dispatch(getSongs);

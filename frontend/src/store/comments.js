@@ -30,6 +30,34 @@ const loadComments = (comments) => {
     }
   }
 
+
+//******* Thunks *********
+export const loadAllComments = () => async (dispatch) => {
+    const res = await csrfFetch("/api/comments");
+    console.log(res, "RESPONSE");
+    if (res.ok) {
+      const comments = await res.json();
+      console.log(comments, "LOADED COMMENTS");
+      dispatch(loadComments(comments.comments));
+    }
+  };
+
+
+
+    export const updateComment = (payload) => async (dispatch) => {
+        const res = await csrfFetch(`/api/comments/${payload.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          const comment = await res.json();
+          dispatch(editComment(comment));
+          return comment;
+        }
+      };
+
 const initialState = {}
 
 const commentReducer = (state = initialState, action) => {
