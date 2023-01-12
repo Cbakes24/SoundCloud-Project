@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createSong } from "../../store/songs";
-import{ updateSong}    from "../../store/songs"
+import { updateSong } from "../../store/songs";
 
 //really just the song form for both creating and editing a song
 //I am pushing in a song template from either EditSongForm or CreateSongForm, edit will already have the fields filled out
@@ -22,7 +22,7 @@ const AddSongForm = ({ song, formType }) => {
     e.preventDefault();
 
     if (formType === "New Song") {
-        setErrors([]);
+      setErrors([]);
       const payload = {
         //does the order of items matter to match the backend?
         title,
@@ -32,16 +32,20 @@ const AddSongForm = ({ song, formType }) => {
         albumTitle, //if I set this to = {album.id it will read the id from the back end if one exists}
       };
 
-      const newSong = await dispatch(createSong(payload)).catch(async (res) => {
+      const newSong = await dispatch(createSong(payload))
+      .then((song) => history.push(`/songs/${song.id}`))
+      .catch(async (res) => {
         const data = await res.json();
-        console.log(data, 'DATAAA for ERRORSSS')
+        console.log(data.errors, "DATAAA for ERRORSSS");
         if (data && data.errors) setErrors(data.errors);
       }); // sending it to the Thunk and action and reducer to update the state
 
-      history.push(`./`);
-    } else {
 
-        const payload = {
+// history.push("/songs");
+
+      // ****** EDIT SONG FORM ******
+    } else {
+      const payload = {
         ...song,
         title,
         description,
@@ -49,19 +53,20 @@ const AddSongForm = ({ song, formType }) => {
         previewImage,
         albumTitle,
       };
-   console.log(payload, ' EDIT PAYLOAD')
-      dispatch(updateSong(payload)).catch(async (res) => {
+      console.log(payload, " EDIT PAYLOAD");
+      dispatch(updateSong(payload))
+      .then((song) => history.push(`/songs/${song.id}`))
+      .catch(async (res) => {
         const data = await res.json();
+        console.log(data.errors, "DATAAA for ERRORSSS");
         if (data && data.errors) setErrors(data.errors);
       });
-
-      history.push(`/songs`);
     }
-    return setErrors([
-        "Confirm Password field must be the same as the Password field",
-      ]);
+
+// history.push("/songs");
   };
 
+  //****** CANCEL BUTTON ******
   const handleCancelClick = (e) => {
     e.preventDefault();
     history.push("./");
@@ -69,9 +74,8 @@ const AddSongForm = ({ song, formType }) => {
 
   return (
     <section>
-         {errors.length > 0 && errors.map((error, i) => (
-            <div key={i}> {error} </div>
-        ))}
+      {errors.length > 0 &&
+        errors.map((error, i) => <div key={i}> {error} </div>)}
       <form onSubmit={handleSubmit}>
         <h2>{formType}</h2>
         <label>Song Name</label>

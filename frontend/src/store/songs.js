@@ -72,6 +72,7 @@ export const updateSong = (payload) => async (dispatch) => {
     dispatch(editSong(song));
     return song;
   }
+  return res
 };
 
 export const removeSong = (songId) => async (dispatch) => {

@@ -27,13 +27,15 @@ const SongsList = () => {
         <h1>Songs</h1>
         <h2>Comments</h2>
       </div>
+       <Link to="/songs/new">Add Song</Link>
       <ul className="song-list">
         {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
         {songsArr.map((song) => (
             <SingleSong song={song} key={song.id} currentUser={currentUser} />
         ))}
-        <Link to="/songs/new">Add Song</Link>
+
       </ul>
+      <Link to="/songs/new">Add Song</Link>
     </div>
   );
 };
