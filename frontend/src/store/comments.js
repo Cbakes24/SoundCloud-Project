@@ -42,7 +42,15 @@ export const loadAllComments = () => async (dispatch) => {
     }
   };
 
-
+  export const loadSongComments = (song) => async (dispatch) => {
+    const res = await csrfFetch(`/api/songs/${song.id}/comments`);
+    console.log(res, 'SONG COMMENT RESPONSE')
+    if (res.ok) {
+      const songComments = await res.json();
+      console.log(songComments, "SONG COMMENTS");
+      dispatch(loadComments(song.comments));
+    }
+  };
 
     export const updateComment = (payload) => async (dispatch) => {
         const res = await csrfFetch(`/api/comments/${payload.id}`, {

@@ -5,6 +5,7 @@ import CommentList from "../Comments/CommentList";
 import { createComment } from "../../store/songs";
 import { getSongs } from "../../store/songs";
 import { useEffect } from 'react'
+import { loadSongComments } from "../../store/comments";
 
 const SongPage = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,11 @@ useEffect(() => {
 }, [dispatch])
 
 
+
+useEffect((song) => {
+  console.log(song, 'DISPATCHING THIS SONG')
+  dispatch(loadSongComments(song));
+}, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
