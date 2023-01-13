@@ -20,12 +20,11 @@ img {
 }
 
 .song-list {
-    display: grid;
+    display: flex;
     border: 10px;
     border-style: dashed;
     flex-wrap: nowrap;
-    flex-direction: column;
-    align-items: baseline;
+    flex-direction: column-reverse;
 
 }
 
