@@ -17,6 +17,7 @@ const SongPage = () => {
   const { songId } = useParams();
   const songs = useSelector((state) => state.songs);
   // const songArr = Object.values(songs)
+  let comment;
   let song;
 if(songs) {
   song = songs[songId]
@@ -83,7 +84,7 @@ useEffect((song) => {
 
       <section>
         <div>
-          <CommentList />
+          <CommentList song={song} currentUser={currentUser} />
         </div>
       </section>
     </div>

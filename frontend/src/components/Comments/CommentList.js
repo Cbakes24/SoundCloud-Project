@@ -1,53 +1,49 @@
 import "./Comments.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
-import { loadAllComments } from "../../store/comments";
-import { loadSongComments } from "../../store/comments";
-import { getSongs } from "../../store/songs";
+import { deleteComment, loadAllComments } from "../../store/comments";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import SingleComment from "./SingleComment";
 
-const CommentList = () => {
+const CommentList = ({ song }) => {
   const dispatch = useDispatch();
-  const { songId } = useParams()
-  console.log(songId, 'SONG ID')
+  const { songId } = useParams();
   const comments = useSelector((state) => state.comments);
   const commentsArr = Object.values(comments);
-  console.log(commentsArr, 'COMMENTS ARRAY')
-  const currentSongComments = commentsArr.filter((comment) => comment.songId == songId );
 
-  console.log(currentSongComments, 'CURRENT SONG COMMENTS')
-  const currentUser = useSelector((state) => state.session.user)
-  const username = currentUser.username
+  // const [commentId, setCommentId] = useState("");
 
-//   const songs = useSelector((state) => state.songs);
-//   console.log(songs,'YOOOOOOOOOOOO SONGS')
-//   const songsArr = Object.values(songs);
-// const song = songsArr.forEach(song => {
-//     return song
-// })
-
-
+  const currentSongComments = commentsArr.filter(
+    (comment) => comment.songId == songId
+  );
+  const currentUser = useSelector((state) => state.session.user);
+  const username = currentUser.username;
 
   useEffect(() => {
     dispatch(loadAllComments());
   }, [dispatch]);
 
-//   useEffect(() => {
-//     dispatch(getSongs);
-//   }, [dispatch]);
+  // const handleDelete = (e) => {
+  //   e.preventDefault()
+  //   // console.log(comment.id, "TARGET VALUE");
+
+  //   if (!currentUser) return window.alert("Please Login");
+
+  //   dispatch(deleteComment());
+  // };
 
   return (
     <div>
       <h1>Comments</h1>
       {currentSongComments.map((comment) => (
-        <ul>
+        <ul className="comment">
+          <li>{username}</li>
+          <li key={comment.id}>Comment: {comment.body}</li>
+         
 
-         <li key={comment.id}>Comment: {comment.body}</li>
-            <li>comment with songId {comment.songId}</li>
-            <li>songId {songId}</li>
-        <li>Username: {username}</li>
+          <SingleComment comment={comment}/>
         </ul>
-
       ))}
     </div>
   );

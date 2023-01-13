@@ -8,12 +8,11 @@ const SingleSong = ({ song, currentUser }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
   //EDIT BUTTON
   const handleEdit = (e) => {
     e.preventDefault();
     console.log(song.userId, "USER ID");
-    if(!currentUser) return window.alert('Please Login')
+    if (!currentUser) return window.alert("Please Login");
     if (song.userId === currentUser.id) {
       history.push(`/songs/${song.id}/edit`);
     } else {
@@ -21,27 +20,25 @@ const SingleSong = ({ song, currentUser }) => {
     }
   };
 
-
   //DELETE BUTTON
   const handleDelete = (e) => {
     e.preventDefault();
-    if(!currentUser) return window.alert('Please Login')
+    if (!currentUser) return window.alert("Please Login");
     if (song.userId === currentUser.id) {
-     console.log(song, "SONG BEING DELETED");
-    dispatch(removeSong(song.id));
-      } else {
-        window.alert("This account does not have permission to delete this song");
-      }
+      console.log(song, "SONG BEING DELETED");
+      dispatch(removeSong(song.id));
+    } else {
+      window.alert("This account does not have permission to delete this song");
+    }
   };
 
-//COmment Button
-const handleComment = (e) => {
-  e.preventDefault();
-  if(!currentUser) return window.alert('Please Login')
+  //COmment Button
+  const handleComment = (e) => {
+    e.preventDefault();
+    if (!currentUser) return window.alert("Please Login");
 
-   history.push(`/songs/${song.id}`);
-}
-
+    history.push(`/songs/${song.id}`);
+  };
 
   return (
     <div className="song-box">
@@ -52,11 +49,15 @@ const handleComment = (e) => {
         <li>Album: {song.albumId}</li>
         <li>Description: {song.description}</li>
         <a href={song.url}>
-    <button>Play <i class="fa-solid fa-play"></i></button>
-      </a>
+          <button>
+            Play <i class="fa-solid fa-play"></i>
+          </button>
+        </a>
       </ul>
       <div className="song-buttons">
-        <button className='commentButton' onClick={handleComment}>Comment</button>
+        <button className="commentButton" onClick={handleComment}>
+          Comment
+        </button>
 
         <button className="editButton" onClick={handleEdit}>
           Edit
