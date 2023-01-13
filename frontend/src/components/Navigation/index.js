@@ -7,8 +7,9 @@ import SongsList from '../Songs/SongsList';
 
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded, setIsLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  // console.log(sessionUser, "SESSION USERRR")
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
@@ -31,6 +32,7 @@ function Navigation({ isLoaded }){
         <NavLink to="/comments">Comments</NavLink>
         <NavLink to="/songs">Songs</NavLink>
         {isLoaded && sessionLinks}
+        {/* <NavLink to={`/user/${sessionUser.id}/songs`}>My Profile</NavLink> */}
       </li>
     </ul>
   );

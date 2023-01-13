@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
       {isLoaded && (
         <Switch>
           <Route path="/login">

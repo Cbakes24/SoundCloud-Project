@@ -72,6 +72,18 @@ export const getSongs = () => async (dispatch) => {
   }
 };
 
+export const getUserSongs = () => async (dispatch) => {
+  const res = await fetch("/api/songs/current");
+  console.log(res, "RESPONSE");
+  if (res.ok) {
+    const songs = await res.json();
+    console.log(songs, "User SONGSSSS");
+    dispatch(loadSongs(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
+  }
+};
+
+
+
 export const createSong = (payload) => async (dispatch) => {
   const res = await csrfFetch("/api/songs", {
     method: "POST",
