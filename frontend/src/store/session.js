@@ -74,14 +74,14 @@ export const restoreUser = () => async (dispatch) => {
   return response;
 };
 
-export const getUserInfo = (userId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/users/${userId}`);
-  if (res.ok) {
-    const user = await res.json();
-    dispatch(getUser(user.Artist));
-  }
-  return res
-};
+// export const getUserInfo = (userId) => async (dispatch) => {
+//   const res = await csrfFetch(`/api/users/${userId}`);
+//   if (res.ok) {
+//     const user = await res.json();
+//     dispatch(getUser(user.Artist));
+//   }
+//   return res
+// };
 
 
 const initialState = () => ({ user: null });

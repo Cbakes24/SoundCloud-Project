@@ -32,10 +32,17 @@ const SongsList = () => {
 
       <div>
         <ul className="song-list">
-          {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
+          <div>
+            <AllComments songs={songs}/>
+          </div>
+          <div>
+ {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
           {songsArr.map((song) => (
             <SingleSong song={song} key={song.id} currentUser={currentUser} />
           ))}
+
+          </div>
+
         </ul>
 
       </div>
