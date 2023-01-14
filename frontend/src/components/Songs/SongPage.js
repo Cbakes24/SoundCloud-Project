@@ -50,11 +50,14 @@ const SongPage = () => {
     };
     const newComment = await dispatch(createComment(payload))
       .then((comment) => history.push(`/songs/${comment.songId}`))
+
       .catch(async (res) => {
         const data = await res.json();
         console.log(data.errors, "DATAAA for ERRORSSS");
         if (data && data.errors) setErrors(data.errors);
       });
+
+      setBody('')
   };
 
   return song ? (
