@@ -45,6 +45,16 @@ let comments = await Comment.findAll({
 return res.json({ comments });
 });
 
+
+//GET A COMMENT
+// router.get("/:commentId", async (req, res, next) => {
+//   const comment = await Comment.findOne({
+//     where: {
+//       id: req.params.commentId
+//     }
+//   })
+// })
+
 //EDIT A COMMENT
 router.put("/:commentId", requireAuth, async (req, res, next) => {
   const commentId = req.params.commentId;

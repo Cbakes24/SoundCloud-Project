@@ -23,6 +23,13 @@ const validateSong = [
   handleValidationErrors,
 ];
 
+const validateComment = [
+  check("body")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a valid comment."),
+  handleValidationErrors,
+];
+
 //GET SONG
 router.get("/", async (req, res, next) => {
   let { page, size } = req.query;
@@ -159,7 +166,7 @@ router.post("/", requireAuth, validateSong, async (req, res, next) => {
 });
 
 //CREATE A COMMENT
-router.post("/:songId/comments", requireAuth, async (req, res, next) => {
+router.post("/:songId/comments", requireAuth, validateComment, async (req, res, next) => {
   const { body } = req.body;
   const songId = req.params.songId;
   const userId = req.user.id;
