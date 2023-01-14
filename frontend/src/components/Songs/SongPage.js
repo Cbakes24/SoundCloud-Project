@@ -14,9 +14,10 @@ const SongPage = () => {
   const [errors, setErrors] = useState([]);
   const currentUser = useSelector((state) => state.session.user);
   let userId;
-
+  let username;
   if (currentUser) {
     userId = currentUser.id;
+    username = currentUser.username
   }
   const { songId } = useParams();
   const songs = useSelector((state) => state.songs);
@@ -38,11 +39,14 @@ const SongPage = () => {
     [dispatch]
   );
 
+
+  //COMMENT FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setErrors([]);
     const payload = {
+      username,
       songId,
       userId,
       body,
@@ -75,15 +79,17 @@ const SongPage = () => {
         <a href={song.url}>
           <button>Play Song</button>
         </a>
-        {/* <Link to="/songs">Back to Songs</Link> */}
+
+
         <form onSubmit={handleSubmit}>
           <h2>Comment Form</h2>
           <input
+            className='comment-input'
             type="textarea"
             value={body}
             onChange={(e) => setBody(e.target.value)}
           ></input>
-          <button>Submit</button>
+          <button>Submit Comment</button>
         </form>
       </section>
 

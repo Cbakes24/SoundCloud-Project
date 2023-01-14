@@ -41,6 +41,7 @@ export const loadAllComments = () => async (dispatch) => {
 };
 
 export const loadSongComments = (song) => async (dispatch) => {
+    console.log(song, 'THE SONGGGGG')
   const res = await csrfFetch(`/api/songs/${song.id}/comments`);
   console.log(res, "SONG COMMENT RESPONSE");
   if (res.ok) {

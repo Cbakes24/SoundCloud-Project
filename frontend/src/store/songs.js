@@ -44,6 +44,23 @@ export const deleteSong = (id) => { //the songId from the removeSong thunk is pa
   }
 }
 //******* THUNK *******
+// export const createComment =  (payload) => async (dispatch) => {
+//   console.log(payload, 'HERE IS THE SUBMITTED COMMENT!!!')
+//   const {username, body, userId, songId} = payload
+//   const res = await csrfFetch(`/api/songs/${songId}/comments`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({body})
+//     });
+
+//     if (res.ok) {
+//       const comment = await res.json();
+//       comment.User = {id: userId, username}
+//       console.log(comment, 'RETURNED COMMENT')
+//       dispatch(addComment(comment));
+//       return comment;
+//     }
+//   };
 export const createComment =  (payload) => async (dispatch) => {
   console.log(payload, 'HERE IS THE SUBMITTED COMMENT!!!')
   const res = await csrfFetch(`/api/songs/${payload.songId}/comments`, {

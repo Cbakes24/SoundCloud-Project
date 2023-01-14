@@ -1,0 +1,15 @@
+.comment-bodybox {
+    border-width: 1px;
+    border-color: black;
+    border-style:solid;
+    border-radius: 5px;
+    height: auto;
+    width: 500px;
+    background-color: aqua;
+}
+
+.comment-text {
+    margin-left: 5px;
+    margin-top: 3px;
+    margin-bottom: 2px
+}

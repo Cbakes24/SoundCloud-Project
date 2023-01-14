@@ -37,7 +37,10 @@ const CommentList = ({ song }) => {
         <ul className="comment">
           <li>{comment.User.username}</li>
        {/* <UserInfo comment={comment} /> */}
-          <li key={comment.id}>Comment: {comment.body}</li>
+       <div className="comment-bodybox">
+         <li className='comment-text' key={comment.id}>{comment.body}</li>
+       </div>
+
           <SingleComment comment={comment} />
         </ul>
       ))}

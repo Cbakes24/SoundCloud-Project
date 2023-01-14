@@ -41,7 +41,7 @@ const handleSubmit = (e) => {
       });
     }
 
-    history.push('/login')
+
   };
 
 
