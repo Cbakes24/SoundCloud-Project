@@ -17,10 +17,11 @@ const SongPage = () => {
   let username;
   if (currentUser) {
     userId = currentUser.id;
-    username = currentUser.username
+    username = currentUser.username;
   }
   const { songId } = useParams();
   const songs = useSelector((state) => state.songs);
+
   // const songArr = Object.values(songs)
   let comment;
   let song;
@@ -32,13 +33,9 @@ const SongPage = () => {
     dispatch(getSongs());
   }, [dispatch]);
 
-  useEffect(
-    (song) => {
-      dispatch(loadSongComments(song));
-    },
-    [dispatch]
-  );
-
+  useEffect(() => {
+    dispatch(loadSongComments(song));
+  }, [dispatch]);
 
   //COMMENT FORM
   const handleSubmit = async (e) => {
@@ -52,7 +49,7 @@ const SongPage = () => {
       body,
     };
     const newComment = await dispatch(createComment(payload))
-      .then((song) => history.push(`/songs/${song.id}`))
+      .then((comment) => history.push(`/songs/${comment.songId}`))
       .catch(async (res) => {
         const data = await res.json();
         console.log(data.errors, "DATAAA for ERRORSSS");
@@ -79,12 +76,10 @@ const SongPage = () => {
         <a href={song.url}>
           <button>Play Song</button>
         </a>
-
-
         <form onSubmit={handleSubmit}>
           <h2>Comment Form</h2>
           <input
-            className='comment-input'
+            className="comment-input"
             type="textarea"
             value={body}
             onChange={(e) => setBody(e.target.value)}

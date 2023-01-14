@@ -170,6 +170,8 @@ router.post("/:songId/comments", requireAuth, validateComment, async (req, res, 
   const { body } = req.body;
   const songId = req.params.songId;
   const userId = req.user.id;
+  const username = req.user.username
+  console.log(username, 'BACKEND USERNAME')
   const song = await Song.findByPk(req.params.songId);
 
   if (!song || songId === null) {
@@ -182,7 +184,7 @@ router.post("/:songId/comments", requireAuth, validateComment, async (req, res, 
     return next(err);
   }
 
-  const newComment = await song.createComment({ body: body, userId });
+  const newComment = await song.createComment({ body: body, userId, username });
 
   res.json(newComment);
 });

@@ -14,11 +14,18 @@ const SingleComment = ({ comment }) => {
     if (currentUser.id !== comment.userId) {
       return window.alert("You do not have access to delete this comment");
     } else {
+
       dispatch(removeComment(comment.id));
     }
+
   };
 
-  return <button onClick={handleDelete}>Delete</button>;
+console.log(currentUser.id === comment.userId)
+
+
+  return currentUser.id === comment.userId ?
+  <button onClick={handleDelete}>Delete</button>
+: null
 };
 
 export default SingleComment;

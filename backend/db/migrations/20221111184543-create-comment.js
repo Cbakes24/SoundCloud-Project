@@ -14,6 +14,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+
+      username: {
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'username'
+        }
+      },
+
       body: {
         type: Sequelize.STRING
       },

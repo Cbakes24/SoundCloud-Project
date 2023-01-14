@@ -28,7 +28,7 @@ const handleDemoClick = (e) => {
 
 
 setCredential('corybaker24')
-setPassword('hello123')
+setPassword('corysoloman')
 
 //works but flashes that invalid login info, its submitting the login before the credentials are set to corybaker24
 return dispatch(sessionActions.login({ credential, password })).catch(

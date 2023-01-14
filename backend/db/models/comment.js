@@ -13,11 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       Comment.belongsTo(models.User,
         { foreignKey: 'userId' })
 
+      Comment.belongsTo(models.User,
+        { foreignKey: 'username' })
+
       Comment.belongsTo(models.Song,
         { foreignKey: 'songId' })
     }
   }
   Comment.init({
+    username: DataTypes.STRING,
     body: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     songId: DataTypes.INTEGER

@@ -35,7 +35,7 @@ const CommentList = ({ song }) => {
       <h1>Comments</h1>
       {currentSongComments.map((comment) => (
         <ul className="comment">
-          <li>{comment.User.username}</li>
+          <li>{comment.username}</li>
        {/* <UserInfo comment={comment} /> */}
        <div className="comment-bodybox">
          <li className='comment-text' key={comment.id}>{comment.body}</li>
