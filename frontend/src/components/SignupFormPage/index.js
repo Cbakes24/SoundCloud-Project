@@ -6,6 +6,7 @@ import "./SignupForm.css";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -32,21 +33,18 @@ const handleSubmit = (e) => {
           username,
           email,
           password,
-        })
-      ).catch(async (res) => {
+        }))
+      .then(() => history.push(`/songs`))
+      .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
     }
 
-    return setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
-
-
+    history.push('/login')
   };
 
-const history = useHistory()
+
   const handleClick = () => {
     history.replace('/login')
   }

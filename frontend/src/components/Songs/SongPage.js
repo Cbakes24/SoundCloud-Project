@@ -4,7 +4,7 @@ import { useState } from "react";
 import CommentList from "../Comments/CommentList";
 import { createComment } from "../../store/songs";
 import { getSongs } from "../../store/songs";
-import { useEffect } from 'react'
+import { useEffect } from "react";
 import { loadSongComments } from "../../store/comments";
 
 const SongPage = () => {
@@ -15,27 +15,28 @@ const SongPage = () => {
   const currentUser = useSelector((state) => state.session.user);
   let userId;
 
-  if(currentUser){
-userId = currentUser.id
+  if (currentUser) {
+    userId = currentUser.id;
   }
   const { songId } = useParams();
   const songs = useSelector((state) => state.songs);
   // const songArr = Object.values(songs)
   let comment;
   let song;
-if(songs) {
-  song = songs[songId]
-}
+  if (songs) {
+    song = songs[songId];
+  }
 
-useEffect(() => {
-  dispatch(getSongs())
-}, [dispatch])
+  useEffect(() => {
+    dispatch(getSongs());
+  }, [dispatch]);
 
-
-
-useEffect((song) => {
-  dispatch(loadSongComments(song));
-}, [dispatch]);
+  useEffect(
+    (song) => {
+      dispatch(loadSongComments(song));
+    },
+    [dispatch]
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,20 +48,19 @@ useEffect((song) => {
       body,
     };
     const newComment = await dispatch(createComment(payload))
-    .then((song) => history.push(`/songs/${song.id}`))
-    .catch(async (res) => {
-      const data = await res.json();
-      console.log(data.errors, "DATAAA for ERRORSSS");
-      if (data && data.errors) setErrors(data.errors);
-    });
-  }
+      .then((song) => history.push(`/songs/${song.id}`))
+      .catch(async (res) => {
+        const data = await res.json();
+        console.log(data.errors, "DATAAA for ERRORSSS");
+        if (data && data.errors) setErrors(data.errors);
+      });
+  };
 
   return song ? (
     <div>
       <section>
-      {errors.length > 0 &&
-        errors.map((error, i) => <div key={i}> {error} </div>)}
-
+        {errors.length > 0 &&
+          errors.map((error, i) => <div key={i}> {error} </div>)}
         <img src={song.previewImage} />
         <br />
         ID: {song.id}
@@ -93,7 +93,7 @@ useEffect((song) => {
         </div>
       </section>
     </div>
-  ) : null
+  ) : null;
 };
 
 export default SongPage;

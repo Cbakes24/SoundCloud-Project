@@ -50,7 +50,7 @@ const SingleSong = ({ song, currentUser }) => {
         <li>Description: {song.description}</li>
         <a href={song.url}>
           <button>
-            Play <i class="fa-solid fa-play"></i>
+            Play <i className="fa-solid fa-play"></i>
           </button>
         </a>
       </ul>
