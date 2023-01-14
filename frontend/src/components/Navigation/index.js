@@ -28,10 +28,13 @@ function Navigation({ isLoaded, setIsLoaded }){
   return (
     <ul>
       <li className='navList'>
-        <NavLink exact to="/">Home</NavLink>
-        <NavLink to="/comments">Comments</NavLink>
-        <NavLink to="/songs">Songs</NavLink>
-        {isLoaded && sessionLinks}
+        <NavLink activeClassName="active" exact to="/">Home</NavLink>
+        <NavLink  activeClassName="active" to="/comments">Comments</NavLink>
+        <NavLink  activeClassName="active" to="/songs">Songs</NavLink>
+        <section>
+           {isLoaded && sessionLinks}
+        </section>
+
         {/* <NavLink to={`/user/${sessionUser.id}/songs`}>My Profile</NavLink> */}
       </li>
     </ul>

@@ -46,7 +46,7 @@ export const loadSongComments = (song) => async (dispatch) => {
   if (res.ok) {
     const songComments = await res.json();
     console.log(songComments, "SONG COMMENTS");
-    dispatch(loadComments(song.comments));
+    dispatch(loadComments(songComments));
   }
 };
 

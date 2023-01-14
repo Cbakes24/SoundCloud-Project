@@ -13,7 +13,11 @@ const SongPage = () => {
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState([]);
   const currentUser = useSelector((state) => state.session.user);
-  const userId = currentUser.id;
+  let userId;
+
+  if(currentUser){
+userId = currentUser.id
+  }
   const { songId } = useParams();
   const songs = useSelector((state) => state.songs);
   // const songArr = Object.values(songs)
@@ -30,7 +34,6 @@ useEffect(() => {
 
 
 useEffect((song) => {
-  console.log(song, 'DISPATCHING THIS SONG')
   dispatch(loadSongComments(song));
 }, [dispatch]);
 
@@ -43,19 +46,21 @@ useEffect((song) => {
       userId,
       body,
     };
-    const newComment = await dispatch(createComment(payload)).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
-
-    history.push(`./${song.id}`);
-  };
+    const newComment = await dispatch(createComment(payload))
+    .then((song) => history.push(`/songs/${song.id}`))
+    .catch(async (res) => {
+      const data = await res.json();
+      console.log(data.errors, "DATAAA for ERRORSSS");
+      if (data && data.errors) setErrors(data.errors);
+    });
+  }
 
   return song ? (
     <div>
       <section>
+      {errors.length > 0 &&
+        errors.map((error, i) => <div key={i}> {error} </div>)}
+
         <img src={song.previewImage} />
         <br />
         ID: {song.id}
