@@ -6,7 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation/index";
 import SongsList from "./components/Songs/SongsList";
-import AddSongForm from "./components/Songs/AddSongForm";
+import AddSongForm from "./components/Songs/addSongForm";
 import EditSongForm from "./components/Songs/EditSongForm";
 import CreateSongForm from "./components/Songs/CreateSongForm";
 import SongPage from "./components/Songs/SongPage";

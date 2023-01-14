@@ -33,15 +33,14 @@ const AddSongForm = ({ song, formType }) => {
       };
 
       const newSong = await dispatch(createSong(payload))
-      .then((song) => history.push(`/songs/${song.id}`))
-      .catch(async (res) => {
-        const data = await res.json();
-        console.log(data.errors, "DATAAA for ERRORSSS");
-        if (data && data.errors) setErrors(data.errors);
-      }); // sending it to the Thunk and action and reducer to update the state
+        .then((song) => history.push(`/songs/${song.id}`))
+        .catch(async (res) => {
+          const data = await res.json();
+          console.log(data.errors, "DATAAA for ERRORSSS");
+          if (data && data.errors) setErrors(data.errors);
+        }); // sending it to the Thunk and action and reducer to update the state
 
-
-// history.push("/songs");
+      // history.push("/songs");
 
       // ****** EDIT SONG FORM ******
     } else {
@@ -55,15 +54,15 @@ const AddSongForm = ({ song, formType }) => {
       };
       console.log(payload, " EDIT PAYLOAD");
       dispatch(updateSong(payload))
-      .then((song) => history.push(`/songs/${song.id}`))
-      .catch(async (res) => {
-        const data = await res.json();
-        console.log(data.errors, "DATAAA for ERRORSSS");
-        if (data && data.errors) setErrors(data.errors);
-      });
+        .then((song) => history.push(`/songs/${song.id}`))
+        .catch(async (res) => {
+          const data = await res.json();
+          console.log(data.errors, "DATAAA for ERRORSSS");
+          if (data && data.errors) setErrors(data.errors);
+        });
     }
 
-// history.push("/songs");
+    // history.push("/songs");
   };
 
   //****** CANCEL BUTTON ******
@@ -76,8 +75,6 @@ const AddSongForm = ({ song, formType }) => {
     <section>
       {errors.length > 0 &&
         errors.map((error, i) => <div key={i}> {error} </div>)}
-
-
 
       <form onSubmit={handleSubmit}>
         <h2>{formType}</h2>
