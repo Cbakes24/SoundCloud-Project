@@ -13,7 +13,12 @@ function Navigation({ isLoaded, setIsLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
+      <div>
+
+       <NavLink  activeClassName="active" exact to={`/songs/users/${sessionUser.id}`}>My Songs</NavLink>
       <ProfileButton user={sessionUser} />
+      </div>
+
     );
   } else {
     sessionLinks = (
@@ -30,7 +35,8 @@ function Navigation({ isLoaded, setIsLoaded }){
       <li className='navList'>
         <NavLink activeClassName="active" exact to="/">Home</NavLink>
         <NavLink  activeClassName="active" to="/comments">Comments</NavLink>
-        <NavLink  activeClassName="active" to="/songs">Songs</NavLink>
+        <NavLink  activeClassName="active" exact to="/songs">Songs</NavLink>
+
         <section>
            {isLoaded && sessionLinks}
         </section>

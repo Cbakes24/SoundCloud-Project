@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getUserSongs } from "../../store/songs";
 import { useState } from 'react'
+import { useEffect }  from 'react'
+import { Link } from 'react-router-dom'
+import SingleSong from "./SingleSong";
 
 const UserSongs = () => {
 
@@ -8,7 +11,11 @@ const UserSongs = () => {
   const currentUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.songs);
   const songsArr = Object.values(songs);
-  console.log(songsArr, "USERS SONGS ARRAY");
+  console.log(songsArr, 'SONGS ARRAY');
+  const userSongsArr = songsArr.filter(song => {
+    return song.userId === currentUser.id
+  })
+console.log(userSongsArr, "USERS SONGS ARRAY")
 
   useEffect(() => {
     dispatch(getUserSongs());
@@ -20,10 +27,12 @@ const UserSongs = () => {
       <Link to="/songs/new">Add Song</Link>
       <ul className="song-list">
         {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
-        {songsArr.map((song) => (
+        {userSongsArr.map((song) => (
           <SingleSong song={song} key={song.id} currentUser={currentUser} />
         ))}
       </ul>
     </div>
   );
 };
+
+export default UserSongs

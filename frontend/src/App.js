@@ -12,6 +12,7 @@ import CreateSongForm from "./components/Songs/CreateSongForm";
 import SongPage from "./components/Songs/SongPage";
 import CommentList from "./components/Comments/CommentList";
 import CreateCommentForm from "./components/Comments/CreateCommentForm";
+import UserSongs from "./components/Songs/UserSongs";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route path={`/songs/:songId/comments`}>
             <CreateCommentForm />
+          </Route>
+          <Route exact path={`/songs/users/:userId`}>
+            <UserSongs />
           </Route>
         </Switch>
       )}

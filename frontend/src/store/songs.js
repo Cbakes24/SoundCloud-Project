@@ -95,7 +95,7 @@ export const getUserSongs = () => async (dispatch) => {
   if (res.ok) {
     const songs = await res.json();
     console.log(songs, "User SONGSSSS");
-    dispatch(loadSongs(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
+    dispatch(loadSongs(songs)); //because allsongs was the initial key in the list of songs see the console log
   }
 };
 

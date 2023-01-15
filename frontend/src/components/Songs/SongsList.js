@@ -33,7 +33,7 @@ const SongsList = () => {
       <div>
         <ul className="song-list">
           <div>
-            <AllComments songs={songs}/>
+            {/* <AllComments songs={songs}/> */}
           </div>
           <div>
  {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
