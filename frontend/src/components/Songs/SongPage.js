@@ -76,8 +76,13 @@ const SongPage = () => {
         <a href="/songs">
           <button>Back To Songs</button>
         </a>
-        <a href={song.url}>
-          <button>Play Song</button>
+        {/* <a href={song.url}>
+          <button >Play Song</button>
+        </a> */}
+         <a href={song.url}>
+          <button>
+            Play <i className="fa-solid fa-play"></i>
+          </button>
         </a>
         <form onSubmit={handleSubmit}>
           <h2>Comment Form</h2>

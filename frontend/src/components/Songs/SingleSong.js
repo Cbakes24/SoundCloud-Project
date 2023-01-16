@@ -38,16 +38,8 @@ const SingleSong = ({ song, currentUser }) => {
         <button className="commentButton" onClick={handleComment}>
           Comment
         </button>
-        
-    <EditDelete  song={song} currentUser={currentUser}/>
-{/*
-   <button className="editButton" onClick={handleEdit}>
-          Edit
-        </button>
 
-        <button className="delete" onClick={handleDelete}>
-          Delete
-        </button> */}
+    <EditDelete  song={song} currentUser={currentUser}/>
 
       </div>
     </div>
