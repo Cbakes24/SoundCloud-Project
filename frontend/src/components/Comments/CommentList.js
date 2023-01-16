@@ -32,10 +32,11 @@ const CommentList = ({ song }) => {
       <h1>Comments</h1>
       {currentSongComments.map((comment) => (
         <ul className="comment">
-        
+
           <li>{song.title}</li>
        <div className="comment-bodybox">
          <li className='comment-text' key={comment.id}>{comment.body}</li>
+        <li>-{comment.username}</li>
        </div>
 
           <SingleComment comment={comment} />

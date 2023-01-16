@@ -25,6 +25,7 @@ const AllComments = ({ songs }) => {
               <li className="comment-text" key={comment.id}>
                 {comment.body}
               </li>
+              <li>-{comment.username}</li>
             </div>
           </ul>
         ))}
