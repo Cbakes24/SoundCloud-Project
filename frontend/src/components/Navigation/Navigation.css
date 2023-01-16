@@ -1,6 +1,5 @@
 
 #main-header{
-    width: 100%;
     padding: 15px;
     margin: auto;
     overflow: hidden;
@@ -14,7 +13,7 @@
 }
 
 #navbar {
-width: 100%;
+width: 100%
 }
 
 #navbar ul {
