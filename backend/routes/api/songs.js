@@ -207,12 +207,12 @@ router.get("/:songId/comments", async (req, res, next) => {
 
   const songComments = await Comment.findAll({
     where: { songId: songId },
-    include: [
-      {
-        model: User,
-        attributes: ["id", "username"],
-      },
-    ],
+    // include: [
+    //   {
+    //     model: User,
+    //     attributes: ["id", "username"],
+    //   },
+    // ],
   });
   // console.log("song");
   res.json(songComments);
