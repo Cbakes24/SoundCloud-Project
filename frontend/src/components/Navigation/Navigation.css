@@ -39,7 +39,8 @@ width: 100%;
 
 #navbar a{
     text-decoration: none;
-    color:aliceblue
+    color:aliceblue;
+    width: 100%;
    }
 
 .container {
