@@ -3,7 +3,7 @@ ul {
 }
 
 img {
-  margin-top: 30px;
+  margin: 30px;
   width: 200px;
   height: 200px;
   border-style: double;
@@ -14,13 +14,15 @@ img {
 
 .songs {
   display: flex;
-  width: min-content;
+  width: 100%;
+  overflow: auto;
 }
 
 .song-list {
   list-style-type: none;
   display: flex;
   flex-direction: column-reverse;
+
 }
 
 .song-box {
