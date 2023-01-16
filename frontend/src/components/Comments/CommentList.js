@@ -33,7 +33,7 @@ const CommentList = ({ song }) => {
       {currentSongComments.map((comment) => (
         <ul className="comment">
           <li>{comment.username}</li>
-
+          <li>{song.title}</li>
        <div className="comment-bodybox">
          <li className='comment-text' key={comment.id}>{comment.body}</li>
        </div>

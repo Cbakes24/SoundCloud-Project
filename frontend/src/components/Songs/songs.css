@@ -1,84 +1,76 @@
 ul {
-
-    list-style-type: none;
+  list-style-type: none;
 }
 
 img {
-    margin-top: 30px;
-    width: 200px;
-    height: 200px;
-    border-style: double;
-    border-color: black;
-    border-width: 5px;
-    border-radius: 2px;
+  margin-top: 30px;
+  width: 200px;
+  height: 200px;
+  border-style: double;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 2px;
 }
 
 .songs {
-    display: flex;
-    width: min-content
-
+  display: flex;
+  width: min-content;
 }
 
-
 .song-list {
-
-    list-style-type: none;
-    display: flex;
-    flex-direction: column-reverse;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .song-box {
-    display: flex;
-    border-style: solid;
-    border-width: 5px;
-    border-radius: 5px;
-    width: 400px;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    background-color: white;
+  display: flex;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 5px;
+  width: 400px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  background-color: white;
 }
 
 .singleSong {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 0px
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
 }
 
 Link {
-    color: white
+  color: white;
 }
 
 li {
-    color: black;
-    margin-left: 10px
-
+  color: black;
+  margin-left: 10px;
 }
 
 .song-buttons {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    width: 200px;
-    margin-bottom: 15px;
-    background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 200px;
+  margin-bottom: 15px;
+  background-color: white;
 }
 
-
 .comment {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .delete {
-
 }
 
 .playButton {
-
 }
 
 .comment-input {
-    height: 40px
+  height: 40px;
 }

@@ -1,6 +1,6 @@
 .comment-bodybox {
     border-width: 1px;
-    border-color: black;
+    border-color:#25335a;
     border-style:solid;
     border-radius: 5px;
     height: auto;
@@ -11,7 +11,8 @@
 .comment-text {
     margin-left: 5px;
     margin-top: 3px;
-    margin-bottom: 2px
+    margin-bottom: 2px;
+    color: #25335a
 }
 
 #feed {
