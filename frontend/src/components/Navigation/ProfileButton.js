@@ -33,7 +33,7 @@ const history = useHistory()
   };
 
   return (
-    <div>
+    <>
       <button className='profileButton' onClick={openMenu}>Profile
       <i className="fa-solid fa-user"></i>
       </button>
@@ -46,7 +46,7 @@ const history = useHistory()
           </li>
         </ul>
       )}
-    </div>
+    </>
   );
 }
 

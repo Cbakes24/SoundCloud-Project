@@ -13,6 +13,8 @@ import SongPage from "./components/Songs/SongPage";
 import CommentList from "./components/Comments/CommentList";
 import CreateCommentForm from "./components/Comments/CreateCommentForm";
 import UserSongs from "./components/Songs/UserSongs";
+import Home from "./components/Home/Home";
+import AllComments from "./components/Comments/AllComments";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +28,9 @@ function App() {
       <Navigation isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
       {isLoaded && (
         <Switch>
+            <Route exact path="/">
+            <Home />
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>
@@ -45,7 +50,7 @@ function App() {
             <SongPage />
           </Route>
           <Route exact path={`/comments`}>
-            <CommentList />
+            <AllComments/>
           </Route>
           <Route path={`/songs/:songId/comments`}>
             <CreateCommentForm />

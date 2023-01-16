@@ -1,0 +1,12 @@
+#loginsignup {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: 3px black solid;
+
+}
+
+.formbuttons {
+    margin-top: 15px;
+    padding: 5px;
+}

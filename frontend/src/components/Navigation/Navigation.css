@@ -1,35 +1,81 @@
-.navList {
-display: flex;
-justify-content: flex-start;
-align-items: flex-start;
+
+#main-header{
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+    overflow: hidden;
+    background-color: #34ccaa;
 }
 
+
+#main-header h1{
+    background-color: #34ccaa;
+    color: rgb(0, 0, 0);
+}
+
+#navbar ul {
+padding: 0;
+text-decoration: none;
+}
+
+#navbar li{
+ display: inline-block;
+ font-size: 22px;
+ padding-right: 15px;
+ text-decoration: none;
+}
+
+#navbar a:hover {
+    background-color: black;
+    color: white;
+    padding: 2px
+
+}
+
+#navbar a{
+    text-decoration: none;
+    color:aliceblue
+   }
+
+.container {
+    background-color: rgb(246, 75, 75);
+    padding: 1px;
+    height: 100%;
+}
+
+
+
+.active {
+
+margin: 10px;
+color: rgb(0, 0, 0);
+border-width: 3px;
+border-style: solid;
+border-color: rgb(255, 255, 255);
+border-radius: 5px;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+
+/* PROFILE BUTTON */
+#profilediv {
+    margin: 0;
+    padding: 0;
+}
 .profileButton:hover {
     background-color: black;
     color: white
 }
 
 .profile-dropdown {
- display: inline;
-
+ display: inline-flex;
+ flex-direction: column;
 }
-
-nav {
-
-}
-
-.active {
-    margin: 10px;
-    color: white;
-    border-width: 3px;
-border-style: dashed;
-border-color: brown;
-}
-
-
 i {
     padding-left: 10px;
 }
+
 .listItem {
     list-style-type: none;
 }
@@ -38,10 +84,4 @@ i {
     background-color: black;
     color: white;
     cursor:pointer
- }
-
- .active {
-    color: blue;
-    margin-left: 5px;
-    margin-right: 5px;
  }

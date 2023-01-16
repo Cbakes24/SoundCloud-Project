@@ -16,8 +16,8 @@ const AllComments = ({songs}) => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Comments</h1>
+    <div id="feed">
+      <h1>The Feed</h1>
       {allCommentsArr.map((comment) => (
         <ul className="comment">
           <li>{comment.username}</li>

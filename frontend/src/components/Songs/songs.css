@@ -1,16 +1,12 @@
 ul {
+
     list-style-type: none;
 }
 
 .song-comments {
     display: grid;
-    border:blue;
-    border-style: double;
-    border-width: 5px;
-    /* align-content: space-between;
-    justify-content: space-around;
-    justify-items: stretch; */
     gap: 50px 100px;
+    justify-items: center;
 }
 
 img {
@@ -23,13 +19,15 @@ img {
     border-radius: 2px;
 }
 
-.song-list {
+.songs {
     display: flex;
-    border: 10px;
-    border-style: dashed;
-    flex-wrap: nowrap;
-    flex-direction: column-reverse;
+}
 
+
+.song-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .song-box {

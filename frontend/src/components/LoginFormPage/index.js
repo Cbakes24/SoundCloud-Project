@@ -40,7 +40,7 @@ return dispatch(sessionActions.login({ credential, password })).catch(
 }
 
   return (
-    <div className='loginDiv'>
+    <div className='home-form'>
       <h1>Login</h1>
        <form onSubmit={handleSubmit}>
       <ul>
@@ -68,8 +68,11 @@ return dispatch(sessionActions.login({ credential, password })).catch(
           required
         />
       </label>
-      <button type="submit">Log In</button>
-      <button onClick={handleDemoClick}>Demo Log In</button>
+
+      <button className='formbuttons' type="submit">Log In</button>
+      <button className='formbuttons'  onClick={handleDemoClick}>Demo Log In</button>
+
+
     </form>
     </div>
 

@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserSongs } from "../../store/songs";
 import { useState } from 'react'
 import { useEffect }  from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import SingleSong from "./SingleSong";
 
 const UserSongs = () => {
-
+  const history = useHistory()
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.songs);
@@ -21,10 +21,16 @@ console.log(userSongsArr, "USERS SONGS ARRAY")
     dispatch(getUserSongs());
   }, [dispatch]);
 
+  const handleNew = (e) => {
+    e.preventDefault()
+    if (!currentUser) return window.alert("Please Login");
+    history.push(`/songs/new`);
+  };
+
   return (
     <div>
       <h1>My Songs</h1>
-      <Link to="/songs/new">Add Song</Link>
+      <button onClick={handleNew}>Add Song</button>
       <ul className="song-list">
         {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
         {userSongsArr.map((song) => (

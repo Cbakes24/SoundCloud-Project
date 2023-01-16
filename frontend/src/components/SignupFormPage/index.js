@@ -56,7 +56,7 @@ const handleSubmit = (e) => {
   //   })
   // }, [errors])
   return (
-    <div className='signupDiv'>
+    <div className='home-form'>
       <h1>Sign Up Form</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -125,8 +125,8 @@ const handleSubmit = (e) => {
             required
           />
         </label>
-        <button id='signupButton' type="submit">Sign Up</button>
-        <button id='loginButton' onClick={handleClick}>Log In</button>
+        <button className="formbuttons" id='signupButton' type="submit">Sign Up</button>
+        <button className="formbuttons" id='loginButton' onClick={handleClick}>Log In</button>
       </form>
     </div>
   );
