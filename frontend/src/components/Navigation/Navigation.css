@@ -10,7 +10,6 @@
 #main-header #mylinks{
     padding: 15px;
     margin-left: 99px;
-    overflow: hidden;
     background-color: #34ccaa;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
@@ -19,6 +18,10 @@
     background-color: #34ccaa;
     color: #25335a
 }
+#main-header button{
+width: 100px;
+}
+
 
 #navbar {
 width: 100%

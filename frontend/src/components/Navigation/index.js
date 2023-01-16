@@ -47,15 +47,19 @@ function Navigation({ isLoaded, setIsLoaded }) {
 
           <h1> JAM PACKED SOUND CLOUD</h1>
 <div id='mylinks'>
-  <NavLink activeClassName="active" exact to="https://github.com/Cbakes24/SoundCloud-Project">
-              GitHub
-            </NavLink>
 
+            <a href="https://github.com/Cbakes24/SoundCloud-Project">
+          <button>
+            GitHub <i class="fa-brands fa-github"></i>
+          </button>
+        </a>
 <br></br>
-            <NavLink activeClassName="active" exact to="https://www.linkedin.com/in/cory-baker-9738ba2a/">
-              LinkedIn
-            </NavLink>
 
+            <a href="https://www.linkedin.com/in/cory-baker-9738ba2a/">
+          <button>
+            LinkedIn <i class="fa-brands fa-linkedin"></i>
+          </button>
+        </a>
 </div>
 
 
