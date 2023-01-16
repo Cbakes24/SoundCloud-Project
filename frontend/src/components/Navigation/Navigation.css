@@ -13,9 +13,14 @@
     color: rgb(0, 0, 0);
 }
 
+#navbar {
+width: 100%;
+}
+
 #navbar ul {
 padding: 0;
 text-decoration: none;
+width: 100%;
 }
 
 #navbar li{
@@ -41,6 +46,7 @@ text-decoration: none;
     background-color: rgb(246, 75, 75);
     padding: 1px;
     height: 100%;
+    width: auto;
 }
 
 

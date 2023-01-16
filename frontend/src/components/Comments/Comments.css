@@ -5,7 +5,7 @@
     border-radius: 5px;
     height: auto;
     width: 500px;
-    background-color: rgb(124, 164, 244);
+    background-color: white
 }
 
 .comment-text {
@@ -16,6 +16,6 @@
 
 #feed {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column-reverse;
+    align-items:flex-start;
 }
