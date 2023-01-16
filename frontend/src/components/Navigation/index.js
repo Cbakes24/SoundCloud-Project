@@ -44,29 +44,21 @@ function Navigation({ isLoaded, setIsLoaded }) {
   return (
     <>
       <header id="main-header">
-        <div className="'container">
+
           <h1> JAM PACKED SOUND CLOUD</h1>
-          <li className="navList">
-            {" "}
-            <NavLink
-              activeClassName="active"
-              exact
-              to="https://github.com/Cbakes24/SoundCloud-Project"
-            >
+<div id='mylinks'>
+  <NavLink activeClassName="active" exact to="https://github.com/Cbakes24/SoundCloud-Project">
               GitHub
             </NavLink>
-          </li>
-          <li className="navList">
-            {" "}
-            <NavLink
-              activeClassName="active"
-              exact
-              to="https://www.linkedin.com/in/cory-baker-9738ba2a/"
-            >
-              GitHub
+
+<br></br>
+            <NavLink activeClassName="active" exact to="https://www.linkedin.com/in/cory-baker-9738ba2a/">
+              LinkedIn
             </NavLink>
-          </li>
-        </div>
+
+</div>
+
+
       </header>
 
       <nav id="navbar">
