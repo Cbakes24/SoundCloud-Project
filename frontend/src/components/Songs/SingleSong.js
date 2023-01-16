@@ -40,7 +40,7 @@ const SingleSong = ({ song, currentUser }) => {
     history.push(`/songs/${song.id}`);
   };
 
-  return (
+  return  (
     <div className="song-box">
       <ul className="singleSong">
         <img src={song.previewImage} />
@@ -54,18 +54,21 @@ const SingleSong = ({ song, currentUser }) => {
           </button>
         </a>
       </ul>
+
       <div className="song-buttons">
         <button className="commentButton" onClick={handleComment}>
           Comment
         </button>
 
-        <button className="editButton" onClick={handleEdit}>
+
+   <button className="editButton" onClick={handleEdit}>
           Edit
         </button>
-        {/* <Link to={`/songs/${song.id}/edit`}>Edit</Link> */}
+
         <button className="delete" onClick={handleDelete}>
           Delete
         </button>
+
       </div>
     </div>
   );
