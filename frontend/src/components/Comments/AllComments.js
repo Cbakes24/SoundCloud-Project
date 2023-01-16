@@ -13,14 +13,14 @@ const AllComments = ({ songs }) => {
     dispatch(loadAllComments());
   }, [dispatch]);
 
-  
+
   return (
     <>
       <h1>The Feed</h1>
       <div id="feed">
         {allCommentsArr.map((comment) => (
           <ul className="comment">
-            <li>{comment.username}</li>
+          
             <div className="comment-bodybox">
               <li className="comment-text" key={comment.id}>
                 {comment.body}
