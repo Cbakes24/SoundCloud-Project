@@ -20,7 +20,7 @@ const AllComments = ({ songs }) => {
       <div id="feed">
         {allCommentsArr.map((comment) => (
           <ul className="comment">
-          
+
             <div className="comment-bodybox">
               <li className="comment-text" key={comment.id}>
                 {comment.body}
