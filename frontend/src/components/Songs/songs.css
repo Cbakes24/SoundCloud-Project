@@ -67,10 +67,12 @@ li {
   margin-bottom: 10px;
 }
 
-.delete {
-}
-
-.playButton {
+#comment-form {
+  background-color: #faf5f1;
+  border: black solid 2px;
+  border-radius: 4px;
+  margin-top: 10px;
+  padding: 10px;
 }
 
 .comment-input {

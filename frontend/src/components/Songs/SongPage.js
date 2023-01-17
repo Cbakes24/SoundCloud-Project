@@ -82,7 +82,7 @@ const SongPage = () => {
             Play <i className="fa-solid fa-play"></i>
           </button>
         </a>
-        <form onSubmit={handleSubmit}>
+        <form id='comment-form' onSubmit={handleSubmit}>
           <h2>Comment Form</h2>
           {errors.length > 0 &&
             errors.map((error, i) => <div key={i}> {error} </div>)}
