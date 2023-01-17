@@ -27,11 +27,11 @@ const SingleSong = ({ song, currentUser }) => {
         <Link to={`/songs/${song.id}`}>Song Name: {song.title}</Link>
         <li>Album: {song.albumId}</li>
         <li>Description: {song.description}</li>
-        <a href={song.url}>
+        {/* <a href={song.url}>
           <button>
             Play <i className="fa-solid fa-play"></i>
           </button>
-        </a>
+        </a> */}
       </ul>
 
       <div className="song-buttons">
