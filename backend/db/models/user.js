@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
-
+ 
     //static association
     static associate(models) {
       User.hasMany(models.Playlist,

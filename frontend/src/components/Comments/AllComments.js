@@ -2,16 +2,27 @@ import "./Comments.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { loadAllComments } from "../../store/comments";
+import { getSongs } from "../../store/songs";
 
 const AllComments = ({ songs }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments);
+  const songState = useSelector((state) => state.songs);
+console.log(songState, "songStATEEEEEE")
+const allSongArr =  Object.values(songState);
+console.log(allSongArr, 'SONG ARRRR')
   const allCommentsArr = Object.values(comments);
   console.log(allCommentsArr, "ALL COMMENTS");
 
-  const songId = useEffect(() => {
+  // const songImage = allSongArr.map((song) => {
+  //   return {id: song.previewImage}
+  // })
+
+  useEffect(() => {
     dispatch(loadAllComments());
+    dispatch(getSongs());
   }, [dispatch]);
+
 
 
   return (
@@ -19,8 +30,7 @@ const AllComments = ({ songs }) => {
       <h1>The Feed</h1>
       <div id="feed">
         {allCommentsArr.map((comment) => (
-          <ul className="comment">
-
+          <ul className="comment"  key={comment.id}>
             <div className="comment-bodybox">
               <li className="comment-text" key={comment.id}>
                 {comment.body}

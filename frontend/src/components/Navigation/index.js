@@ -14,6 +14,7 @@ function Navigation({ isLoaded, setIsLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <div className="container">
+        <div className="navList">
         <NavLink
           activeClassName="active"
           exact
@@ -22,21 +23,19 @@ function Navigation({ isLoaded, setIsLoaded }) {
           My Songs
         </NavLink>
 
-        <li className="navList">
           {" "}
           <ProfileButton user={sessionUser} />
-        </li>
+        </div>
       </div>
     );
   } else {
     sessionLinks = (
       <div className="container">
-        <li>
+
           <NavLink to="/login">Log In</NavLink>
-        </li>
-        <li>
+
           <NavLink to="/signup">Sign Up</NavLink>
-        </li>
+
       </div>
     );
   }
@@ -67,7 +66,7 @@ function Navigation({ isLoaded, setIsLoaded }) {
 
       <nav id="navbar">
         <div className="container">
-          <ul>
+          <ol>
             <li className="navList">
               {" "}
               <NavLink activeClassName="active" exact to="/">
@@ -85,8 +84,9 @@ function Navigation({ isLoaded, setIsLoaded }) {
                 Songs
               </NavLink>
             </li>
+
             <li className="navList"> {isLoaded && sessionLinks}</li>
-          </ul>
+          </ol>
         </div>
       </nav>
     </>

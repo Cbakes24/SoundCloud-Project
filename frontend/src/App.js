@@ -25,7 +25,10 @@ function App() {
 
   return (
     <>
+    <div>
+
       <Navigation isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+      </div>
       {isLoaded && (
         <Switch>
             <Route exact path="/">
@@ -58,6 +61,8 @@ function App() {
           <Route exact path={`/songs/users/:userId`}>
             <UserSongs />
           </Route>
+
+
         </Switch>
       )}
     </>

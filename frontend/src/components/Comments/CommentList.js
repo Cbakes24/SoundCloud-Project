@@ -12,8 +12,8 @@ const CommentList = ({ song }) => {
   const commentsArr = Object.values(comments);
   // const [commentId, setCommentId] = useState("");
 
-  const currentSongComments = commentsArr.filter(
-    (comment) => comment.songId == songId
+  const currentSongComments = commentsArr.filter((comment) =>
+  comment.songId == songId
   );
   const currentUser = useSelector((state) => state.session.user);
 
