@@ -5,7 +5,10 @@
     border-radius: 5px;
     height: auto;
     width: 500px;
-    background-color:aliceblue
+    background-color:aliceblue;
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
 }
 
 .comment-text {

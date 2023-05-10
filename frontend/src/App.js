@@ -15,7 +15,7 @@ import CreateCommentForm from "./components/Comments/CreateCommentForm";
 import UserSongs from "./components/Songs/UserSongs";
 import Home from "./components/Home/Home";
 import AllComments from "./components/Comments/AllComments";
-
+import HomeMap from "./components/GoogleMaps/GoogleMaps";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -61,7 +61,9 @@ function App() {
           <Route exact path={`/songs/users/:userId`}>
             <UserSongs />
           </Route>
-
+          <Route exact path="/map">
+            <HomeMap />
+          </Route>
 
         </Switch>
       )}

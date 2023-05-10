@@ -15,7 +15,7 @@ module.exports = {
         url: 'url',
         userId: 1,
         albumId: 1,
-        previewImage: 'image'
+        previewImage: 'https://i.scdn.co/image/ab67616d0000b273db89b08034de626ebee6823d'
       },
       {
         title: 'F.O.D',
@@ -23,7 +23,7 @@ module.exports = {
         url: 'url',
         userId: 1,
         albumId: 1,
-        previewImage: 'image'
+        previewImage: 'https://i.scdn.co/image/ab67616d0000b273db89b08034de626ebee6823d'
       },
       {
         title: 'Suck my Kiss',
@@ -31,7 +31,7 @@ module.exports = {
         url: 'url',
         userId: 2,
         albumId: 2,
-        previewImage: 'image'
+        previewImage: 'https://i.scdn.co/image/ab67616d00001e02e7957730bc48a85ee53657fd'
       },
       {
         title: 'Under the Bridge',
@@ -39,21 +39,21 @@ module.exports = {
         url: 'url',
         userId: 2,
         albumId: 2,
-        previewImage: 'image'
+        previewImage: 'https://i.scdn.co/image/ab67616d00001e02e7957730bc48a85ee53657fd'
       },
       {
         title: 'Blood Sex Sugar magik',
         description: 'Come on Anthony gimmie some sugaa',
         userId: 3,
         albumId: 3,
-        previewImage: 'image'
+        previewImage: 'https://i.scdn.co/image/ab67616d00001e02e7957730bc48a85ee53657fd'
       },
       {
         title: 'Giving Kids to Candy',
         description: 'Forever changed the Rock and Roll World',
         userId: 3,
         albumId: 3,
-        previewImage: 'image'
+        previewImage: 'https://m.media-amazon.com/images/I/51qQRA-hjzL._UXNaN_FMjpg_QL85_.jpg'
       },
     ]);
   },
