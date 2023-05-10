@@ -26,7 +26,7 @@ module.exports = {
         previewImage: 'https://i.scdn.co/image/ab67616d0000b273db89b08034de626ebee6823d'
       },
       {
-        title: 'Suck my Kiss',
+        title: 'All Around The World',
         description: 'Oh them chili boyssss',
         url: 'url',
         userId: 2,
