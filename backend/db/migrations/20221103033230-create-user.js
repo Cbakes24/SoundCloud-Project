@@ -28,6 +28,20 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false
       },
+      firstName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+
+     lastName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+
+      previewImage: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
