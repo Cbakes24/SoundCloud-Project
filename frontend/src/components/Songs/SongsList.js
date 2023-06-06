@@ -8,7 +8,7 @@ import AllComments from "../Comments/AllComments";
 
 const SongsList = () => {
   const dispatch = useDispatch();
-const history = useHistory()
+  const history = useHistory();
   //   The Array of all the songs
   const currentUser = useSelector((state) => state.session.user);
 
@@ -22,29 +22,23 @@ const history = useHistory()
     dispatch(getSongs());
   }, [dispatch]);
 
-const handleNew = (e) => {
-  e.preventDefault()
-  if (!currentUser) return window.alert("Please Login");
-  history.push(`/songs/new`);
-};
-
-
+  const handleNew = (e) => {
+    e.preventDefault();
+    if (!currentUser) return window.alert("Please Login");
+    history.push(`/songs/new`);
+  };
 
   return (
-    <div className="song-comments">
-      <div className="comments">
-
-      </div>
-<button onClick={handleNew}>Add Song</button>
+    <div>
+      <button onClick={handleNew}>Add Song</button>
       <div>
         <ul className="song-list">
           <div className="songs">
-          {songsArr.map((song) => (
-            <SingleSong song={song} key={song.id} currentUser={currentUser} />
-          ))}
+            {songsArr.map((song) => (
+              <SingleSong song={song} key={song.id} currentUser={currentUser} />
+            ))}
           </div>
         </ul>
-
       </div>
 
       <Link to="/songs/new">Add Song</Link>

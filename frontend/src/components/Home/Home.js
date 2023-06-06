@@ -8,10 +8,13 @@ const Home = () => {
     const currentUser = useSelector((state) => state.session.user);
 
     return currentUser ? (
-        <div>
+        
+        <div className="homepage">
             <h2> Welcome!</h2>
             <h3>Check Out The Newest Songs</h3>
-            <SongsList />
+            <div>
+            <SongsList  className='song-list-home'/>
+            </div>
         </div>
 
     ) :
