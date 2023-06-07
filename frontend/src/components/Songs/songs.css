@@ -12,20 +12,20 @@ img {
   border-radius: 2px;
 }
 
+.song-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column-reverse;
+
+
+}
+
 .songs {
   display: flex;
   width: 100%;
   overflow: auto;
 }
 
-.song-list {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column-reverse;
-  overflow: auto;
-  width: 80rem
-
-}
 
 .song-box {
   display: flex;
@@ -47,6 +47,9 @@ img {
   padding: 0px;
 }
 
+.singleSong p {
+  margin: 0px
+}
 Link {
   color: white;
 }
@@ -62,6 +65,7 @@ li {
   flex-direction: row;
   width: 200px;
   margin-bottom: 15px;
+  margin-top: 15px;;
   background-color: white;
 }
 

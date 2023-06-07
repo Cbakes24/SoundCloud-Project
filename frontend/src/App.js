@@ -15,7 +15,8 @@ import CreateCommentForm from "./components/Comments/CreateCommentForm";
 import UserSongs from "./components/Songs/UserSongs";
 import Home from "./components/Home/Home";
 import AllComments from "./components/Comments/AllComments";
-import HomeMap from "./components/GoogleMaps/GoogleMaps";
+import EditCommentForm from "./components/Comments/EditCommentForm";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -58,12 +59,13 @@ function App() {
           <Route path={`/songs/:songId/comments`}>
             <CreateCommentForm />
           </Route>
+          <Route path={`/comments/:commentId/edit`}>
+            <EditCommentForm />
+          </Route>
           <Route exact path={`/songs/users/:userId`}>
             <UserSongs />
           </Route>
-          <Route exact path="/map">
-            <HomeMap />
-          </Route>
+     
 
         </Switch>
       )}

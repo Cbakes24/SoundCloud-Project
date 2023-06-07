@@ -23,10 +23,10 @@ const SingleSong = ({ song, currentUser }) => {
     <div className="song-box">
       <ul className="singleSong">
         <img src={song.previewImage} />
-        <li>ID: {song.id}</li>
+        <p>ID: {song.id}</p>
         <Link to={`/songs/${song.id}`}>Song Name: {song.title}</Link>
-        <li>Album: {song.albumId}</li>
-        <li>Description: {song.description}</li>
+        <p>Album: {song.albumId}</p>
+    <p>Description: {song.description}</p>
         {/* <a href={song.url}>
           <button>
             Play <i className="fa-solid fa-play"></i>

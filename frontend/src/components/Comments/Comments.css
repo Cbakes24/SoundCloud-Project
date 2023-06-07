@@ -23,3 +23,12 @@
     flex-direction: column-reverse;
     align-items:flex-start;
 }
+
+.comment-section {
+    display: flex;
+   justify-content: center;
+}
+
+.comment-form {
+margin: 10px;
+}

@@ -1,14 +1,23 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CommentForm from "./CommentForm";
+import { loadAllComments } from "../../store/comments";
 
 const EditCommentForm = () => {
   const { commentId } = useParams();
-
+  const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments);
-console.log(comments,' COMMENTS FROM EDIT FORM')
+  console.log(comments, " COMMENTS FROM EDIT FORM");
   const comment = comments[commentId];
 
+  useEffect(() => {
+    dispatch(loadAllComments(comment));
+  }, [dispatch, commentId]);
+
+  if (!comment) {
+    return null;
+  }
   return <CommentForm comment={comment} formType="Edit Comment" />;
 };
 export default EditCommentForm;
