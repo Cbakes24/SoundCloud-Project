@@ -39,7 +39,7 @@ const handleSubmit = (e) => {
      dispatch(sessionActions.updateUser(payload))
 
 
-      .then((sessionUser) => history.push(`/users/${sessionUser.id}/edit`))
+      .then((sessionUser) => history.push(`/`))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

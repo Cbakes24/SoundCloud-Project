@@ -104,7 +104,7 @@ const sessionReducer = (state = initialState(), action) => {
       delete newState.user
       return newState;
       case EDIT_USER:
-        newState[action.user.id] = action.user;
+        newState.user = action.user;
         return newState;
 
     default:
