@@ -193,7 +193,7 @@ router.put("/:userId", requireAuth, async (req, res, next) => {
     password: password
   });
 
-  console.log(user, "***** EDITED USER ****")
+  console.log(user, "***** USER ****")
   await user.save();
 
   const editedUser = await User.findByPk(req.params.userId);

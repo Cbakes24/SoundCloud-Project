@@ -84,6 +84,7 @@ export const updateUser = (payload) => async (dispatch) => {
 
   if (res.ok) {
     const user = await res.json();
+    console.log(user, "**** ressss ok user ****")
     dispatch(editUser(user));
     return user;
   }

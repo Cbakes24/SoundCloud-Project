@@ -28,7 +28,12 @@ module.exports = (sequelize, DataTypes) => {
 
       User.hasMany(models.Comment,
         { foreignKey: 'userId', onDelete: 'cascade', hooks: true });
+
+      User.hasMany(models.Comment,
+        { foreignKey: 'username', onDelete: 'cascade', hooks: true });
+          
     }
+    
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     }
@@ -107,7 +112,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       defaultScope: {
         attributes: {
-          exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+          exclude: ["hashedPassword", "createdAt", "updatedAt"]
         }
       },
       scopes: {
