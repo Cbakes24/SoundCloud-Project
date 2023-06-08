@@ -16,6 +16,7 @@ import UserSongs from "./components/Songs/UserSongs";
 import Home from "./components/Home/Home";
 import AllComments from "./components/Comments/AllComments";
 import EditCommentForm from "./components/Comments/EditCommentForm";
+import EditSignupForm from "./components/SignupFormPage/EditSignupForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,9 @@ function App() {
           </Route>
           <Route exact path={`/songs/users/:userId`}>
             <UserSongs />
+          </Route>
+          <Route exact path={`/users/:userId/edit`}>
+            <EditSignupForm />
           </Route>
      
 

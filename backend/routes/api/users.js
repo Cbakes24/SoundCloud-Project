@@ -168,6 +168,40 @@ router.post("/", validateSignup, async (req, res, next) => {
   return res.json(newUser);
 });
 
+// EDIT USER
+router.put("/:userId", requireAuth, async (req, res, next) => {
+  console.log(req.body, 'R**** REQ BODY ****')
+  const{ firstName, lastName, username, email, password }  = req.body;
+  const user = await User.findByPk(req.params.userId);
+  0;
+  if (!user) {
+    //title, status, errors(array), message
+    const err = new Error();
+    err.status = 404;
+    err.title = "userId does not exist";
+    err.message = "User could not be found";
+    err.errors = ["User not found"];
+
+    return next(err);
+  }
+
+  user.set({
+    firstName: firstName,
+    lastName: lastName,
+    username: username,
+    email: email,
+    password: password
+  });
+
+  console.log(user, "***** EDITED USER ****")
+  await user.save();
+
+  const editedUser = await User.findByPk(req.params.userId);
+  console.log(editedUser, "**** EDITED USER *****")
+  res.json(editedUser);
+});
+
+
 // router.post("/", validateSignup, async (req, res) => {
 //   const { email, password, username } = req.body;
 //   const user = await User.signup({

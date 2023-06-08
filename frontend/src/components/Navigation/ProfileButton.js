@@ -31,7 +31,11 @@ const history = useHistory()
     dispatch(sessionActions.logout());
     history.push('/login')
   };
-
+  const editProfile = (e) => {
+    e.preventDefault();
+    // dispatch(sessionActions.updateUser(user));
+    history.push(`/users/${user.id}/edit`)
+  };
   return (
     <>
       <button className='profileButton' onClick={openMenu}>Profile
@@ -43,6 +47,7 @@ const history = useHistory()
           <li className='listItem'>{user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
+            <button onClick={editProfile}>Edit Profile</button>
           </li>
         </ul>
       )}
