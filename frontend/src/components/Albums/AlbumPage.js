@@ -15,3 +15,5 @@ const AlbumPage = () => {
         </div>
     )
 }
+
+export default AlbumPage

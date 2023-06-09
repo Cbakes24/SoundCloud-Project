@@ -17,6 +17,7 @@ import Home from "./components/Home/Home";
 import AllComments from "./components/Comments/AllComments";
 import EditCommentForm from "./components/Comments/EditCommentForm";
 import EditSignupForm from "./components/SignupFormPage/EditSignupForm";
+import AlbumList from "./components/Albums/AlbumsList";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,8 +70,9 @@ function App() {
           <Route exact path={`/users/:userId/edit`}>
             <EditSignupForm />
           </Route>
-     
-
+          <Route exact path={`/albums`}>
+            <AlbumList />
+          </Route>
         </Switch>
       )}
     </>
