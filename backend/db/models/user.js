@@ -29,9 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Comment,
         { foreignKey: 'userId', onDelete: 'cascade', hooks: true });
 
-      User.hasMany(models.Comment,
-        { foreignKey: 'username', onDelete: 'cascade', hooks: true });
-          
+   
     }
     
     static getCurrentUserById(id) {

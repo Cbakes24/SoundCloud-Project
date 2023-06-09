@@ -90,6 +90,7 @@ const commentReducer = (state = initialState, action) => {
       action.comments.forEach((comment) => {
         newState[comment.id] = comment;
       });
+      console.log(newState, "HELLLOOOOOOOO");
       return newState;
     case DELETE_COMMENT:
       delete newState[action.id];

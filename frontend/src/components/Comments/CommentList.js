@@ -8,6 +8,11 @@ import SingleComment from "./SingleComment";
 const CommentList = ({ song }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
+
+  useEffect(() => {
+    dispatch(loadSongComments(song));
+  }, [dispatch, song]);
+
   const comments = useSelector((state) => state.comments);
   const commentsArr = Object.values(comments);
   // const [commentId, setCommentId] = useState("");
@@ -22,9 +27,7 @@ const CommentList = ({ song }) => {
   //   dispatch(loadAllComments());
   // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(loadSongComments(song));
-  }, [dispatch]);
+
 
 
   return (
@@ -36,7 +39,7 @@ const CommentList = ({ song }) => {
           <li>{song.title}</li>
        <div className="comment-bodybox">
          <li className='comment-text' key={comment.id}>{comment.body}</li>
-        <li>-{comment.username}</li>
+        <li>-{comment.User.username}</li>
        </div>
 
           <SingleComment comment={comment} />
