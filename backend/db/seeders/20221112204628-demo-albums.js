@@ -12,17 +12,20 @@ module.exports = {
       {
         title: 'Dookie',
         description: 'Best Green Day Album everrrr',
-        userId: 1
+        userId: 1,
+        previewImage: 'img.com'
       },
       {
         title: 'Blood Sex Sugar magik',
         description: 'Come on Anthony gimmie some sugaa',
-        userId: 2
+        userId: 2,
+        previewImage: 'img.com'
       },
       {
         title: 'Giving Kids to Candy',
         description: 'Forever changed the Rock and Roll World',
-        userId: 3
+        userId: 3,
+        previewImage: 'img.com'
       },
     ]);
   },

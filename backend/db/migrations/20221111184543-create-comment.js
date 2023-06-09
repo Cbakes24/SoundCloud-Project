@@ -15,13 +15,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 
-      username: {
-        type: Sequelize.STRING,
-        references: {
-          model: 'Users',
-          key: 'username'
-        }
-      },
+      // username: {
+      //   type: Sequelize.STRING,
+      //   references: {
+      //     model: 'Users',
+      //     key: 'username'
+      //   }
+      // },
 
       body: {
         type: Sequelize.STRING

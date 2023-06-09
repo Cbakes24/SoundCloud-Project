@@ -14,9 +14,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING
-      },
+      // username: {
+      //   type: Sequelize.STRING
+      // },
       totalSongs: {
         type: Sequelize.INTEGER
       },
