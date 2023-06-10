@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 //******* Variables *********
 const LOAD_ALBUMS = "load/LOAD_ALBUMS";
+const LOAD_ALBUM = "load/LOAD_ALBUM";
 const ADD_ALBUM = "add/ADD_ALBUM";
 const DELETE_ALBUM = "delete/DELETE_ALBUM";
 const EDIT_ALBUM = "edit/EDIT_ALBUM";
@@ -23,6 +24,12 @@ const loadAlbums = (albums) => {
   };
 };
 
+const loadAlbum = (album) => {
+    return {
+      type: LOAD_ALBUM,
+      album,
+    };
+  };
 const addAlbum = (payload) => {
   return {
     type: ADD_ALBUM,
@@ -56,6 +63,19 @@ export const getAlbums = () => async (dispatch) => {
       dispatch(loadAlbums(albums)); //because allsongs was the initial key in the list of songs see the console log
     }
   };
+
+//   *** GET SINGLE ALBUM ***
+export const getAlbum = (albumId) => async (dispatch) => {
+    console.log('ALBUMS THUNK')
+    const res = await fetch(`/api/albums/${albumId}`);
+    console.log(res, "RESPONSE");
+    if (res.ok) {
+      const album = await res.json();
+      console.log(album, "THUNK Album ");
+      dispatch(loadAlbum(album)); //because allsongs was the initial key in the list of songs see the console log
+    }
+  };
+
 //   *** DELETE AN ALBUM *** 
 export const removeAlbum = (albumId) => async (dispatch) => {
     console.log(albumId, 'Remove Album THUNK hits')
@@ -123,6 +143,10 @@ const albumReducer = (state = initialState, action) => {
       return newState;
     case EDIT_ALBUM:
       newState[action.album.id] = action.album;
+      return newState;
+      case LOAD_ALBUM:
+      newState[action.album.id] = action.album;
+      console.log(newState, "ALBUM STATE SINGLE")
       return newState;
   //  case ADD_COMMENT:
   //     newState[action.payload.id] = action.payload

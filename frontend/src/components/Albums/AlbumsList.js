@@ -27,15 +27,15 @@ console.log(albums, "ALBUMS HI")
             
         
                 <Link className='album-title' to={`/albums/${album.id}`}>
-                {album.previewImage ? (<ls>{album.previewImage}</ls>) : (
-                <ls>
+                {album.previewImage ? (<div>{album.previewImage}</div>) : (
+                <div>
                
                 <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
-                </ls> )}
+                </div> )}
          
                 {album.title}
                
-            {/* <ls>{album.description}</ls>  */}
+            {/* <div>{album.description}</div>  */}
                 </Link>
              
 
@@ -45,9 +45,7 @@ console.log(albums, "ALBUMS HI")
             
 
            }
-           <div>
-            <AlbumPage />
-           </div>
+
         </div>
     )
 }
