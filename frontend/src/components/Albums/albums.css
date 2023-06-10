@@ -13,12 +13,36 @@
     font-weight: bold;
 }
 
-.album-list img {
+.album-section img {
     margin: 0px;
+    width: 400px;
+    height: 400px;
+    border-style: double;
+    border-color: black;
+    border-width: 5px;
+    border-radius: 2px;
+}
+
+.album-song-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.album-song {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+}
+.album-song img {
+    margin: 5px;
     width: 200px;
     height: 200px;
     border-style: double;
     border-color: black;
     border-width: 5px;
     border-radius: 2px;
+}
+
+.album-song h3 {
+    margin-top: 0px;
 }

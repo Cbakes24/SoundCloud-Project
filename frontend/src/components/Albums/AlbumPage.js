@@ -40,7 +40,7 @@ const AlbumPage = () => {
   return (
     <div>
       HELLO ALBUM Page
-      <section>
+      <section className='album-section'>
         {album && album.previewImage ? (
           <div>{album.previewImage}</div>
         ) : (
@@ -57,11 +57,17 @@ const AlbumPage = () => {
           <button>Back To Albums</button>
         </a>
       </section>
-   
+
+   <div className='album-song-list'>
+
       {songsInAlbum.map((song) => (
-                <SingleSong song={song} currentUser={{currentUser}} />
-            
+        <div className='album-song'>
+            <img src={song.previewImage} />
+            <h3>{song.title}</h3>
+        </div>
             ))}
+
+   </div>
     </div>
   );
 };
