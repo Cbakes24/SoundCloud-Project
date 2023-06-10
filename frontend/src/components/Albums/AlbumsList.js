@@ -1,8 +1,9 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { getAlbums } from "../../store/albums";
 import './albums.css'
+import AlbumPage from "./AlbumPage";
 
 const AlbumList = () => {
     const dispatch = useDispatch();
@@ -23,17 +24,30 @@ console.log(albums, "ALBUMS HI")
         HI
            {albumArr.map((album) => (
              <div className='albums-list'>
-             {album.previewImage ? (<ls>{album.previewImage}</ls>) : (
+            
+        
+                <Link className='album-title' to={`/albums/${album.id}`}>
+                {album.previewImage ? (<ls>{album.previewImage}</ls>) : (
                 <ls>
+               
                 <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
                 </ls> )}
-            
-             <ls className='album-title'>{album.title}</ls>
+         
+                {album.title}
+               
+            {/* <ls>{album.description}</ls>  */}
+                </Link>
+             
 
-            <ls>{album.description}</ls> 
              </div>
            )) 
+
+            
+
            }
+           <div>
+            <AlbumPage />
+           </div>
         </div>
     )
 }
