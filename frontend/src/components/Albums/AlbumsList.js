@@ -2,7 +2,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { getAlbums } from "../../store/albums";
-
+import './albums.css'
 
 const AlbumList = () => {
     const dispatch = useDispatch();
@@ -22,9 +22,16 @@ console.log(albums, "ALBUMS HI")
         <div>
         HI
            {albumArr.map((album) => (
-             <p>
-             {album.title}
-             </p>
+             <div className='albums-list'>
+             {album.previewImage ? (<ls>{album.previewImage}</ls>) : (
+                <ls>
+                <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
+                </ls> )}
+            
+             <ls className='album-title'>{album.title}</ls>
+
+            <ls>{album.description}</ls> 
+             </div>
            )) 
            }
         </div>
