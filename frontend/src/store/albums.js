@@ -44,7 +44,18 @@ export const deleteAlbum = (id) => {
     }
   }
 
+// *** GET ALL ALBUMS ***
 
+export const getAlbums = () => async (dispatch) => {
+    console.log('ALBUMS THUNK')
+    const res = await fetch("/api/albums");
+    console.log(res, "RESPONSE");
+    if (res.ok) {
+      const albums = await res.json();
+      console.log(albums, "THUNK ALBUMSSS");
+      dispatch(loadAlbums(albums)); //because allsongs was the initial key in the list of songs see the console log
+    }
+  };
 //   *** DELETE AN ALBUM *** 
 export const removeAlbum = (albumId) => async (dispatch) => {
     console.log(albumId, 'Remove Album THUNK hits')
@@ -75,7 +86,7 @@ export const createAlbum = (payload) => async (dispatch) => {
   };
 
 
-
+//  *** EDIT ALBUM ***
 export const updateAlbum = (payload) => async (dispatch) => {
     const res = await csrfFetch(`/api/albums/${payload.id}`, {
       method: "PUT",

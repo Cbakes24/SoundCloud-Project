@@ -18,6 +18,7 @@ import AllComments from "./components/Comments/AllComments";
 import EditCommentForm from "./components/Comments/EditCommentForm";
 import EditSignupForm from "./components/SignupFormPage/EditSignupForm";
 import AlbumList from "./components/Albums/AlbumsList";
+import AlbumPage from "./components/Albums/AlbumPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +73,9 @@ function App() {
           </Route>
           <Route exact path={`/albums`}>
             <AlbumList />
+          </Route>
+          <Route exact path={`/albums/:albumId`}>
+            <AlbumPage />
           </Route>
         </Switch>
       )}
