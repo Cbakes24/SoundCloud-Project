@@ -13,6 +13,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
+const asyncHandler = require('express-async-handler')
 
 const validateSignup = [
   check("email")
