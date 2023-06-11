@@ -19,6 +19,7 @@ import EditCommentForm from "./components/Comments/EditCommentForm";
 import EditSignupForm from "./components/SignupFormPage/EditSignupForm";
 import AlbumList from "./components/Albums/AlbumsList";
 import AlbumPage from "./components/Albums/AlbumPage";
+import CreateUser from "./components/SignupFormPage/AWS-SignupForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -76,6 +77,9 @@ function App() {
           </Route>
           <Route exact path={`/albums/:albumId`}>
             <AlbumPage />
+          </Route>
+          <Route exact path={`/users`}>
+            <CreateUser />
           </Route>
         </Switch>
       )}

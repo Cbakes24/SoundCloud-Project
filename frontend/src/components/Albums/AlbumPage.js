@@ -53,9 +53,7 @@ const AlbumPage = () => {
         <br />
         Description: {album && album.description}
         <br />
-        <a href="/albums">
-          <button>Back To Albums</button>
-        </a>
+     
       </section>
 
    <div className='album-song-list'>
@@ -68,6 +66,9 @@ const AlbumPage = () => {
             ))}
 
    </div>
+   <a href="/albums">
+          <button>Back To Albums</button>
+        </a>
     </div>
   );
 };

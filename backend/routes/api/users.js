@@ -12,6 +12,7 @@ const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op } = require("sequelize");
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 
 const validateSignup = [
   check("email")
@@ -139,39 +140,76 @@ router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
   return res.json(userPlaylists);
 });
 
+// AWS USER SIGNUP
+router.post("/", singleMulterUpload("image"),
+  validateSignup,
+  asyncHandler(async (req, res) => {
+    const { email, password, username, firstName, lastName } = req.body;
+    const profileImageUrl = await singlePublicFileUpload(req.file);
+
+    const existUsers = await User.findOne({
+      where: { [Op.or]: [{ username }, { email }] },
+    });
+  
+    if (existUsers) {
+      const err = new Error();
+      err.status = 403;
+      err.title = "user email or username not unique";
+      err.message = "user email or username already exists";
+      err.errors = ["user email or username already exists"];
+  
+      return next(err);
+    }
+    const user = await User.signup({
+      username,
+      email,
+      password,
+      firstName,
+      lastName,
+      profileImageUrl,
+    });
+
+    setTokenCookie(res, user);
+
+    return res.json({
+      user,
+    });
+  })
+);
+
 //NEW USER SIGN Up?
-router.post("/", validateSignup, async (req, res, next) => {
-  const { firstName, lastName, username, email, password } = req.body;
-  const existUsers = await User.findOne({
-    where: { [Op.or]: [{ username }, { email }] },
-  });
+// router.post("/", validateSignup, async (req, res, next) => {
+//   const { firstName, lastName, username, email, password } = req.body;
+  // const existUsers = await User.findOne({
+  //   where: { [Op.or]: [{ username }, { email }] },
+  // });
 
-  if (existUsers) {
-    const err = new Error();
-    err.status = 403;
-    err.title = "user email or username not unique";
-    err.message = "user email or username already exists";
-    err.errors = ["user email or username already exists"];
+  // if (existUsers) {
+  //   const err = new Error();
+  //   err.status = 403;
+  //   err.title = "user email or username not unique";
+  //   err.message = "user email or username already exists";
+  //   err.errors = ["user email or username already exists"];
 
-    return next(err);
-  }
-  const newUser = await User.signup({
-    username,
-    email,
-    password,
-    firstName,
-    lastName,
-  });
+  //   return next(err);
+  // }
+//   const newUser = await User.signup({
+//     username,
+//     email,
+//     password,
+//     firstName,
+//     lastName,
+//   });
 
-  await setTokenCookie(res, newUser);
+//   await setTokenCookie(res, newUser);
 
-  return res.json(newUser);
-});
+//   return res.json(newUser);
+// });
 
 // EDIT USER
 router.put("/:userId", requireAuth, async (req, res, next) => {
-  console.log(req.body, 'R**** REQ BODY ****')
-  const{ firstName, lastName, username, email, password }  = req.body;
+  console.log(req.body, "R**** REQ BODY ****");
+  const { firstName, lastName, username, email, password } = req.body;
   const user = await User.findByPk(req.params.userId);
   0;
   if (!user) {
@@ -190,17 +228,16 @@ router.put("/:userId", requireAuth, async (req, res, next) => {
     lastName: lastName,
     username: username,
     email: email,
-    password: password
+    password: password,
   });
 
-  console.log(user, "***** USER ****")
+  console.log(user, "***** USER ****");
   await user.save();
 
   const editedUser = await User.findByPk(req.params.userId);
-  console.log(editedUser, "**** EDITED USER *****")
+  console.log(editedUser, "**** EDITED USER *****");
   res.json(editedUser);
 });
-
 
 // router.post("/", validateSignup, async (req, res) => {
 //   const { email, password, username } = req.body;
