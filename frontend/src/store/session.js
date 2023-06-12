@@ -61,6 +61,8 @@ export const createUser = (user) => async (dispatch) => {
   });
 
   const data = await res.json();
+  console.log(data, "*** DATA RETURNED FROM API***")
+  console.log(data.user, "*** DATA USER ****")
   dispatch(setUser(data.user));
 };
 

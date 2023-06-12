@@ -120,7 +120,7 @@ const CreateUser = () => {
             <h1>{user.username}</h1>
             <img
               style={{ width: "150px" }}
-              src={user.profileImageUrl}
+              src={user.previewImage}
               alt="profile"
             />
           </div>
