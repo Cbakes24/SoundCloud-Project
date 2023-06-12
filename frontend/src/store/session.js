@@ -1,22 +1,16 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf.js";
 
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
-const EDIT_USER = "get/GET_USER"
+const EDIT_USER = "session/editUser"
+const setUser = (user) => ({
+  type: SET_USER,
+  payload: user,
+});
 
-
-const setUser = (user) => {
-  return {
-    type: SET_USER,
-    user
-  };
-};
-
-const removeUser = () => {
-  return {
-    type: REMOVE_USER,
-  };
-};
+const removeUser = () => ({
+  type: REMOVE_USER,
+});
 
 const editUser = (user) => {
   return {
@@ -24,42 +18,27 @@ const editUser = (user) => {
     user
   }
 }
-
-
-
-
-export const login = (user) => async (dispatch) => {
-  const { credential, password } = user;
-  const response = await csrfFetch("/api/session", {
+export const login = ({ credential, password }) => async (dispatch) => {
+  const res = await csrfFetch("/api/session", {
     method: "POST",
-    body: JSON.stringify({
-      credential,
-      password,
-    }),
+    body: JSON.stringify({ credential, password }),
   });
-  const data = await response.json();
-  dispatch(setUser(data));
-  return response;
+  const data = await res.json();
+  dispatch(setUser(data.user));
 };
 
-export const logout = () => async (dispatch) => {
-  const response = await csrfFetch("/api/session", {
-    method: "DELETE",
-  });
-  dispatch(removeUser());
-  return response;
+export const restoreUser = () => async (dispatch) => {
+  const res = await csrfFetch("/api/session");
+  const data = await res.json();
+  dispatch(setUser(data.user));
 };
 
-
-//  *** AWS CREATE USER ***
-export const signup = (user) => async (dispatch) => {
-  const { username, email, password, firstName, lastName, images, image } = user;
+export const createUser = (user) => async (dispatch) => {
+  const { images, image, username, email, password } = user;
   const formData = new FormData();
   formData.append("username", username);
   formData.append("email", email);
   formData.append("password", password);
-  formData.append("firstName", firstName);
-  formData.append("lastName", lastName);
 
   // for multiple files
   if (images && images.length !== 0) {
@@ -83,29 +62,15 @@ export const signup = (user) => async (dispatch) => {
   dispatch(setUser(data.user));
 };
 
+export const logout = () => async (dispatch) => {
+  const res = await csrfFetch("/api/session", {
+    method: "DELETE",
+  });
 
-// export const signup = (user) => async (dispatch) => {
-//   const { firstName, lastName, username, email, password } = user;
-//   const response = await csrfFetch("/api/users", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       firstName,
-//       lastName,
-//       username,
-//       email,
-//       password,
-//     }),
-//   });
-//   const data = await response.json();
-//   dispatch(setUser(data));
-//   return response;
-// };
-
-export const restoreUser = () => async (dispatch) => {
-  const response = await csrfFetch("/api/session");
-  const data = await response.json();
-  dispatch(setUser(data.user));
-  return response;
+  const data = await res.json();
+  if (data.message === "success") {
+    dispatch(removeUser());
+  }
 };
 
 export const updateUser = (payload) => async (dispatch) => {
@@ -126,24 +91,150 @@ export const updateUser = (payload) => async (dispatch) => {
 };
 
 
-const initialState = () => ({ user: null });
+const initialState = { user: null };
 
-const sessionReducer = (state = initialState(), action) => {
-  let newState = { ...state };
+function reducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case SET_USER:
-      newState.user = action.user;
-      return newState;
+      // I prefer this syntax rather than the Object.assign(...)
+      return { ...state, user: action.payload };
     case REMOVE_USER:
-      delete newState.user
+      newState = Object.assign({}, state, { user: null });
       return newState;
-      case EDIT_USER:
-        newState.user = action.user;
-        return newState;
-
     default:
       return state;
   }
-};
+}
 
-export default sessionReducer;
+export default reducer;
+// import { csrfFetch } from "./csrf";
+
+// const SET_USER = "session/setUser";
+// const REMOVE_USER = "session/removeUser";
+// const EDIT_USER = "get/GET_USER"
+
+
+// const setUser = (user) => {
+//   return {
+//     type: SET_USER,
+//     user
+//   };
+// };
+
+// const removeUser = () => {
+//   return {
+//     type: REMOVE_USER,
+//   };
+// };
+
+
+
+
+
+
+// export const login = (user) => async (dispatch) => {
+//   const { credential, password } = user;
+//   const response = await csrfFetch("/api/session", {
+//     method: "POST",
+//     body: JSON.stringify({
+//       credential,
+//       password,
+//     }),
+//   });
+//   const data = await response.json();
+//   dispatch(setUser(data));
+//   return response;
+// };
+
+// export const logout = () => async (dispatch) => {
+//   const response = await csrfFetch("/api/session", {
+//     method: "DELETE",
+//   });
+//   dispatch(removeUser());
+//   return response;
+// };
+
+
+// //  *** AWS CREATE USER ***
+// export const signup = (user) => async (dispatch) => {
+//   console.log(user, "*** NEW USER IN THUNK ***")
+//   const { username, email, password, firstName, lastName, images, image } = user;
+//   const formData = new FormData();
+//   formData.append("username", username);
+//   formData.append("email", email);
+//   formData.append("password", password);
+//   formData.append("firstName", firstName);
+//   formData.append("lastName", lastName);
+
+//   // for multiple files
+//   if (images && images.length !== 0) {
+//     for (var i = 0; i < images.length; i++) {
+//       formData.append("images", images[i]);
+//     }
+//   }
+
+//   // for single file
+//   if (image) formData.append("image", image);
+
+//   const res = await csrfFetch(`/api/users/`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//     body: formData,
+//   });
+// console.log(res, "*** RES IN THE SIGNUP ***")
+//   const data = await res.json();
+//   dispatch(setUser(data.user));
+// };
+
+
+// // export const signup = (user) => async (dispatch) => {
+// //   const { firstName, lastName, username, email, password } = user;
+// //   const response = await csrfFetch("/api/users", {
+// //     method: "POST",
+// //     body: JSON.stringify({
+// //       firstName,
+// //       lastName,
+// //       username,
+// //       email,
+// //       password,
+// //     }),
+// //   });
+// //   const data = await response.json();
+// //   dispatch(setUser(data));
+// //   return response;
+// // };
+
+// export const restoreUser = () => async (dispatch) => {
+//   const response = await csrfFetch("/api/session");
+//   const data = await response.json();
+//   dispatch(setUser(data.user));
+//   return response;
+// };
+
+
+
+
+// const initialState = () => ({ user: null });
+
+// const sessionReducer = (state = initialState(), action) => {
+//   let newState = { ...state };
+//   switch (action.type) {
+//     case SET_USER:
+//       newState.user = action.user;
+//       return newState;
+//     case REMOVE_USER:
+//       delete newState.user
+//       return newState;
+//       case EDIT_USER:
+//         newState.user = action.user;
+//         return newState;
+
+//     default:
+//       return state;
+//   }
+// };
+
+// export default sessionReducer;

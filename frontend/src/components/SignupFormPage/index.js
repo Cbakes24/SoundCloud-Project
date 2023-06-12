@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
-
+import { createUser } from "../../store/session";
 function SignupFormPage() {
   const dispatch = useDispatch();
   const history = useHistory()
@@ -27,7 +27,7 @@ const handleSubmit = (e) => {
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(
-        sessionActions.signup({
+        sessionActions.createUser({
           firstName,
           lastName,
           username,

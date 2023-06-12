@@ -145,9 +145,12 @@ router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
 router.post("/", singleMulterUpload("image"),
   validateSignup,
   asyncHandler(async (req, res) => {
+    console.log("*** REQ IN THE SIGNUP API ***")
     const { email, password, username, firstName, lastName } = req.body;
+    console.log(req.file, "*** TESTERR 1 ***")
+    
     const profileImageUrl = await singlePublicFileUpload(req.file);
-
+    console.log(username, "*** TESTERR 2 ***")
     const existUsers = await User.findOne({
       where: { [Op.or]: [{ username }, { email }] },
     });
@@ -167,11 +170,11 @@ router.post("/", singleMulterUpload("image"),
       password,
       firstName,
       lastName,
-      profileImageUrl,
+      previewImage: profileImageUrl
     });
 
     setTokenCookie(res, user);
-
+    console.log(user, "USER IN BACKENDD *****")
     return res.json({
       user,
     });

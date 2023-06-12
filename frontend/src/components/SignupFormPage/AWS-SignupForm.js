@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signup } from "../../store/session";
+import { createUser, signup } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -10,6 +10,10 @@ const CreateUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+
   // for multuple file upload
   //   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -20,10 +24,12 @@ const CreateUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    dispatch(signup({ username, email, password, image }))
+    dispatch(createUser({ username, email, firstName, lastName, password, image }))
       .then(() => {
         setUsername("");
         setEmail("");
+        setFirstName("");
+        setLastName("");
         setPassword("");
         setImage(null);
       })
@@ -56,6 +62,22 @@ const CreateUser = () => {
         style={{ display: "flex", flexFlow: "column" }}
         onSubmit={handleSubmit}
       >
+        <label>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </label>
         <label>
           <input
             type="text"
