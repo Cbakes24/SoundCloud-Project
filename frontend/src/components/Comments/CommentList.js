@@ -15,36 +15,36 @@ const CommentList = ({ song }) => {
 
   const comments = useSelector((state) => state.comments);
   const commentsArr = Object.values(comments);
-  // const [commentId, setCommentId] = useState("");
 
-  const currentSongComments = commentsArr.filter((comment) =>
-  comment.songId == songId
+
+  const currentSongComments = commentsArr.filter(
+    (comment) => comment.songId == songId
   );
   const currentUser = useSelector((state) => state.session.user);
-
-
-  // useEffect(() => {
-  //   dispatch(loadAllComments());
-  // }, [dispatch]);
-
 
 
 
   return (
     <div>
       <h1>Comments</h1>
-      {currentSongComments.map((comment) => (
+      {currentSongComments.length > 0 ? (
+      currentSongComments.map((comment) => (
         <ul className="comment">
-
           <li>{song.title}</li>
-       <div className="comment-bodybox">
-         <li className='comment-text' key={comment.id}>{comment.body}</li>
-        <li>-{comment.User.username}</li>
-       </div>
+          <div className="comment-bodybox">
+            <li className="comment-text" key={comment.id}>
+              {comment.body}
+            </li>
+            <li>-{comment.User?.username || currentUser?.username}</li>
+          </div>
 
-          <SingleComment comment={comment} username={comment.User.username}/>
-        </ul>
-      ))}
+          <SingleComment comment={comment}  />
+        </ul> 
+        )
+      )) : 
+          <p>no COmments</p>
+      
+      }
     </div>
   );
 };

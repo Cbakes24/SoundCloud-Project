@@ -32,3 +32,15 @@
 .comment-form {
 margin: 10px;
 }
+
+.user-default {
+    height: 40px;
+    width: 40px
+}
+
+.user-comment-info {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+}

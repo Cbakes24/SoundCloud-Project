@@ -33,10 +33,15 @@ const AllComments = ({ songs, username }) => {
             <ul className="comment" key={comment.id}>
               <div className="comment-bodybox">
                 {song && <img src={song.previewImage} alt={song.title} />}
-                <li>{song.title}</li>
+                {song.title}
                 <li className="comment-text" key={comment.id}>
                   {comment.body}
-                <li>- {comment.User.username}</li>
+                  <div className='user-comment-info'>
+
+                  <li>- {comment.User && comment.User.username ? comment.User.username : "Unknown"}</li>
+                  <li>{comment.User && comment.User.previewImage ? comment.User.previewImage : <img className='user-default' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png' />}</li>
+                  </div>
+
                 </li>
               
               </div>
