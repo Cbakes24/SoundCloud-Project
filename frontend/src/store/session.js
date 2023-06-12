@@ -34,8 +34,10 @@ export const restoreUser = () => async (dispatch) => {
 };
 
 export const createUser = (user) => async (dispatch) => {
-  const { images, image, username, email, password } = user;
+  const {  firstName, lastName, username, email, password, images, image } = user;
   const formData = new FormData();
+  formData.append("firstName", firstName);
+  formData.append("lastName", lastName);
   formData.append("username", username);
   formData.append("email", email);
   formData.append("password", password);

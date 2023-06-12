@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 // name of your bucket here
-const corysoundcloudawsbucket = "aws-s3-pern-demo";
+const NAME_OF_BUCKET = "corysoundcloudawsbucket";
 
 const multer = require("multer");
 
@@ -21,7 +21,7 @@ const singlePublicFileUpload = async (file) => {
   const Key = new Date().getTime().toString() + path.extname(originalname);
   console.log(Key, "*** KEY ***")
   const uploadParams = {
-    Bucket: corysoundcloudawsbucket,
+    Bucket: NAME_OF_BUCKET,
     Key,
     Body: buffer,
     ACL: "public-read",
@@ -49,7 +49,7 @@ const singlePrivateFileUpload = async (file) => {
   // name of the file in your S3 bucket will be the date in ms plus the extension name
   const Key = new Date().getTime().toString() + path.extname(originalname);
   const uploadParams = {
-    Bucket: corysoundcloudawsbucket,
+    Bucket: NAME_OF_BUCKET,
     Key,
     Body: buffer,
   };
@@ -71,7 +71,7 @@ const retrievePrivateFile = (key) => {
   let fileUrl;
   if (key) {
     fileUrl = s3.getSignedUrl("getObject", {
-      Bucket: corysoundcloudawsbucket,
+      Bucket: NAME_OF_BUCKET,
       Key: key,
     });
   }
