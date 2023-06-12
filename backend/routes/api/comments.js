@@ -13,7 +13,6 @@ const {
 } = require("../../db/models");
 const { Op } = require("sequelize");
 
-
 //CREATE A COMMENT
 router.post("/", requireAuth, async (req, res, next) => {
   const { body } = req.body;
@@ -39,12 +38,17 @@ router.post("/", requireAuth, async (req, res, next) => {
 //GET ALL COMMENTs
 
 router.get("/", async (req, res, next) => {
-let comments = await Comment.findAll({
-});
+  let comments = await Comment.findAll({
+    include: [
+      {
+        model: User,
+        // attributes: ["id", "username"],
+      },
+    ],
+  });
 
-return res.json({ comments });
+  res.json(comments);
 });
-
 
 //GET A COMMENT
 // router.get("/:commentId", async (req, res, next) => {
@@ -78,7 +82,7 @@ router.put("/:commentId", requireAuth, async (req, res, next) => {
 
     comment.set({
       userId,
-      body: body
+      body: body,
     });
 
     await comment.save();
@@ -88,7 +92,6 @@ router.put("/:commentId", requireAuth, async (req, res, next) => {
 
   res.json(editedComment);
 });
-
 
 //DELETE A COMMENT
 router.delete("/:commentId", requireAuth, async (req, res, next) => {
@@ -121,7 +124,5 @@ router.delete("/:commentId", requireAuth, async (req, res, next) => {
     statusCode: 200,
   });
 });
-
-
 
 module.exports = router;

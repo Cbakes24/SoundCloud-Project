@@ -36,7 +36,7 @@ export const loadAllComments = () => async (dispatch) => {
   if (res.ok) {
     const comments = await res.json();
     console.log(comments, "LOADED COMMENTS");
-    dispatch(loadComments(comments.comments));
+    dispatch(loadComments(comments));
   }
 };
 

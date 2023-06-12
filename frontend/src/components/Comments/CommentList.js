@@ -42,7 +42,7 @@ const CommentList = ({ song }) => {
         <li>-{comment.User.username}</li>
        </div>
 
-          <SingleComment comment={comment} />
+          <SingleComment comment={comment} username={comment.User.username}/>
         </ul>
       ))}
     </div>

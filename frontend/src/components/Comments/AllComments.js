@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { loadAllComments } from "../../store/comments";
 import { getSongs } from "../../store/songs";
 
-const AllComments = ({ songs }) => {
+const AllComments = ({ songs, username }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments);
   const songState = useSelector((state) => state.songs);
@@ -13,7 +13,8 @@ const AllComments = ({ songs }) => {
   console.log(allSongArr, "SONG ARRRR");
   const allCommentsArr = Object.values(comments);
   console.log(allCommentsArr, "ALL COMMENTS");
-
+  
+  const currentUser = useSelector((state) => state.session.user);
   // const songImage = allSongArr.map((song) => {
   //   return {id: song.previewImage}
   // })
@@ -22,7 +23,6 @@ const AllComments = ({ songs }) => {
     dispatch(loadAllComments());
     dispatch(getSongs());
   }, [dispatch]);
-
   return (
     <>
       <h1>The Feed</h1>
@@ -36,8 +36,9 @@ const AllComments = ({ songs }) => {
                 <li>{song.title}</li>
                 <li className="comment-text" key={comment.id}>
                   {comment.body}
+                <li>- {comment.User.username}</li>
                 </li>
-                <li>-{comment.username}</li>
+              
               </div>
             </ul>
           );
