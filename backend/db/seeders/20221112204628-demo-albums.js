@@ -33,7 +33,7 @@ module.exports = {
     ]);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Albums'
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, null, {
