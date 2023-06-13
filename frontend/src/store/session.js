@@ -19,12 +19,14 @@ const editUser = (user) => {
   }
 }
 export const login = ({ credential, password }) => async (dispatch) => {
+  console.log(credential, password, "**** CREDENTIAL PASSWORD ****")
   const res = await csrfFetch("/api/session", {
     method: "POST",
     body: JSON.stringify({ credential, password }),
   });
   const data = await res.json();
-  dispatch(setUser(data.user));
+  console.log(data, "LOGIN DATA *****")
+  dispatch(setUser(data));
 };
 
 export const restoreUser = () => async (dispatch) => {
@@ -101,8 +103,10 @@ function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case SET_USER:
-      // I prefer this syntax rather than the Object.assign(...)
-      return { ...state, user: action.payload };
+      console.log('action.payload', action.payload)
+      newState = Object.assign({}, state);
+      newState.user = action.payload;
+      return newState;
     case REMOVE_USER:
       newState = Object.assign({}, state, { user: null });
       return newState;

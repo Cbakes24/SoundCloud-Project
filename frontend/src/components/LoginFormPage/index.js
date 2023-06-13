@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -10,6 +10,7 @@ function LoginFormPage() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -24,19 +25,12 @@ function LoginFormPage() {
     );
   };
 
-const handleDemoClick = (e) => {
-
-
+const handleDemoClick = () => {
 setCredential('corybaker24')
 setPassword('corysoloman')
 
-//works but flashes that invalid login info, its submitting the login before the credentials are set to corybaker24
-return dispatch(sessionActions.login({ credential, password })).catch(
-  async (res) => {
-    const data = await res.json();
-    if (data && data.errors) setErrors(data.errors);
-  }
-);
+dispatch(sessionActions.login(credential, password));
+
 }
 
   return (

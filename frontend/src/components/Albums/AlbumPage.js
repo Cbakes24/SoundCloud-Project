@@ -14,7 +14,7 @@ const AlbumPage = () => {
   const songState = useSelector((state) => (state.songs))
   const songArr = Object.values(songState)
 
-  console.log(songArr, "SONGS STATEEEEEE")
+
   const albumState = useSelector((state) => state.albums);
   const album = albumState[albumId];
   //   const albumArr = Object.values(albums)
@@ -26,17 +26,17 @@ const AlbumPage = () => {
           dispatch(getAlbum(albumId));
           dispatch(getSongs());
         }, [dispatch, albumId]);
-        // console.log(album.songs, "ALBUM SONGSSS")
+        
        
        
        
         const songsInAlbum = songArr.filter((song) => {
-            console.log(song.albumId, "SONG IN FUNCTION ****")
-            console.log(albumId, typeof(albumId), typeof(song.albumId))
+          
+          
             return song.albumId == albumId
         })
 
-    console.log(songsInAlbum , "SONGS IN ALBUM ****")
+  
   return (
     <div>
       HELLO ALBUM Page

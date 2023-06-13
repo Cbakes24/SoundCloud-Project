@@ -171,7 +171,6 @@ router.post("/:songId/comments", requireAuth, validateComment, async (req, res, 
   const songId = req.params.songId;
   const userId = req.user.id;
   const username = req.user.username
-  console.log(username, 'BACKEND USERNAME')
   const song = await Song.findByPk(req.params.songId);
 
   if (!song || songId === null) {
@@ -214,7 +213,6 @@ router.get("/:songId/comments", async (req, res, next) => {
       },
     ],
   });
-  // console.log("song");
   res.json(songComments);
 });
 
