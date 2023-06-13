@@ -1,5 +1,6 @@
 'use strict';
-
+const { User } = require('../models'); // Import the User model
+ 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
