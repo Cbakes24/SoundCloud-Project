@@ -8,23 +8,31 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Albums'
+
+    const users = await queryInterface.sequelize.query('SELECT id FROM Users', {
+      type: Sequelize.QueryTypes.SELECT
+    });
+    // Map the user IDs to an array so its not hard coded and throwing an error if you reseed
+    const userIds = users.map(user => user.id);
+
+
     await queryInterface.bulkInsert(options, [
       {
         title: 'Dookie',
         description: 'Best Green Day Album everrrr',
-        userId: 1,
+        userId: userIds[0],
         previewImage: 'img.com'
       },
       {
         title: 'Blood Sex Sugar magik',
         description: 'Come on Anthony gimmie some sugaa',
-        userId: 2,
+        userId: userIds[1],
         previewImage: 'img.com'
       },
       {
         title: 'Giving Kids to Candy',
         description: 'Forever changed the Rock and Roll World',
-        userId: 3,
+        userId: userIds[2],
         previewImage: 'img.com'
       },
     ]);
