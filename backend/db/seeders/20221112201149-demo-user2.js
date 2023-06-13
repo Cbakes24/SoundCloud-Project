@@ -17,8 +17,8 @@ module.exports = {
         lastName: 'Stoopid',
         email: 'demov@user.io',
         username: 'Demo-lvition',
-        hashedPassword: bcrypt.hashSync('https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/rosalina-pic.png'),
-        previewImage: 'image'
+        hashedPassword: bcrypt.hashSync('password'),
+        previewImage: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/rosalina-pic.png'
       },
       {
         firstName: 'Johnny',
@@ -34,7 +34,7 @@ module.exports = {
         email: 'user2f@user.io',
         username: 'FakeUsevr2',
         hashedPassword: bcrypt.hashSync('password3'),
-        previewImage: 'imaghttps://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/yoshi+pic.jpege'
+        previewImage: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/yoshi+pic.jpeg'
       }
     ], {});
   },
