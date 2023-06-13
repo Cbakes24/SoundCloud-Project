@@ -37,14 +37,26 @@ const AllComments = ({ songs, username }) => {
               <div className="comment-bodybox">
                 <div className="comment-info">
                   
-                  <div className="comment-info-row">
+                  <div className="comment-title-row">
                     <img className="comment-profile-pic" src={userProfilePic} alt="Profile" />
                  
                     <span className="comment-username">{comment.User?.username || "Unknown"}</span>
                   </div>
                 </div>
                 <div className="comment-info-row">
-                  <span className="comment-text">{comment.body}</span>
+      
+                  <span className="comment-text">
+                  <div>
+                  Song: {song.title} 
+
+                  </div>
+                  <br></br>
+                  <div>
+
+                  "{comment.body}"
+                  </div>
+                  
+                  </span>
                 </div>
               </div>
             </ul>

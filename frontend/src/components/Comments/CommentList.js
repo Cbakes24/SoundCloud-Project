@@ -30,12 +30,19 @@ const CommentList = ({ song }) => {
       {currentSongComments.length > 0 ? (
       currentSongComments.map((comment) => (
         <ul className="comment">
-          <li>{song.title}</li>
+       
           <div className="comment-bodybox">
-            <li className="comment-text" key={comment.id}>
-              {comment.body}
-            </li>
-            <li>-{comment.User?.username || currentUser?.username}</li>
+            
+          <div className="comment-title-row">
+                    <img className="comment-profile-pic" src={comment.User?.previewImage} alt="Profile" />
+                 
+                    <span className="comment-username">{comment.User?.username || "Unknown"}</span>
+                  </div>
+                 <br></br>
+                  <div>
+
+                  "{comment.body}"
+                  </div>
           </div>
 
           <SingleComment comment={comment}  />

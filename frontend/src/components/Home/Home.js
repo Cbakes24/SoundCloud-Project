@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginFormPage from "../LoginFormPage";
 import SignupFormPage from "../SignupFormPage";
 import SongsList from "../Songs/SongsList"
+import AllComments from "../Comments/AllComments";
 import "./Home.css"
 
 const Home = () => {
@@ -12,9 +13,17 @@ const Home = () => {
         <div className="homepage">
             <h2> Welcome!</h2>
             <h3>Check Out The Newest Songs</h3>
+            <span>
+
             <div>
             <SongsList  className='song-list-home'/>
             </div>
+            <div>
+            <AllComments  />
+            </div>
+
+            </span>
+
         </div>
 
     ) :
