@@ -29,17 +29,17 @@ module.exports = {
         allowNull: false
       },
       firstName: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(256),
         allowNull: false,
       },
 
      lastName: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(256),
         allowNull: false,
       },
 
       previewImage: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(256),
         allowNull: true,
       },
       createdAt: {
