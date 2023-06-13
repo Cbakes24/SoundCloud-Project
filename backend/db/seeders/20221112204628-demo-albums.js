@@ -14,7 +14,7 @@ module.exports = {
       {
         title: 'Dookie',
         description: 'Best Green Day Album everrrr',
-        userId: User.id,
+        userId: 1,
         previewImage: 'img.com'
       },
       {
