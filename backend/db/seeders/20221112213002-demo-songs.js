@@ -10,12 +10,6 @@ module.exports = {
     options.tableName = 'Songs'
 
 
-    const users = await queryInterface.sequelize.query('SELECT id FROM Users', {
-      type: Sequelize.QueryTypes.SELECT
-    });
-    // Map the user IDs to an array so its not hard coded and throwing an error if you reseed
-    const userIds = users.map(user => user.id);
-
     await queryInterface.bulkInsert(options, [
       {
         title: 'Basketcase',
