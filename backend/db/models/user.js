@@ -106,7 +106,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       previewImage: {
-        type: DataTypes.TEXT
+        type: DataTypes.STRING
       },
 
     },
