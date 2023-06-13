@@ -1,5 +1,5 @@
 .comment-bodybox {
-    border-width: 1px;
+    border-width: 9px;
     border-color: #25335a;
     border-style: solid;
     border-radius: 5px;
@@ -8,9 +8,10 @@
     background-color: aliceblue;
     display: flex;
     align-items: flex-start;
-    flex-direction: row;
+    flex-direction: column;
     padding: 10px;
 }
+
 
 
 
@@ -48,13 +49,13 @@ margin: 10px;
 
 }
 
-  .comment-text {
-    border: solid green 1px;
+.comment-text {
+
     border-radius: 48px;
     padding: 12px;
-    margin-left: 25px
+    color:#1e1e1e;
+    width: 80%;
   }
-  
 
   
   .comment-info {
@@ -65,5 +66,12 @@ margin: 10px;
   .comment-info-row {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    width: 80%;
+  }
+
+  .comment-username {
+    color: grey;
+    font-size: 1.5em;
+    margin-left: 10px;
   }
