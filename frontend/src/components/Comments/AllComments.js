@@ -29,21 +29,23 @@ const AllComments = ({ songs, username }) => {
       <div id="feed">
         {allCommentsArr.map((comment) => {
           const song = allSongArr.find((song) => song.id === comment.songId);
+          console.log(comment.User, "COMENT USERRRRR *****")
+          const userProfilePic = comment.User?.previewImage || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
+
           return (
             <ul className="comment" key={comment.id}>
               <div className="comment-bodybox">
-                {song && <img src={song.previewImage} alt={song.title} />}
-                {song.title}
-                <li className="comment-text" key={comment.id}>
-                  {comment.body}
-                  <div className='user-comment-info'>
-
-                  <li>- {comment.User && comment.User.username ? comment.User.username : "Unknown"}</li>
-                  <li>{comment.User && comment.User.previewImage ? comment.User.previewImage : <img className='user-default' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png' />}</li>
+                <div className="comment-info">
+                  
+                  <div className="comment-info-row">
+                    <img className="comment-profile-pic" src={userProfilePic} alt="Profile" />
+                 
+                    <span className="comment-username">{comment.User?.username || "Unknown"}</span>
                   </div>
-
-                </li>
-              
+                </div>
+                <div className="comment-info-row">
+                  <span className="comment-text">{comment.body}</span>
+                </div>
               </div>
             </ul>
           );

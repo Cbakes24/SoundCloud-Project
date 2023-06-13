@@ -1,22 +1,25 @@
 .comment-bodybox {
     border-width: 1px;
-    border-color:#25335a;
-    border-style:solid;
+    border-color: #25335a;
+    border-style: solid;
     border-radius: 5px;
     height: auto;
     width: 500px;
-    background-color:aliceblue;
+    background-color: aliceblue;
     display: flex;
-    align-items: baseline;
-    flex-direction: column;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 10px;
 }
 
-.comment-text {
-    margin-left: 5px;
-    margin-top: 3px;
-    margin-bottom: 2px;
-    color: #25335a
-}
+
+
+ .comment-profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0px
+  }
 
 #feed {
     display: flex;
@@ -44,3 +47,23 @@ margin: 10px;
     align-items: center;
 
 }
+
+  .comment-text {
+    border: solid green 1px;
+    border-radius: 48px;
+    padding: 12px;
+    margin-left: 25px
+  }
+  
+
+  
+  .comment-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comment-info-row {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
