@@ -20,6 +20,7 @@ import EditSignupForm from "./components/SignupFormPage/EditSignupForm";
 import AlbumList from "./components/Albums/AlbumsList";
 import AlbumPage from "./components/Albums/AlbumPage";
 import CreateUser from "./components/SignupFormPage/AWS-SignupForm";
+import CreateAlbum from "./components/Albums/AlbumForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,9 @@ function App() {
           </Route>
           <Route exact path={`/users`}>
             <CreateUser />
+            <Route exact path={`/albums/create`}>
+            <CreateAlbum />
+          </Route>
           </Route>
         </Switch>
       )}

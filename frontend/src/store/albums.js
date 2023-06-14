@@ -91,10 +91,21 @@ export const removeAlbum = (albumId) => async (dispatch) => {
 
 //   *** CREATE AN ALBUM ***
 export const createAlbum = (payload) => async (dispatch) => {
+  const {title, description, previewImage, userId} = payload
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("previewImage", previewImage);
+  formData.append("userId", userId);
+
+  
+   // for single file
+  if (previewImage) formData.append("previewImage", previewImage);
+
     const res = await csrfFetch("/api/albums", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: formData
     });
   
     if (res.ok) {
@@ -108,6 +119,7 @@ export const createAlbum = (payload) => async (dispatch) => {
 
 //  *** EDIT ALBUM ***
 export const updateAlbum = (payload) => async (dispatch) => {
+
     const res = await csrfFetch(`/api/albums/${payload.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -135,7 +147,7 @@ const albumReducer = (state = initialState, action) => {
       console.log(newState, "NEWSTATE");
       return newState;
     case ADD_ALBUM:
-      //why is it adding a album and there is no code here?
+
       newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_ALBUM:

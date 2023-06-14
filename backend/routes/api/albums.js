@@ -54,23 +54,49 @@ router.get('/:albumId', async (req, res, next) => {
 
 
 //CREATE AN ALBUM
-router.post('/', requireAuth, async (req, res) => {
-  const { title, description, previewImage } = req.body;
-  const userId = req.user.id
-  const newAlbum = await Album.create(
-    {
-      title: title,
-      description: description,
-      previewImage: previewImage,
-      userId
-    },
-  );
+router.post("/create", singleMulterUpload("image"),
+  validateSignup,
+  asyncHandler(async (req, res) => {
+    // console.log("*** REQ IN THE SIGNUP API ***")
+    const { title, description, previewImage, userId} = req.body;
+    // console.log(req.file, "*** TESTERR 1 ***")
+    console.log(title, '*** TEST FOR ALBUM TITLE ***')
+    const albumImageUrl = await singlePublicFileUpload(req.file);
+    console.log(title, "*** TESTERR 2 ***")
 
-  if (newAlbum) {
-    res.status(200);
-    return res.json(newAlbum);
-  }
-});
+
+    const newAlbum = await Album.create({
+      title,
+      description,
+      previewImage: albumImageUrl,
+      userId
+    });
+// console.log(user, "*** USER IN APPII ***")
+    setTokenCookie(res, newAlbum);
+    console.log(newAlbum, "NEW ALBUM IN BACKENDD *****")
+    return res.json({
+      newAlbum,
+    });
+  })
+);
+
+// router.post('/', requireAuth, async (req, res) => {
+//   const { title, description, previewImage } = req.body;
+//   const userId = req.user.id
+//   const newAlbum = await Album.create(
+//     {
+//       title: title,
+//       description: description,
+//       previewImage: previewImage,
+//       userId
+//     },
+//   );
+
+//   if (newAlbum) {
+//     res.status(200);
+//     return res.json(newAlbum);
+//   }
+// });
 
 //CREATE A SONG FOR AN ALBUM
 router.post('/:albumId/songs', requireAuth, async (req, res, next) => {
