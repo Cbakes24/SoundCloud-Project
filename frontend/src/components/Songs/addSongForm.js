@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { createUser, signup } from "../../store/session";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createSong } from "../../store/songs";
 
 
 
 const AddSongForm = () => {
+  const history = useHistory()
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [album, setAlbum] = useState(null);
   const [audioFile, setAudioFile] = useState(null)
-  const [image, setImage] = useState(null)
+
 
 
 
@@ -24,12 +26,12 @@ const AddSongForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    dispatch(createSong({ title, description, audioFile}))
+    dispatch(createSong({ title, description, album, audioFile}))
       .then(() => {
         setTitle("");
         setDescription("");
+        setAlbum(null);
         setAudioFile(null)
-        setImage(null);
        
       })
       .catch(async (res) => {
@@ -43,14 +45,18 @@ const AddSongForm = () => {
 
   const updateFile = (e) => {
     const file = e.target.files[0];
-    if (file) setImage(file);
+    if (file) setAudioFile(file);
   };
-  console.log(image, "*** IMAGE IN THE COMP ****")
+  console.log(audioFile, "*** MP3 IN THE COMP ****")
   // for multiple file upload
   //   const updateFiles = (e) => {
   //     const files = e.target.files;
   //     setImages(files);
   //   };
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    history.push("./");
+  };
 
   return (
     <section>
@@ -81,7 +87,7 @@ const AddSongForm = () => {
           onChange={(e) => setDescription(e.target.value)}
         ></input>
 
-        <label>Song Link</label>
+        <label>Song File</label>
         <input type="file" onChange={updateFile} />
      
 
