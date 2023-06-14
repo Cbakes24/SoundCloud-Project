@@ -31,13 +31,12 @@ function App() {
 
   return (
     <>
-    <div>
-
-      <Navigation isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+      <div>
+        <Navigation isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
       </div>
       {isLoaded && (
         <Switch>
-            <Route exact path="/">
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="/login">
@@ -59,7 +58,7 @@ function App() {
             <SongPage />
           </Route>
           <Route exact path={`/comments`}>
-            <AllComments/>
+            <AllComments />
           </Route>
           <Route path={`/songs/:songId/comments`}>
             <CreateCommentForm />
@@ -76,14 +75,14 @@ function App() {
           <Route exact path={`/albums`}>
             <AlbumList />
           </Route>
+          <Route exact path={`/albums/create`}>
+            <CreateAlbum />
+          </Route>
           <Route exact path={`/albums/:albumId`}>
             <AlbumPage />
           </Route>
           <Route exact path={`/users`}>
             <CreateUser />
-            <Route exact path={`/albums/create`}>
-            <CreateAlbum />
-          </Route>
           </Route>
         </Switch>
       )}

@@ -5,7 +5,8 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { User, Song, Album, Playlist, Comment, PlaylistSong } = require('../../db/models');
 const { Op } = require("sequelize");
-
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
+const asyncHandler = require('express-async-handler')
 
 
 router.get('/', async (req, res) => {
@@ -55,25 +56,28 @@ router.get('/:albumId', async (req, res, next) => {
 
 //CREATE AN ALBUM
 router.post("/create", singleMulterUpload("image"),
-  validateSignup,
-  asyncHandler(async (req, res) => {
+requireAuth,
+asyncHandler(async (req, res) => {
+    console.log(" **** ALBUM API BACK END ****" )
     // console.log("*** REQ IN THE SIGNUP API ***")
-    const { title, description, previewImage, userId} = req.body;
+    const { title, description} = req.body;
+    let currUserId = req.user.id
+    console.log("🚀 ~ file: albums.js:63 ~ asyncHandler ~ image:", req.file)
     // console.log(req.file, "*** TESTERR 1 ***")
     console.log(title, '*** TEST FOR ALBUM TITLE ***')
+    
     const albumImageUrl = await singlePublicFileUpload(req.file);
     console.log(title, "*** TESTERR 2 ***")
 
 
     const newAlbum = await Album.create({
-      title,
-      description,
+      title: title,
+      description: description,
       previewImage: albumImageUrl,
-      userId
+      userId: currUserId
     });
-// console.log(user, "*** USER IN APPII ***")
-    setTokenCookie(res, newAlbum);
     console.log(newAlbum, "NEW ALBUM IN BACKENDD *****")
+    
     return res.json({
       newAlbum,
     });

@@ -91,26 +91,33 @@ export const removeAlbum = (albumId) => async (dispatch) => {
 
 //   *** CREATE AN ALBUM ***
 export const createAlbum = (payload) => async (dispatch) => {
-  const {title, description, previewImage, userId} = payload
+  console.log(payload, "*** ALBUM DATA SUBMITTED* ****")
+  const {title, description, images, image} = payload
   const formData = new FormData();
   formData.append("title", title);
   formData.append("description", description);
-  formData.append("previewImage", previewImage);
-  formData.append("userId", userId);
 
+
+  // for multiple files
+  if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
   
    // for single file
-  if (previewImage) formData.append("previewImage", previewImage);
-
-    const res = await csrfFetch("/api/albums", {
+  if (image) formData.append("image", image);
+    const res = await csrfFetch("/api/albums/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "multipart/form-data" },
       body: formData
     });
-  
+  console.log(res, '**** ALBUM NEW RES ****')
     if (res.ok) {
       const album = await res.json();
-      dispatch(addAlbum(album));
+      console.log("🚀 ~ file: albums.js:114 ~ createAlbum ~ album:", album)
+  
+      dispatch(addAlbum(album.newAlbum));
       return album;
     }
     return res
@@ -149,6 +156,7 @@ const albumReducer = (state = initialState, action) => {
     case ADD_ALBUM:
 
       newState[action.payload.id] = action.payload;
+      console.log(newState, "ALBUM NEWSTAT ***")
       return newState;
     case DELETE_ALBUM:
       delete newState[action.id];

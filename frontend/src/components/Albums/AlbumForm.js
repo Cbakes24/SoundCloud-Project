@@ -8,7 +8,7 @@ import { createAlbum } from "../../store/albums";
 const CreateAlbum = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [previewImage, setPreviewImage] = useState(null);
+  const [image, setImage] = useState(null);
 
 
 
@@ -23,11 +23,11 @@ const CreateAlbum = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    dispatch(createAlbum({ title, description, previewImage, userId}))
+    dispatch(createAlbum({ title, description, image}))
       .then(() => {
         setTitle("");
         setDescription("");
-        setPreviewImage(null);
+        setImage(null);
        
       })
       .catch(async (res) => {
@@ -41,9 +41,9 @@ const CreateAlbum = () => {
 
   const updateFile = (e) => {
     const file = e.target.files[0];
-    if (file) setPreviewImage(file);
+    if (file) setImage(file);
   };
-
+  console.log(image, "*** IMAGE IN THE COMP ****")
   // for multiple file upload
   //   const updateFiles = (e) => {
   //     const files = e.target.files;
@@ -94,7 +94,7 @@ const CreateAlbum = () => {
             <h1>{user.username}</h1>
             <img
               style={{ width: "150px" }}
-              src={user.previewImage}
+              src={user.image}
               alt="profile"
             />
           </div>
