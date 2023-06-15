@@ -54,7 +54,7 @@ module.exports = {
       {
         // 4
         title: 'Under the Bridge',
-        description: 'ONever alone in LA',
+        description: 'You"re Never alone in LA',
         url: 'url',
         userId:  2,
         albumId: 2,
@@ -125,21 +125,29 @@ module.exports = {
         url: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/Song-mp3-files/onlymp3.to+-+Tash+Sultana+-+Pink+Moon+Official+Audio+-VWlixpOloJo-192k-1686806456.mp3'
       },
       {
+        // 10
+        title: 'Pretty Lady',
+        description: 'Trippin out on this one, beautiful',
+        userId:  3,
+        albumId: 5,
+        previewImage: 'https://upload.wikimedia.org/wikipedia/en/d/d7/Tash_Sultana_Flow_State_Album_Artwork.png',
+        url: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/Song-mp3-files/onlymp3.to+-+TASH+SULTANA+-+PRETTY+LADY+Live+at+Lonely+Lands+Studio+-jVqiZ8GT8N0-192k-1686809031.mp3'
+      },
+      {
         // 11
-        title: 'Giving Kids to Candy',
+        title: 'Capacity',
         description: 'Forever changed the Rock and Roll World',
         userId:  2,
         albumId: 3,
         previewImage: 'https://m.media-amazon.com/images/I/51qQRA-hjzL._UXNaN_FMjpg_QL85_.jpg',
-        url: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/onlymp3.to+-+Capacity+feat+Lissa+Dee+-q1wnUcmAZPQ-192k-1686808611.mp3'
+        url: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/Song-mp3-files/onlymp3.to+-+Capacity+feat+Lissa+Dee+-q1wnUcmAZPQ-192k-1686808611.mp3'
       },
     ]);
   },
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Songs'
-    const Op = Sequelize.Op;
-      await queryInterface.bulkDelete(options, null, {});
+        await queryInterface.bulkDelete(options, null, {});
 
   }
 };
