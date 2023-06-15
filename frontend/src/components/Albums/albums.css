@@ -25,24 +25,33 @@
 
 .album-song-list {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .album-song {
     display: flex;
     align-items: baseline;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    border: solid black 1px;
+    transition: background-color .3s ease-in-out;
 }
+
+.album-song:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+
 .album-song img {
     margin: 5px;
-    width: 200px;
-    height: 200px;
-    border-style: double;
+    width: 50px;
+    height: 50px;
+    border-style: solid;
     border-color: black;
-    border-width: 5px;
-    border-radius: 2px;
+    border-width: .5px;
+    border-radius: .5px;
 }
 
 .album-song h3 {
-    margin-top: 0px;
+
 }

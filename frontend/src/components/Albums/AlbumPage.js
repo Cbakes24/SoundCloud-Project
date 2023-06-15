@@ -34,19 +34,19 @@ const AlbumPage = () => {
     <div>
       HELLO ALBUM Page
       <section className="album-section">
-        {album && album.previewImage ? (
-          <img src={album.previewImage} alt="Album Preview" />
-        ) : (
-          <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
-        )}
-        <br />
-        ID: {album && album.id}
-        <br />
-        Title: {album && album.title}
-        <br />
-        Description: {album && album.description}
-        <br />
+        <div className="album-info">
+          {album && album.previewImage ? (
+            <img src={album.previewImage} alt="Album Preview" />
+          ) : (
+            <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
+          )}
+
+          <p>Title: {album && album.title}</p>
+
+          <p>Description: {album && album.description}</p>
+        </div>
       </section>
+      
       <div className="album-song-list">
         {songsInAlbum.map((song) => (
           <div className="album-song">
