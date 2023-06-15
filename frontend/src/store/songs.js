@@ -5,16 +5,16 @@ const LOAD_SONGS = "load/LOAD_SONGS";
 const ADD_SONG = "add/ADD_SONG";
 const DELETE_SONG = "delete/DELETE_SONG";
 const EDIT_SONG = "edit/EDIT_SONG";
-const ADD_COMMENT = "add/ADD_COMMENT";
+// const ADD_COMMENT = "add/ADD_COMMENT";
 
 //******* Actions *********
 
-const addComment = (payload) => {
-  return {
-    type: ADD_COMMENT,
-    payload,
-  };
-};
+// const addComment = (payload) => {
+//   return {
+//     type: ADD_COMMENT,
+//     payload,
+//   };
+// };
 
 const loadSongs = (songs) => {
   return {
@@ -61,21 +61,21 @@ export const deleteSong = (id) => { //the songId from the removeSong thunk is pa
 //       return comment;
 //     }
 //   };
-export const createComment =  (payload) => async (dispatch) => {
-  console.log(payload, 'HERE IS THE SUBMITTED COMMENT!!!')
-  const res = await csrfFetch(`/api/songs/${payload.songId}/comments`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+// export const createComment =  (payload) => async (dispatch) => {
+//   console.log(payload, 'HERE IS THE SUBMITTED COMMENT!!!')
+//   const res = await csrfFetch(`/api/songs/${payload.songId}/comments`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(payload),
+//     });
 
-    if (res.ok) {
-      const comment = await res.json();
-      console.log(comment, 'THIS IS THE RETURNED COMMENT')
-      dispatch(addComment(comment));
-      return comment;
-    }
-  };
+//     if (res.ok) {
+//       const comment = await res.json();
+//       console.log(comment, 'THIS IS THE RETURNED COMMENT')
+//       dispatch(addComment(comment));
+//       return comment;
+//     }
+//   };
 
 
 

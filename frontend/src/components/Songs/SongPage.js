@@ -2,7 +2,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import CommentList from "../Comments/CommentList";
-import { createComment } from "../../store/songs";
+import { createComment } from "../../store/comments";
 import { getSongs } from "../../store/songs";
 import { useEffect } from "react";
 import { loadSongComments } from "../../store/comments";
@@ -51,7 +51,7 @@ const SongPage = () => {
 
     const newComment = await dispatch(createComment(payload))
       .then((comment) => 
-      history.push(`/songs/${comment.songId}`))
+      history.push(`/songs/${songId}`))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

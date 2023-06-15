@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { createComment } from "../../store/songs";
+import { createComment } from "../../store/comments";
 import { updateComment } from "../../store/comments";
 
 const CommentForm = ({ comment, formType }) => {
@@ -30,43 +30,6 @@ const CommentForm = ({ comment, formType }) => {
       history.push(`/comments`)
     }
 
-
-
-
-
-    // if (formType === "New Comment") {
-    //   setErrors([]);
-    //   const payload = {
-    //     body,
-    //     user,
-    //   };
-
-    //   const newComment = await dispatch(createComment(payload)).catch(
-    //     async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors);
-    //     }
-    //   ); // sending it to the Thunk and action and reducer to update the state
-
-    //   history.push(`./`);
-    // } else {
-    //   const payload = {
-    //     ...comment,
-    //     body,
-    //     user,
-    //   };
-
-    //   console.log(payload, " EDIT PAYLOAD");
-    //   dispatch(updateComment(payload)).catch(async (res) => {
-    //     const data = await res.json();
-    //     if (data && data.errors) setErrors(data.errors);
-    //   });
-
-    //   history.push(`/comments`);
-    // }
-    // return setErrors([
-    //   "Confirm Password field must be the same as the Password field",
-    // ]);
   };
 
   return (

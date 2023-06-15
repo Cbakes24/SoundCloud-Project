@@ -110,47 +110,50 @@ router.get("/current", requireAuth, async (req, res, next) => {
 });
 
 //EDIT A SONG
-router.put("/:songId", singleMulterUpload("audioFile"),  requireAuth,
+router.put(
+  "/:songId",
+  singleMulterUpload("audioFile"),
+  requireAuth,
   asyncHandler(async (req, res, next) => {
     const { title, description, albumId } = req.body;
     const userId = req.user.id;
     const audioFile = await singlePublicFileUpload(req.file);
     let album;
     console.log(title, "*** TEST FOR SONG TITLE ***");
-    
+
     if (albumId) {
       album = await Album.findByPk(albumId);
     }
 
     let songId = req.params.songId;
 
-    let currentSong = await Song.findOne({where:{id: songId}});
+    let currentSong = await Song.findOne({ where: { id: songId } });
 
-  if (!currentSong) {
-    //title, status, errors(array), message
-    const err = new Error();
-    err.status = 404;
-    err.title = "songId does not exist";
-    err.message = "Song could not be found";
-    err.errors = ["Song not found"];
+    if (!currentSong) {
+      //title, status, errors(array), message
+      const err = new Error();
+      err.status = 404;
+      err.title = "songId does not exist";
+      err.message = "Song could not be found";
+      err.errors = ["Song not found"];
 
-    return next(err);
-  }
+      return next(err);
+    }
 
-  currentSong.update({
+    currentSong.update({
       title: title,
       description: description,
       url: audioFile,
       previewImage: album.previewImage,
       albumId: albumId,
       userId: userId,
-  });
-  await currentSong.save();
+    });
+    await currentSong.save();
 
-  const editedSong = await Song.findByPk(req.params.songId);
-  res.json(editedSong);
-
-}));
+    const editedSong = await Song.findByPk(req.params.songId);
+    res.json(editedSong);
+  })
+);
 
 //CREATE A SONG FOR AN ALBUM
 router.post(
@@ -165,7 +168,7 @@ router.post(
     if (albumId) {
       album = await Album.findByPk(albumId);
     }
-console.log(album, "**** ALBUM IN THE  BACK END FOR SONG ****")
+    console.log(album, "**** ALBUM IN THE  BACK END FOR SONG ****");
     const audioFile = await singlePublicFileUpload(req.file);
     console.log(title, "*** TESTERR 2 ***");
 
@@ -211,7 +214,11 @@ router.post(
       username,
     });
 
-    res.json(newComment);
+    const createdComment = await Comment.findByPk(newComment.id, {
+      include: [{ model: User }],
+    });
+
+    res.json(createdComment);
   }
 );
 
