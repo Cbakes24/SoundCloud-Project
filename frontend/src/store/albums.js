@@ -124,13 +124,19 @@ export const createAlbum = (payload) => async (dispatch) => {
   };
 
 
-//  *** EDIT ALBUM ***
-export const updateAlbum = (payload) => async (dispatch) => {
-
-    const res = await csrfFetch(`/api/albums/${payload.id}`, {
+  export const updateAlbum = (payload) => async (dispatch) => {
+    console.log("🚀 ~ file: albums.js:137 ~ updatealbum ~ payload:", payload)
+    const {title, description, image, albumId} = payload
+  
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+  if(image) formData.append('image', image)
+  
+    const res = await csrfFetch(`/api/albums/${albumId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      headers: { "Content-Type": "multipart/form-data" },
+      body: formData
     });
   
     if (res.ok) {
@@ -140,7 +146,6 @@ export const updateAlbum = (payload) => async (dispatch) => {
     }
     return res
   };
-
 
   const initialState = {};
 
