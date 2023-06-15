@@ -1,20 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createUser, signup } from "../../store/session";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createSong } from "../../store/songs";
-
-
-
+import { getAlbums } from "../../store/albums";
 const AddSongForm = () => {
-  const history = useHistory()
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [album, setAlbum] = useState(null);
-  const [audioFile, setAudioFile] = useState(null)
-
-
-
+  const [albumId, setAlbumId] = useState("");
+  const [audioFile, setAudioFile] = useState(null);
 
   // for multuple file upload
   //   const [images, setImages] = useState([]);
@@ -22,17 +17,32 @@ const AddSongForm = () => {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-    const userId = user.id
+  const albums = useSelector((state) => state.albums);
+  console.log("🚀 ~ file: addSongForm.js:26 ~ AddSongForm ~ albums:", albums);
+
+  const userId = user.id;
+
+  useEffect(() => {
+    dispatch(getAlbums());
+  }, [dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    dispatch(createSong({ title, description, album, audioFile}))
+
+    console.log(
+      "🚀 ~ file: addSongForm.js:37 ~ handleSubmit ~ **** NEW SONG INF **** :",
+      title,
+      description,
+      albumId,
+      audioFile
+    );
+    dispatch(createSong({ title, description, albumId, audioFile }))
       .then(() => {
         setTitle("");
         setDescription("");
-        setAlbum(null);
-        setAudioFile(null)
-       
+        setAlbumId("");
+        setAudioFile(null);
       })
       .catch(async (res) => {
         const data = await res.json();
@@ -47,7 +57,7 @@ const AddSongForm = () => {
     const file = e.target.files[0];
     if (file) setAudioFile(file);
   };
-  console.log(audioFile, "*** MP3 IN THE COMP ****")
+  // console.log(audioFile, "*** MP3 IN THE COMP ****");
   // for multiple file upload
   //   const updateFiles = (e) => {
   //     const files = e.target.files;
@@ -74,11 +84,14 @@ const AddSongForm = () => {
         ></input>
 
         <label>Album Name</label>
-        <input
-          type="select"
-          value={album}
-          onChange={(e) => setAlbum(e.target.value)}
-        ></input>
+        <select value={albumId} onChange={(e) => setAlbumId(e.target.value)}>
+          <option value="">Select an album</option>
+          {Object.values(albums).map((album) => (
+            <option key={album.id} value={album.id}>
+              {album.title}
+            </option>
+          ))}
+        </select>
 
         <label>Song Description</label>
         <input
@@ -87,9 +100,8 @@ const AddSongForm = () => {
           onChange={(e) => setDescription(e.target.value)}
         ></input>
 
-        <label>Song File</label>
-        <input type="file" onChange={updateFile} />
-     
+        <label className="audio-file">Song File</label>
+        <input type="file" accept="audio/*" onChange={updateFile} required />
 
         <button type="submit">Submit Song</button>
         <button type="button" onClick={handleCancelClick}>

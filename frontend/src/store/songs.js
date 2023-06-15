@@ -102,14 +102,31 @@ export const getUserSongs = () => async (dispatch) => {
 
 
 export const createSong = (payload) => async (dispatch) => {
+  console.log(payload, "*** SONG DATA SUBMITTED* ****")
+
+  const {title, description, albumId, audioFile} = payload
+  console.log(audioFile, '**** FILEEEE ****')
+  
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("albumId", albumId)
+
+
+
+ // for single file
+if (audioFile) formData.append("audioFile", audioFile);
+
+
   const res = await csrfFetch("/api/songs", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: { "Content-Type": "multipart/form-data" },
+    body: formData
   });
-
+  console.log(res, '**** SONG NEW RES ****')
   if (res.ok) {
     const song = await res.json();
+    console.log("🚀 ~ file: songs.js:130 ~ createSong ~ *** SONG ***:", song)
     dispatch(addSong(song));
     return song;
   }

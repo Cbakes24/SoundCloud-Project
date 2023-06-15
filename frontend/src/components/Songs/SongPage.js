@@ -74,7 +74,10 @@ const SongPage = () => {
         <a href="/songs">
           <button>Back To Songs</button>
         </a>
-
+        <audio controls className="audio-player">
+        <source src={song.url} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
          {/* <a href={song.url}>
           <button>
             Play <i className="fa-solid fa-play"></i>

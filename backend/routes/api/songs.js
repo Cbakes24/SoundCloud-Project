@@ -3,6 +3,8 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
+const asyncHandler = require("express-async-handler");
 const {
   User,
   Song,
@@ -136,57 +138,67 @@ router.put("/:songId", validateSong, requireAuth, async (req, res, next) => {
 });
 
 //CREATE A SONG FOR AN ALBUM
-router.post("/", requireAuth, validateSong, async (req, res, next) => {
-  const { title, description, url, previewImage, albumId } = req.body;
-  const userId = req.user.id;
-  if (albumId) {
-    const album = await Album.findByPk(albumId);
+router.post(
+  "/",
+  singleMulterUpload("audioFile"),
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const { title, description, albumId } = req.body;
+    const userId = req.user.id;
+    let album;
+    console.log(title, "*** TEST FOR SONG TITLE ***");
+    if (albumId) {
+      album = await Album.findByPk(albumId);
+    }
+console.log(album, "**** ALBUM IN THE  BACK END FOR SONG ****")
+    const audioFile = await singlePublicFileUpload(req.file);
+    console.log(title, "*** TESTERR 2 ***");
 
-    if (!album) {
-      //title, status, errors(array), message
+    const newSong = await Song.create({
+      title: title,
+      description: description,
+      url: audioFile,
+      previewImage: album.previewImage,
+      albumId: albumId,
+      userId: userId,
+    });
+    console.log(newSong, "NEW SONG IN BACKENDD *****");
+    res.status(201);
+    return res.json({ newSong });
+  })
+);
+
+//CREATE A COMMENT
+router.post(
+  "/:songId/comments",
+  requireAuth,
+  validateComment,
+  async (req, res, next) => {
+    const { body } = req.body;
+    const songId = req.params.songId;
+    const userId = req.user.id;
+    const username = req.user.username;
+    const song = await Song.findByPk(req.params.songId);
+
+    if (!song || songId === null) {
       const err = new Error();
       err.status = 404;
-      err.title = "albumId does not exist";
-      err.message = "Album not found";
-      err.errors = ["Album not found"];
+      err.title = "songId does not exist";
+      err.message = "Song could not be found";
+      err.errors = ["Song not found"];
 
       return next(err);
     }
+
+    const newComment = await song.createComment({
+      body: body,
+      userId,
+      username,
+    });
+
+    res.json(newComment);
   }
-  const newSong = await Song.create({
-    title,
-    description,
-    url,
-    previewImage,
-    albumId,
-    userId,
-  });
-  res.status(201);
-  res.json(newSong);
-});
-
-//CREATE A COMMENT
-router.post("/:songId/comments", requireAuth, validateComment, async (req, res, next) => {
-  const { body } = req.body;
-  const songId = req.params.songId;
-  const userId = req.user.id;
-  const username = req.user.username
-  const song = await Song.findByPk(req.params.songId);
-
-  if (!song || songId === null) {
-    const err = new Error();
-    err.status = 404;
-    err.title = "songId does not exist";
-    err.message = "Song could not be found";
-    err.errors = ["Song not found"];
-
-    return next(err);
-  }
-
-  const newComment = await song.createComment({ body: body, userId, username });
-
-  res.json(newComment);
-});
+);
 
 //Get A COMMENT
 router.get("/:songId/comments", async (req, res, next) => {

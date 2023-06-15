@@ -20,7 +20,9 @@ export async function csrfFetch(url, options = {}) {
       options.headers["XSRF-Token"] = Cookies.get("XSRF-TOKEN");
     }
   // call the default window's fetch with the url and the options passed in
-  console.log(url, options, "*** URL IN CSRF ***")
+  // console.log(url, options, "*** URL IN CSRF ***")
+  console.log("🚀 ~ file: csrf.js:24 ~ csrfFetch ~ url:", url)
+  console.log("🚀 ~ file: csrf.js:24 ~ csrfFetch ~ options:", options)
   const res = await window.fetch(url, options);
 
   // if the response status code is 400 or above, then throw an error with the
