@@ -1,10 +1,11 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { getAlbum } from "../../store/albums";
 import SongsList from "../Songs/SongsList";
 import SingleSong from "../Songs/SingleSong";
 import { getSongs } from "../../store/songs";
+import { PlayIcon } from '@heroicons/react/24/solid'
 const AlbumPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,8 +32,8 @@ const AlbumPage = () => {
   });
 
   return (
-    <div>
-      HELLO ALBUM Page
+    <div className='album-page'>
+     Album Page
       <section className="album-section">
         <div className="album-info">
           {album && album.previewImage ? (
@@ -41,20 +42,27 @@ const AlbumPage = () => {
             <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
           )}
 
-          <p>Title: {album && album.title}</p>
-
+          <h2>{album && album.title}</h2>
           <p>Description: {album && album.description}</p>
         </div>
       </section>
-      
+      <br></br>
+      <h3>Songs</h3>
       <div className="album-song-list">
         {songsInAlbum.map((song) => (
-          <div className="album-song">
+
+<Link className='song-link' to={`/songs/${song.id}`} >
+
+     <div className="album-song">
+          <PlayIcon className="play-icon"/>
             <img src={song.previewImage} />
             <h3>{song.title}</h3>
           </div>
+</Link>
+       
         ))}
       </div>
+      <br></br>
       <a href="/albums">
         <button>Back To Albums</button>
       </a>
