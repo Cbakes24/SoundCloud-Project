@@ -26,11 +26,11 @@ const CommentList = ({ song }) => {
 
   return (
     <div>
-      <h1>Comments</h1>
+      <h1>The Feed</h1>
       {currentSongComments.length > 0 ? (
       currentSongComments.map((comment) => (
-        <ul className="comment">
-       
+ 
+       <div>
           <div className="comment-bodybox">
             
           <div className="comment-title-row">
@@ -46,7 +46,7 @@ const CommentList = ({ song }) => {
           </div>
 
           <SingleComment comment={comment}  />
-        </ul> 
+  </div>
         )
       )) : 
           <p>no COmments</p>

@@ -64,25 +64,25 @@ const SongPage = () => {
     <div>
       <section>
         <img src={song.previewImage} />
-        <br />
-        ID: {song.id}
-        <br />
-        Title: {song.title}
-        <br />
-        Description: {song.description}
-        <br />
-        <a href="/songs">
-          <button>Back To Songs</button>
-        </a>
+
+   
+
+       <h2>{song.title}</h2> 
+ 
+        <p>Description: {song.description}</p>
+
         <audio controls className="audio-player">
         <source src={song.url} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-         {/* <a href={song.url}>
-          <button>
-            Play <i className="fa-solid fa-play"></i>
-          </button>
-        </a> */}
+      <br></br>
+        <a href="/songs">
+          <button>Back To Songs</button>
+        </a>
+
+      </section>
+
+      <section className='comments-songpage'>
         <form id='comment-form' onSubmit={handleSubmit}>
           <h2>Comment Form</h2>
           {errors.length > 0 &&
@@ -95,9 +95,6 @@ const SongPage = () => {
           ></input>
           <button>Submit Comment</button>
         </form>
-      </section>
-
-      <section>
         <div>
           <CommentList song={song} currentUser={currentUser} />
         </div>

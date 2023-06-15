@@ -74,13 +74,17 @@ li {
 }
 
 #comment-form {
-  background-color: #faf5f1;
+  background-color: #e8e7df;
   border: black solid 2px;
   border-radius: 4px;
-  margin-top: 10px;
+  margin-top: 70px;
   padding: 10px;
 }
 
 .comment-input {
   height: 40px;
+}
+
+.comments-songpage {
+
 }

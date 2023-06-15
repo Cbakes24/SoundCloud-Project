@@ -5,11 +5,12 @@
     border-radius: 5px;
     height: auto;
     width: 500px;
-    background-color: rgb(175, 246, 142);
+    background-color: #e8e7df;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     padding: 10px;
+    margin-bottom: 10px;
 }
 
 
