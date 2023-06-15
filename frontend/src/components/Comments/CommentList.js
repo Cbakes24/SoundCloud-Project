@@ -49,7 +49,7 @@ const CommentList = ({ song }) => {
   </div>
         )
       )) : 
-          <p>no COmments</p>
+          <p>No Comments</p>
       
       }
     </div>

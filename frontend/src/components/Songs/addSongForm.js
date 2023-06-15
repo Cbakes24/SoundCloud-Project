@@ -4,12 +4,15 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createSong } from "../../store/songs";
 import { getAlbums } from "../../store/albums";
-const AddSongForm = () => {
+
+
+
+const AddSongForm = ({song}) => {
   const history = useHistory();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [albumId, setAlbumId] = useState("");
-  const [audioFile, setAudioFile] = useState(null);
+  const [title, setTitle] = useState( song.title || "");
+  const [description, setDescription] = useState(song.description || "");
+  const [albumId, setAlbumId] = useState( song.albumId || "");
+  const [audioFile, setAudioFile] = useState( song.url || null);
 
   // for multuple file upload
   //   const [images, setImages] = useState([]);
@@ -51,6 +54,7 @@ const AddSongForm = () => {
           setErrors(newErrors);
         }
       });
+      history.push(`/songs/${song.id}`)
   };
 
   const updateFile = (e) => {
