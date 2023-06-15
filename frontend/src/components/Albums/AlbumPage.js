@@ -6,6 +6,7 @@ import SongsList from "../Songs/SongsList";
 import SingleSong from "../Songs/SingleSong";
 import { getSongs } from "../../store/songs";
 import { PlayIcon } from "@heroicons/react/24/solid";
+import EditDeleteAlbum from "./EditDeleteAlbum";
 
 const AlbumPage = () => {
   const dispatch = useDispatch();
@@ -81,6 +82,7 @@ const AlbumPage = () => {
       <a href="/albums">
         <button>Back To Albums</button>
       </a>
+      <EditDeleteAlbum album={album} currentUser={currentUser}/>
     </div>
   );
 };

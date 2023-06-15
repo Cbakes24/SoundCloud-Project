@@ -22,7 +22,7 @@ const SongPage = () => {
   const { songId } = useParams();
   const songs = useSelector((state) => state.songs);
 
-  // const songArr = Object.values(songs)
+
   let comment;
   let song;
   if (songs) {

@@ -21,6 +21,7 @@ import AlbumList from "./components/Albums/AlbumsList";
 import AlbumPage from "./components/Albums/AlbumPage";
 import CreateUser from "./components/SignupFormPage/AWS-SignupForm";
 import CreateAlbum from "./components/Albums/AlbumForm";
+import EditAlbumForm from "./components/Albums/EditAllbumForm";
 
 
 function App() {
@@ -81,6 +82,9 @@ function App() {
           </Route>
           <Route exact path={`/albums/:albumId`}>
             <AlbumPage />
+          </Route>
+          <Route exact path={`/albums/:albumId/edit`}>
+            <EditAlbumForm />
           </Route>
           <Route exact path={`/users`}>
             <CreateUser />

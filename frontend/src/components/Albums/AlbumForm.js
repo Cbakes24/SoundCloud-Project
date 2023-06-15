@@ -5,21 +5,19 @@ import { createAlbum } from "../../store/albums";
 
 
 
-const CreateAlbum = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-
-
-
-
+const CreateAlbum = ({album}) => {
+  const [title, setTitle] = useState( album.title || "");
+  const [description, setDescription] = useState(album.description || "");
+  const [image, setImage] = useState(album.previewImage|| null);
   // for multuple file upload
   //   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
-
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-    const userId = user.id
+  const userId = user.id
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
@@ -43,7 +41,8 @@ const CreateAlbum = () => {
     const file = e.target.files[0];
     if (file) setImage(file);
   };
-  console.log(image, "*** IMAGE IN THE COMP ****")
+
+
   // for multiple file upload
   //   const updateFiles = (e) => {
   //     const files = e.target.files;

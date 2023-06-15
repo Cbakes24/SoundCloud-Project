@@ -110,11 +110,23 @@ router.get("/current", requireAuth, async (req, res, next) => {
 });
 
 //EDIT A SONG
-router.put("/:songId", validateSong, requireAuth, async (req, res, next) => {
-  const { title, description, url, previewImage } = req.body;
-  const song = await Song.findByPk(req.params.songId);
-  0;
-  if (!song) {
+router.put("/:songId", singleMulterUpload("audioFile"),  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const { title, description, albumId } = req.body;
+    const userId = req.user.id;
+    const audioFile = await singlePublicFileUpload(req.file);
+    let album;
+    console.log(title, "*** TEST FOR SONG TITLE ***");
+    
+    if (albumId) {
+      album = await Album.findByPk(albumId);
+    }
+
+    let songId = req.params.songId;
+
+    let currentSong = await Song.findOne({where:{id: songId}});
+
+  if (!currentSong) {
     //title, status, errors(array), message
     const err = new Error();
     err.status = 404;
@@ -125,17 +137,20 @@ router.put("/:songId", validateSong, requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  song.set({
-    title: title,
-    description: description,
-    url: url,
-    previewImage: previewImage,
+  currentSong.update({
+      title: title,
+      description: description,
+      url: audioFile,
+      previewImage: album.previewImage,
+      albumId: albumId,
+      userId: userId,
   });
-  await song.save();
+  await currentSong.save();
 
   const editedSong = await Song.findByPk(req.params.songId);
   res.json(editedSong);
-});
+
+}));
 
 //CREATE A SONG FOR AN ALBUM
 router.post(

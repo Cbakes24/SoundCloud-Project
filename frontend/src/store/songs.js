@@ -134,10 +134,19 @@ if (audioFile) formData.append("audioFile", audioFile);
 };
 
 export const updateSong = (payload) => async (dispatch) => {
-  const res = await csrfFetch(`/api/songs/${payload.id}`, {
+  console.log("🚀 ~ file: songs.js:137 ~ updateSong ~ payload:", payload)
+  const {title, description, albumId, audioFile, songId} = payload
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("albumId", albumId)
+if(audioFile) formData.append('audioFile', audioFile)
+
+  const res = await csrfFetch(`/api/songs/${songId}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: { "Content-Type": "multipart/form-data" },
+    body: formData
   });
 
   if (res.ok) {
@@ -170,7 +179,7 @@ const songReducer = (state = initialState, action) => {
       console.log(newState, "NEWSTATE");
       return newState;
     case ADD_SONG:
-      //why is it adding a song and there is no code here?
+
       newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_SONG:
@@ -179,10 +188,7 @@ const songReducer = (state = initialState, action) => {
     case EDIT_SONG:
       newState[action.song.id] = action.song;
       return newState;
-  //  case ADD_COMMENT:
-  //     newState[action.payload.id] = action.payload
-  //     console.log(newState, 'HELLLOOOOOOOO')
-  //     return newState
+
     default:
       return state;
   }

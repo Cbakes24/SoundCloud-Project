@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { createUser, signup } from "../../store/session";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createSong } from "../../store/songs";
+import { createSong, updateSong } from "../../store/songs";
 import { getAlbums } from "../../store/albums";
 
 
 
-const AddSongForm = ({song}) => {
+const AddSongForm = ({song, formType}) => {
   const history = useHistory();
   const [title, setTitle] = useState( song.title || "");
   const [description, setDescription] = useState(song.description || "");
@@ -19,6 +19,7 @@ const AddSongForm = ({song}) => {
   const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
+  const songId = song.id
   const user = useSelector((state) => state.session.user);
   const albums = useSelector((state) => state.albums);
   console.log("🚀 ~ file: addSongForm.js:26 ~ AddSongForm ~ albums:", albums);
@@ -32,30 +33,30 @@ const AddSongForm = ({song}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
+    let action;
+    if(songId) {
+      action = updateSong
+    } else {
+      action = createSong
+    }
 
-    console.log(
-      "🚀 ~ file: addSongForm.js:37 ~ handleSubmit ~ **** NEW SONG INF **** :",
-      title,
-      description,
-      albumId,
-      audioFile
-    );
-    dispatch(createSong({ title, description, albumId, audioFile }))
-      .then(() => {
-        setTitle("");
-        setDescription("");
-        setAlbumId("");
-        setAudioFile(null);
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          newErrors = data.errors;
-          setErrors(newErrors);
-        }
-      });
-      history.push(`/songs/${song.id}`)
-  };
+      dispatch(action({ title, description, albumId, audioFile, songId }))
+        .then(() => {
+          setTitle("");
+          setDescription("");
+          setAlbumId("");
+          setAudioFile(null);
+        })
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            newErrors = data.errors;
+            setErrors(newErrors);
+          }
+        });
+        history.push(`/songs`)
+    };
+    
 
   const updateFile = (e) => {
     const file = e.target.files[0];
