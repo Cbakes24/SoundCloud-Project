@@ -13,7 +13,7 @@ const Home = () => {
         <div className="homepage">
             <h2> Welcome!</h2>
             <h3>Check Out The Newest Songs</h3>
-            <span>
+            <span className="songfeed">
 
             <div>
             <SongsList  className='song-list-home'/>

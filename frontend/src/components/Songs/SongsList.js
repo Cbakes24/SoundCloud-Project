@@ -31,7 +31,7 @@ const SongsList = () => {
   return (
     <div>
       <button onClick={handleNew}>Add Song</button>
-      <div>
+      <div className="songs-section">
         <ul className="song-list">
           <div className="songs">
             {songsArr.map((song) => (

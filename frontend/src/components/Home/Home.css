@@ -1,3 +1,8 @@
+.songfeed {
+    display: flex;
+    flex-direction: row;
+
+}
 #loginsignup {
     display: flex;
     justify-content: center;
@@ -6,11 +11,11 @@
 
 }
 
-.homepage {
-
-}
-
 .formbuttons {
     margin-top: 15px;
     padding: 5px;
+}
+
+.songs-section {
+    width: 70%
 }

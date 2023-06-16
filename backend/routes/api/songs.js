@@ -37,7 +37,14 @@ router.get("/", async (req, res, next) => {
   let { page, size } = req.query;
   let pagination = {};
   if (!page || !size) {
-    let allSongs = await Song.findAll();
+    let allSongs = await Song.findAll({
+      include: [
+        {
+          model: Album,
+          // attributes: ["id", "username"],
+        },
+      ],
+    });
     return res.json({ allSongs });
   }
   if (req.query) {
@@ -65,7 +72,12 @@ router.get("/", async (req, res, next) => {
     }
   }
   let allSongs = await Song.findAll({
-    ...pagination,
+    ...pagination, include: [
+      {
+        model: Album,
+        // attributes: ["id", "username"],
+      },
+    ],
   });
 
   return res.json({ allSongs, page, size });

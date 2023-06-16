@@ -2,6 +2,14 @@ ul {
   list-style-type: none;
 }
 
+.songfeed {
+  display: grid;
+  grid-template-columns: 200px 100px;
+}
+.songs-sections {
+  display: flex;
+  flex-direction: row;
+}
 img {
   margin: 30px;
   width: 200px;
@@ -21,11 +29,11 @@ img {
 }
 
 .songs {
-  display: flex;
-  width: 100%;
-  overflow: auto;
-}
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three song boxes per row */
+  grid-gap: 20px; /* Gap between song boxes */
 
+}
 
 .song-box {
   display: flex;
@@ -40,11 +48,23 @@ img {
   background-color: white;
 }
 
+.song-box:hover {
+  background-color: beige;
+  cursor: pointer;
+}
 .singleSong {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0px;
+}
+
+.songpage-link {
+text-decoration: none;
+color: black;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
 .singleSong p {

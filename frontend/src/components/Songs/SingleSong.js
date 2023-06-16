@@ -22,11 +22,13 @@ const SingleSong = ({ song, currentUser }) => {
   return  (
     <div className="song-box">
       <ul className="singleSong">
+        <Link className='songpage-link' to={`/songs/${song.id}`}>
         <img src={song.previewImage} />
-        <p>ID: {song.id}</p>
-        <Link to={`/songs/${song.id}`}>Song Name: {song.title}</Link>
-        <p>Album: {song.albumId}</p>
+       
+        <p>Album: {song.Album.title}</p>
+        Song Name: {song.title}
     <p>Description: {song.description}</p>
+    </Link>
         {/* <a href={song.url}>
           <button>
             Play <i className="fa-solid fa-play"></i>

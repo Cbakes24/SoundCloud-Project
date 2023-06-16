@@ -2,7 +2,12 @@
 margin: 50px
 }
  
-
+.all-albums{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three song boxes per row */
+    grid-gap: 20px; /* Gap between song boxes */
+  
+}
 .album-title {
     display: flex;
     flex-direction: column;
