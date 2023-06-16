@@ -1,7 +1,11 @@
 .songfeed {
-    display: flex;
-    flex-direction: row;
-
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1200px 300px;
+    overflow: scroll;
+    /* grid-auto-rows: minmax(500px, 800px); */
+    justify-items: stretch;
+    align-items: stretch;
 }
 #loginsignup {
     display: flex;

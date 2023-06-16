@@ -36,9 +36,10 @@ img {
 
 .songs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three song boxes per row */
-  grid-gap: 20px; /* Gap between song boxes */
-
+  grid-template-columns: repeat(3, 1fr);
+  height: 900px;
+  overflow: scroll;
+  width: max-content;
 }
 
 .song-box {
@@ -55,7 +56,7 @@ img {
 }
 
 .song-box:hover {
-  background-color: beige;
+  background-color: rgb(191, 247, 231);
   cursor: pointer;
 }
 .singleSong {
@@ -92,7 +93,7 @@ li {
   width: 200px;
   margin-bottom: 15px;
   margin-top: 15px;;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .comment {
