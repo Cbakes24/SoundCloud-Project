@@ -14,7 +14,11 @@
 }
 
 
-
+.all-comments {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
 
  .comment-profile-pic {
     height: 40px;

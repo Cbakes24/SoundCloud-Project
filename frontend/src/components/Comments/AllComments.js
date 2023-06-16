@@ -13,7 +13,7 @@ const AllComments = ({ songs, username }) => {
   console.log(allSongArr, "SONG ARRRR");
   const allCommentsArr = Object.values(comments);
   console.log(allCommentsArr, "ALL COMMENTS");
-  
+
   const currentUser = useSelector((state) => state.session.user);
   // const songImage = allSongArr.map((song) => {
   //   return {id: song.previewImage}
@@ -24,38 +24,37 @@ const AllComments = ({ songs, username }) => {
     dispatch(getSongs());
   }, [dispatch]);
   return (
-    <>
+    <div className="all-comments">
       <h1>The Feed</h1>
       <div id="feed">
         {allCommentsArr.map((comment) => {
           const song = allSongArr.find((song) => song.id === comment.songId);
-          console.log(comment.User, "COMENT USERRRRR *****")
-          const userProfilePic = comment.User?.previewImage || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
+          console.log(comment.User, "COMENT USERRRRR *****");
+          const userProfilePic =
+            comment.User?.previewImage ||
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 
           return (
             <ul className="comment" key={comment.id}>
               <div className="comment-bodybox">
                 <div className="comment-info">
-                  
                   <div className="comment-title-row">
-                    <img className="comment-profile-pic" src={userProfilePic} alt="Profile" />
-                 
-                    <span className="comment-username">{comment.User?.username || "Unknown"}</span>
+                    <img
+                      className="comment-profile-pic"
+                      src={userProfilePic}
+                      alt="Profile"
+                    />
+
+                    <span className="comment-username">
+                      {comment.User?.username || "Unknown"}
+                    </span>
                   </div>
                 </div>
                 <div className="comment-info-row">
-      
                   <span className="comment-text">
-                  <div>
-                  Song: {song.title} 
-
-                  </div>
-                  <br></br>
-                  <div>
-
-                  "{comment.body}"
-                  </div>
-                  
+                    <div>Song: {song.title}</div>
+                    <br></br>
+                    <div>"{comment.body}"</div>
                   </span>
                 </div>
               </div>
@@ -63,7 +62,7 @@ const AllComments = ({ songs, username }) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

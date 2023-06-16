@@ -29,12 +29,17 @@ const SongsList = () => {
   };
 
   return (
-    <div>
+    <div className="song-list-page">
+    <div className='song-page-title' >
+
       <button onClick={handleNew}>Add Song</button>
+      <h2> New Songs</h2>
+
+    </div>
       <div className="songs-section">
         <ul className="song-list">
           <div className="songs">
-            {songsArr.map((song) => (
+            {songsArr.reverse().map((song) => (
               <SingleSong song={song} key={song.id} currentUser={currentUser} />
             ))}
           </div>
