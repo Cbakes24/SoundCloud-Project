@@ -1,5 +1,13 @@
 /* TODO Add site wide styles */
-
+#main-header {
+    display: flex;
+    padding: 15px;
+    margin: auto;
+    overflow: hidden;
+    background-color: #34ccaa;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    justify-content: space-around;
+}
 
 .home-form {
     display: flex;
