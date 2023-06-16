@@ -10,7 +10,18 @@
     border: 3px black solid;
 
 }
+.songfeed {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    
+}
 
+.songfeed-bottom{
+    background-color: red;
+    height: 50px;
+    grid-column: span 2
+  }
 .formbuttons {
     margin-top: 15px;
     padding: 5px;

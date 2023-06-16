@@ -6,10 +6,7 @@ ul {
   flex-direction: column;
 
 }
-.songfeed {
-  display: grid;
-  grid-template-columns: 200px 100px;
-}
+
 .songs-sections {
   display: flex;
   flex-direction: row;

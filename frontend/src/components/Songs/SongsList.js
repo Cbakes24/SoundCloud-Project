@@ -46,7 +46,7 @@ const SongsList = () => {
         </ul>
       </div>
 
-      <Link to="/songs/new">Add Song</Link>
+    
     </div>
   );
 };
