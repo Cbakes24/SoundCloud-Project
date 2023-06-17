@@ -24,18 +24,56 @@ margin: 50px
     color: black;
    text-decoration: none;
     font-weight: bold;
+    margin: 30px;
 }
 
-.album-section img {
+/* .album-section img {
     margin: 0px;
     width: 400px;
     height: 400px;
     border-style: double;
     border-color: black;
     border-width: 5px;
-    border-radius: 2px;
-}
+    border-radius: 2px; */
 
+.album-song {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    align-items: center;
+    border: solid black 0.5px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    height: 51px;
+    width: 510px;
+  }
+  
+  .album-song:hover {
+    background-color: rgb(79, 79, 79);
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    transform: scale(1.1);
+  }
+  
+  .album-title img {
+    margin: 5px;
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5px;
+    border-radius: 0.5px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .album-title:hover img {
+    transform: scale(1.2);
+  }
+  
+
+  .album-title.active {
+      background-color: rgb(255, 0, 0); /* Apply a different background color for the active title */
+      color: rgb(255, 255, 255); /* Apply a different text color for the active song */
+    }
 .album-song-list {
     display: flex;
     flex-direction: column;

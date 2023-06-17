@@ -83,11 +83,7 @@ function Navigation({ isLoaded, setIsLoaded }) {
                 Albums
               </NavLink>
             </li>
-            <li className="navList">
-              <NavLink activeClassName="active" exact to="/users">
-                Sign Up
-              </NavLink>
-            </li>
+
             <li className="navList"> {isLoaded && sessionLinks}</li>
           </ol>
         </div>
