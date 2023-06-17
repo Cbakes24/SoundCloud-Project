@@ -72,7 +72,8 @@ router.get("/", async (req, res, next) => {
     }
   }
   let allSongs = await Song.findAll({
-    ...pagination, include: [
+    ...pagination,
+    include: [
       {
         model: Album,
         // attributes: ["id", "username"],
@@ -116,7 +117,17 @@ router.get("/:songId(\\d+)", async (req, res, next) => {
 
 router.get("/current", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
-  const allUserSongs = await Song.findAll({ where: { userId: userId } });
+  const allUserSongs = await Song.findAll({
+    include: [
+      {
+        model: Album,
+        // attributes: ["id", "username"],
+      },
+    ],
+    where: {
+      userId: userId,
+    },
+  });
 
   return res.json(allUserSongs);
 });
