@@ -18,10 +18,20 @@ const AlbumList = () => {
     dispatch(getAlbums());
   }, [dispatch]);
 
+
+  const handleNew = (e) => {
+    e.preventDefault();
+    if (!currentUser) return window.alert("Please Login");
+    history.push(`/songs/new`);
+  };
   console.log(albums, "ALBUMS HI");
   return (
+    <div className="albums-dom">
+
+
+        <button onClick={handleNew}>Add Album</button>
+      <h2> Albums</h2>
     <div className='all-albums'>
-  
       {albumArr.map((album) => (
         <div className="albums-list">
           <Link className="album-title" to={`/albums/${album.id}`}>
@@ -39,6 +49,7 @@ const AlbumList = () => {
           </Link>
         </div>
       ))}
+    </div>
     </div>
   );
 };

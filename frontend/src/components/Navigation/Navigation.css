@@ -61,9 +61,12 @@ width: 100%;
     padding: 1px;
     height: 100%;
     width: auto;
+    
 }
 
-
+#signup-button {
+    margin-left: 20px
+}
 
 .active {
 

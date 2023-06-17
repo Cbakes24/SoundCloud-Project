@@ -3,8 +3,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import SongsList from "../Songs/SongsList";
-
 import "./Navigation.css";
 
 function Navigation({ isLoaded, setIsLoaded }) {
@@ -15,27 +13,27 @@ function Navigation({ isLoaded, setIsLoaded }) {
     sessionLinks = (
       <div className="container">
         <div className="navList">
-        <NavLink
-          activeClassName="active"
-          exact
-          to={`/songs/users/${sessionUser.id}`}
-        >
-          My Songs
-        </NavLink>
-
-          {" "}
+          <NavLink
+            activeClassName="active"
+            exact
+            to={`/songs/users/${sessionUser.id}`}
+          >
+            My Songs
+          </NavLink>{" "}
           <ProfileButton user={sessionUser} />
         </div>
       </div>
     );
   } else {
     sessionLinks = (
-      <div className="container">
+      <div className="user-buttons">
+        <NavLink id="login-button" to="/login">
+          Log In
+        </NavLink>
 
-          <NavLink to="/login">Log In</NavLink>
-
-          <NavLink to="/signup">Sign Up</NavLink>
-
+        <NavLink id="signup-button" to="/signup">
+          Sign Up
+        </NavLink>
       </div>
     );
   }
@@ -43,25 +41,21 @@ function Navigation({ isLoaded, setIsLoaded }) {
   return (
     <>
       <header id="main-header">
+        <h1> JAM PACKED SOUND CLOUD</h1>
+        <div id="mylinks">
+          <a href="https://github.com/Cbakes24/SoundCloud-Project">
+            <button>
+              GitHub <i class="fa-brands fa-github"></i>
+            </button>
+          </a>
+          <br></br>
 
-          <h1> JAM PACKED SOUND CLOUD</h1>
-<div id='mylinks'>
-
-            <a href="https://github.com/Cbakes24/SoundCloud-Project">
-          <button>
-            GitHub <i class="fa-brands fa-github"></i>
-          </button>
-        </a>
-<br></br>
-
-            <a href="https://www.linkedin.com/in/cory-baker-9738ba2a/">
-          <button>
-            LinkedIn <i class="fa-brands fa-linkedin"></i>
-          </button>
-        </a>
-</div>
-
-
+          <a href="https://www.linkedin.com/in/cory-baker-9738ba2a/">
+            <button>
+              LinkedIn <i class="fa-brands fa-linkedin"></i>
+            </button>
+          </a>
+        </div>
       </header>
 
       <nav id="navbar">
@@ -91,12 +85,7 @@ function Navigation({ isLoaded, setIsLoaded }) {
             </li>
             <li className="navList">
               <NavLink activeClassName="active" exact to="/users">
-                Sign Up 
-              </NavLink>
-            </li>
-            <li className="navList">
-              <NavLink activeClassName="active" exact to="/albums/create">
-                Create Album
+                Sign Up
               </NavLink>
             </li>
             <li className="navList"> {isLoaded && sessionLinks}</li>

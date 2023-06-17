@@ -1,7 +1,15 @@
+.albums-dom {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .album-page {
 margin: 50px
 }
  
+
 .all-albums{
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three song boxes per row */

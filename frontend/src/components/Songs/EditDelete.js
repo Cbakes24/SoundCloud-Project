@@ -32,7 +32,7 @@ const EditDelete = ({song, currentUser}) => {
   };
 
 
-    return  currentUser.id === song.userId ? (
+    return  currentUser?.id && currentUser.id === song.userId ? (
      <>
         <button className="editButton" onClick={handleEdit}>
           Edit
@@ -42,7 +42,7 @@ const EditDelete = ({song, currentUser}) => {
           Delete
         </button>
         </>
- ) : null
+ ) : history.push`/`
 }
 
 export default EditDelete

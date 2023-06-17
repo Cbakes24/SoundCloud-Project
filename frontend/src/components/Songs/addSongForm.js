@@ -73,7 +73,9 @@ const AddSongForm = ({song, formType}) => {
     history.push("./");
   };
 
-  return (
+  return ( user ? (
+
+
     <section>
       {errors.length > 0 &&
         errors.map((error, i) => <div key={i}> {error} </div>)}
@@ -114,7 +116,7 @@ const AddSongForm = ({song, formType}) => {
         </button>
       </form>
     </section>
-  );
-};
+  ) : history.push(`/`) 
+)};
 
 export default AddSongForm;
