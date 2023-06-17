@@ -29,6 +29,11 @@ color:aliceblue
         margin: 10px
     }
 
+    .home-form h1 {
+        color: aliceblue;
+     
+    }
+
     button {
         background-color: #34ccaa;
         border-radius: 5px;

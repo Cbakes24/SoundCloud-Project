@@ -91,7 +91,7 @@ function Navigation({ isLoaded, setIsLoaded }) {
             </li>
             <li className="navList">
               <NavLink activeClassName="active" exact to="/users">
-                Sign Up AWS
+                Sign Up 
               </NavLink>
             </li>
             <li className="navList">

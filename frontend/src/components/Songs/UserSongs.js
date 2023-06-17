@@ -32,10 +32,13 @@ console.log(userSongsArr, "USERS SONGS ARRAY")
       <h1>My Songs</h1>
       <button onClick={handleNew}>Add Song</button>
       <ul className="song-list">
-        {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
+      <div className='songs'> 
         {userSongsArr.map((song) => (
           <SingleSong song={song} key={song.id} currentUser={currentUser} />
         ))}
+      
+      </div>
+        {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
       </ul>
     </div>
   );

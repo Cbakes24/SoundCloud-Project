@@ -4,6 +4,7 @@ import SignupFormPage from "../SignupFormPage";
 import SongsList from "../Songs/SongsList"
 import AllComments from "../Comments/AllComments";
 import "./Home.css"
+import CreateUser from "../SignupFormPage/AWS-SignupForm";
 
 const Home = () => {
     const currentUser = useSelector((state) => state.session.user);
@@ -30,7 +31,7 @@ const Home = () => {
 <div id='loginsignup'>
         <LoginFormPage />
       
-        <SignupFormPage />
+        <CreateUser />
 </div>
 
 }

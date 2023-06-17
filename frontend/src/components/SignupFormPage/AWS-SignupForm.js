@@ -54,8 +54,8 @@ console.log(image, "*** IMAGE IN THE COMP ****")
   //   };
 
   return (
-    <div>
-      <h1>AWS S3 Express-React Demo</h1>
+    <div className='home-form'>
+      <h1>Sign Up</h1>
       {errors.length > 0 &&
         errors.map((error) => <div key={error}>{error}</div>)}
       <form
@@ -112,7 +112,7 @@ console.log(image, "*** IMAGE IN THE COMP ****")
               multiple
               onChange={updateFiles} />
           </label> */}
-        <button type="submit">Create User</button>
+        <button className='formbuttons' type="submit">Create User</button>
       </form>
       <div>
         {user && (
