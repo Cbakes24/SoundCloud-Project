@@ -79,8 +79,15 @@ export const deleteSong = (id) => { //the songId from the removeSong thunk is pa
 
 
 
-export const getSongs = () => async (dispatch) => {
-  const res = await fetch("/api/songs");
+export const getSongs = (page, size) => async (dispatch) => {
+  // console.log("🚀 ~ file: songs.js:83 ~ getSongs ~ page:", page)
+  // let res;
+  // if(page) {
+  //   let res = await fetch(`/api/songs?page=${page}`);
+  // } else {
+  //   let res = await fetch("/api/songs");
+  // }
+  let res = await fetch("/api/songs");
   console.log(res, "RESPONSE");
   if (res.ok) {
     const songs = await res.json();

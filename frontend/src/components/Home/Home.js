@@ -22,7 +22,6 @@ const Home = () => {
             <div>
             <AllComments  />
             </div>
-        <div className='songfeed-bottom'></div>
             </span>
 
         </div>

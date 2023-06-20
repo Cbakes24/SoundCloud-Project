@@ -68,7 +68,7 @@ img {
 .songs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 900px;
+  height: 100vh;
   overflow: scroll;
   width: max-content;
 }

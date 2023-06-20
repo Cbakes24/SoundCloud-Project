@@ -1,7 +1,7 @@
 .songfeed {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1200px 300px;
+    grid-template-columns: fit-content(2fr) 1fr;
+
     overflow: scroll;
     /* grid-auto-rows: minmax(500px, 800px); */
     justify-items: stretch;
@@ -14,13 +14,10 @@
     border: 3px black solid;
 
 }
-.songfeed {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 2fr 1fr;
-    
-}
 
+.homepage {
+
+}
 .songfeed-bottom{
     background-color: red;
     height: 50px;
