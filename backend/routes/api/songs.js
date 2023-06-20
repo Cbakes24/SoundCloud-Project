@@ -35,8 +35,7 @@ const validateComment = [
 //GET SONG
 router.get("/", async (req, res, next) => {
   let { page, size } = req.query;
-  console.log(page, "*** PAGE")
-  console.log(size, "*** SIIZE")
+
   let pagination = {};
   if (!page || !size) {
     let allSongs = await Song.findAll({

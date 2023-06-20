@@ -19,11 +19,14 @@ ul {
 
 .songs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  height: 100vh;
-  overflow: scroll;
-  width: max-content;
+  grid-template-areas:
+    'song song song'
+    'song song song'
+    'song song song';
+    overflow: hidden;
+    width: fit-content;
 }
+
 
 .song-page-section {
   display: flex;

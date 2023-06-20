@@ -5,24 +5,24 @@ import "./songs.css";
 import SingleSong from "./SingleSong";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import AllComments from "../Comments/AllComments";
-
+import { getPage } from "../../store/songs";
 const SongsList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   //   The Array of all the songs
   const currentUser = useSelector((state) => state.session.user);
   const [page, setPage] = useState(parseInt(1));
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
+  const songs = useSelector((state) => state.songs);
+  const songsArr = Object.values(songs);
 
 
   useEffect(() => {
-    dispatch(getSongs(page)).then(() => setIsLoaded(true));
+    dispatch(getPage(page))
   }, [dispatch, page]);
 
 
 
-  const songs = useSelector((state) => state.songs);
-  const songsArr = Object.values(songs);
 
 
   const handleNew = (e) => {
@@ -42,15 +42,12 @@ const SongsList = () => {
      console.log(page, "*** PAGE BUTTON CLICK ")
   }
 
-  const handlePageOne = () => {
-    setPage(1)
-     console.log(page, "*** PAGE BUTTON CLICK ")
-  }
+  // const handlePageOne = () => {
+  //   setPage(1)
+  //    console.log(page, "*** PAGE BUTTON CLICK ")
+  // }
 
-  const handlePageLast = () => {
-    setPage(-1)
-     console.log(page, "*** PAGE BUTTON CLICK ")
-  }
+
 
   return (
     <div className="song-list-page">
@@ -61,20 +58,20 @@ const SongsList = () => {
 
     </div>
       <div className="songs-section">
-        <ul className="song-list">
+        <div className="song-list">
           <div className="songs">
             {songsArr.reverse().map((song) => (
               <SingleSong song={song} key={song.id} currentUser={currentUser} />
             ))}
           </div>
-        </ul>
+        </div>
       </div>
-
+              <p>Page Number: {page}</p>
       <div className="pagination">
-        <button onClick={() => handlePageNext()}>Next</button>
+        {/* <button onClick={() => handlePageOne()}>First</button> */}
         <button onClick={() => handlePageBack()}>Previous</button>
-        <button onClick={() => handlePageOne()}>First</button>
-        <button onClick={() => handlePageLast()}>Last</button>
+        <button onClick={() => handlePageNext()}>Next</button>
+       
       </div>
     </div>
   );

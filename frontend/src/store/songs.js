@@ -5,6 +5,7 @@ const LOAD_SONGS = "load/LOAD_SONGS";
 const ADD_SONG = "add/ADD_SONG";
 const DELETE_SONG = "delete/DELETE_SONG";
 const EDIT_SONG = "edit/EDIT_SONG";
+const PAGE_SONG = "page/PAGE_SONG";
 // const ADD_COMMENT = "add/ADD_COMMENT";
 
 //******* Actions *********
@@ -19,6 +20,13 @@ const EDIT_SONG = "edit/EDIT_SONG";
 const loadSongs = (songs) => {
   return {
     type: LOAD_SONGS,
+    songs,
+  };
+};
+
+const changeSongPage = (songs) => {
+  return {
+    type: PAGE_SONG,
     songs,
   };
 };
@@ -46,19 +54,26 @@ export const deleteSong = (id) => {
 };
 
 export const getSongs = (page, size) => async (dispatch) => {
-  // console.log("🚀 ~ file: songs.js:83 ~ getSongs ~ page:", page)
-  // let res;
-  // if(page) {
-  //   let res = await fetch(`/api/songs?page=${page}`);
-  // } else {
-  //   let res = await fetch("/api/songs");
-  // }
+  console.log("🚀 ~ file: songs.js:83 ~ getSongs ~ page:", page);
   let res = await fetch("/api/songs");
+
   console.log(res, "RESPONSE");
   if (res.ok) {
     const songs = await res.json();
     console.log(songs, "SONGSSSS");
     dispatch(loadSongs(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
+  }
+};
+
+export const getPage = (page, size) => async (dispatch) => {
+  console.log("🚀 ~ file: songs.js:83 ~ getSongs ~ page:", page);
+  let res = await fetch(`/api/songs?page=${page}&size=${9}`);
+
+  console.log(res, "RESPONSE");
+  if (res.ok) {
+    const songs = await res.json();
+    console.log(songs, "SONGSSSS");
+    dispatch(changeSongPage(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
   }
 };
 
@@ -136,6 +151,12 @@ const songReducer = (state = initialState, action) => {
         newState[song.id] = song;
       });
       return newState;
+    case PAGE_SONG:
+      let newPage = {};
+      action.songs.forEach((song) => {
+        newPage[song.id] = song;
+      });
+      return newPage;
     case ADD_SONG:
       newState[action.payload.id] = action.payload;
       return newState;
