@@ -62,25 +62,29 @@ const SongPage = () => {
 
   return song ? (
     <div>
-      <section>
-        <img src={song.previewImage} />
+      <section className="song-page-section">
+        <img src={song.previewImage} className='songpage-img' alt={song.title}/>
+    <div className="audio-player">
+    <div className="song-page-title">
+        <h1 className='songname'>{song.title}</h1>
 
-   
-
-       <h2>{song.title}</h2> 
- 
-        <p>Description: {song.description}</p>
-
-        <audio controls className="audio-player">
+        <p className="song-description">
+        Description: {song.description}</p>
+      </div>
+        <audio controls >
         <source src={song.url} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
+    </div>
+
+   
+
       <br></br>
+
+      </section>
         <a href="/songs">
           <button>Back To Songs</button>
         </a>
-
-      </section>
 
       <section className='comments-songpage'>
         <form id='comment-form' onSubmit={handleSubmit}>

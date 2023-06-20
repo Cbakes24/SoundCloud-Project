@@ -38,13 +38,13 @@ router.get("/", async (req, res, next) => {
   let pagination = {};
   if (!page || !size) {
     let allSongs = await Song.findAll({
-      include: [
-        {
-          model: Album,
-          // attributes: ["id", "username"],
-        },
-      ],
-    });
+ include: [
+          {
+            model: Album,
+            // attributes: ["title"], // Include only the "title" attribute from Album model
+          },
+        ],
+      });
     return res.json({ allSongs });
   }
   if (req.query) {

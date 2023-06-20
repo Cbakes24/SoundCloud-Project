@@ -40,7 +40,11 @@ const CommentList = ({ song }) => {
                 </span>
               </div>
               <br></br>
-              <div>"{comment.body}"</div>
+              
+              <div>
+        
+              "{comment.body}"
+              </div>
             </div>
 
             <SingleComment comment={comment} />

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { loadAllComments } from "../../store/comments";
 import { getSongs } from "../../store/songs";
+import { Link } from "react-router-dom";
 
 const AllComments = ({ songs, username }) => {
   const dispatch = useDispatch();
@@ -51,13 +52,32 @@ const AllComments = ({ songs, username }) => {
                   </div>
                 </div>
                 <div className="comment-info-row">
+                  <div>
+                    <p className="feed-comment-body">"{comment.body}"</p>
+                  </div>
                   <span className="comment-text">
-                  {song && song.title ? (
-                    <div>Song: {song.title}</div>
-                  ) : <p>"...Loading"</p>}
-                    
+                    {/* {song && song.title ? (
+                    ) : (
+                      <p>"...Loading"</p>
+                    )} */}
+
                     <br></br>
-                    <div>"{comment.body}"</div>
+                    {song && song.previewImage ? (
+                      <div className="song-feed-song">
+                      <Link className='comment-song-link' to={`/songs/${song.id}`}>
+                        <img
+                          className="song-feed-pic"
+                          src={song.previewImage}
+                          alt={song.title}
+                        />
+                        <div>{song.title}</div>
+
+
+                      </Link>
+                      </div>
+                    ) : (
+                      "...Loading"
+                    )}
                   </span>
                 </div>
               </div>

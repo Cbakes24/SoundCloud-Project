@@ -30,7 +30,7 @@ const SongsList = () => {
 
   return (
     <div className="song-list-page">
-    <div className='song-page-title' >
+    <div className='song-list-title' >
 
       <button onClick={handleNew}>Add Song</button>
       <h2> New Songs</h2>

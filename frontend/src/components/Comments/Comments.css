@@ -4,7 +4,7 @@
     border-style: solid;
     border-radius: 5px;
     height: auto;
-    width: 500px;
+    width: 90%;
     background-color: #e8e7df;
     display: flex;
     align-items: flex-start;
@@ -32,8 +32,11 @@
     display: flex;
     flex-direction: column-reverse;
     align-items:flex-start;
+    width: 100%;
 }
-
+.comment {
+  width: 100%
+}
 .comment-section {
     display: flex;
    justify-content: center;
@@ -54,6 +57,13 @@ margin: 10px;
     align-items: center;
 
 }
+.song-feed-song{
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100px
+}
 
 .comment-text {
 
@@ -63,6 +73,11 @@ margin: 10px;
 
   }
 
+  img.song-feed-pic {
+    width: 75px;
+    height: 75px;
+    margin: 0px
+  }
   
   .comment-info {
     display: flex;
@@ -78,12 +93,20 @@ margin: 10px;
   .comment-info-row {
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: row-reverse;
   
   }
-
+.feed-comment-body {
+      width: 97%;
+    margin-left: 20px;
+}
   .comment-username {
     color: grey;
     font-size: 1.5em;
     margin-left: 10px;
   }
+
+  .comment-song-link {
+    text-decoration: none;
+    color: black;
+}

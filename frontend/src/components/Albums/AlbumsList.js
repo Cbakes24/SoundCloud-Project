@@ -18,7 +18,6 @@ const AlbumList = () => {
     dispatch(getAlbums());
   }, [dispatch]);
 
-
   const handleNew = (e) => {
     e.preventDefault();
     if (!currentUser) return window.alert("Please Login");
@@ -27,29 +26,27 @@ const AlbumList = () => {
   console.log(albums, "ALBUMS HI");
   return (
     <div className="albums-dom">
-
-
-        <button onClick={handleNew}>Add Album</button>
+      <button onClick={handleNew}>Add Album</button>
       <h2> Albums</h2>
-    <div className='all-albums'>
-      {albumArr.map((album) => (
-        <div className="albums-list">
-          <Link className="album-title" to={`/albums/${album.id}`}>
-            {album.previewImage ? (
-              <img src={album.previewImage} alt="Album Preview" />
-            ) : (
-              <div>
-                <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
-              </div>
-            )}
+      <div className="all-albums">
+        {albumArr.map((album) => (
+          <div className="albums-list">
+            <Link className="album-title" to={`/albums/${album.id}`}>
+              {album.previewImage ? (
+                <img src={album.previewImage} alt="Album Preview" />
+              ) : (
+                <div>
+                  <img src="https://i.etsystatic.com/18338096/r/il/6fd75a/2865274586/il_fullxfull.2865274586_agx1.jpg" />
+                </div>
+              )}
 
-            {album.title}
+              {album.title}
 
-            {/* <div>{album.description}</div>  */}
-          </Link>
-        </div>
-      ))}
-    </div>
+              {/* <div>{album.description}</div>  */}
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
