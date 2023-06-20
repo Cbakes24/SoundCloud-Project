@@ -11,11 +11,9 @@ const UserSongs = () => {
   const currentUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.songs);
   const songsArr = Object.values(songs);
-  console.log(songsArr, 'SONGS ARRAY');
   const userSongsArr = songsArr.filter(song => {
     return song.userId === currentUser.id
   })
-console.log(userSongsArr, "USERS SONGS ARRAY")
 
   useEffect(() => {
     dispatch(getUserSongs());
@@ -36,7 +34,6 @@ console.log(userSongsArr, "USERS SONGS ARRAY")
         {userSongsArr.map((song) => (
           <SingleSong song={song} key={song.id} currentUser={currentUser} />
         ))}
-      
       </div>
         {/* this map is diplaying all the songs from songsArr, tryh to figure out how to use the pagination */}
       </ul>

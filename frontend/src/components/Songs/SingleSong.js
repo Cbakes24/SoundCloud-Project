@@ -9,8 +9,6 @@ const SingleSong = ({ song, currentUser }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
-
   //COmment Button
   const handleComment = (e) => {
     e.preventDefault();
@@ -19,16 +17,15 @@ const SingleSong = ({ song, currentUser }) => {
     history.push(`/songs/${song.id}`);
   };
 
-  return  (
+  return (
     <div className="song-box">
       <ul className="singleSong">
-        <Link className='songpage-link' to={`/songs/${song.id}`}>
-        <img src={song.previewImage} />
-       
-        <p>Album: {song.Album.title}</p>
-        Song Name: {song.title}
-    <p>Description: {song.description}</p>
-    </Link>
+        <Link className="songpage-link" to={`/songs/${song.id}`}>
+          <img src={song.previewImage} />
+          <p>Album: {song.Album.title}</p>
+          Song Name: {song.title}
+          <p>Description: {song.description}</p>
+        </Link>
         {/* <a href={song.url}>
           <button>
             Play <i className="fa-solid fa-play"></i>
@@ -41,8 +38,7 @@ const SingleSong = ({ song, currentUser }) => {
           Comment
         </button>
 
-    <EditDelete  song={song} currentUser={currentUser}/>
-
+        <EditDelete song={song} currentUser={currentUser} />
       </div>
     </div>
   );

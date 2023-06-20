@@ -36,7 +36,6 @@ const SingleComment = ({ comment }) => {
   //     return;
   //   }
   // };
-  console.log(currentUser.id === comment.userId);
 
   return currentUser.id === comment.userId ? (
     <div>

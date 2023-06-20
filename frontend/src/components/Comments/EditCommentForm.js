@@ -8,7 +8,6 @@ const EditCommentForm = () => {
   const { commentId } = useParams();
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments);
-  console.log(comments, " COMMENTS FROM EDIT FORM");
   const comment = comments[commentId];
 
   useEffect(() => {

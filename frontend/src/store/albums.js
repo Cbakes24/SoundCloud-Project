@@ -54,31 +54,24 @@ export const deleteAlbum = (id) => {
 // *** GET ALL ALBUMS ***
 
 export const getAlbums = () => async (dispatch) => {
-    console.log('ALBUMS THUNK')
     const res = await fetch("/api/albums");
-    console.log(res, "RESPONSE");
     if (res.ok) {
       const albums = await res.json();
-      console.log(albums, "THUNK ALBUMSSS");
       dispatch(loadAlbums(albums)); //because allsongs was the initial key in the list of songs see the console log
     }
   };
 
 //   *** GET SINGLE ALBUM ***
 export const getAlbum = (albumId) => async (dispatch) => {
-    console.log('ALBUMS THUNK')
     const res = await fetch(`/api/albums/${albumId}`);
-    console.log(res, "RESPONSE");
     if (res.ok) {
       const album = await res.json();
-      console.log(album, "THUNK Album ");
       dispatch(loadAlbum(album)); //because allsongs was the initial key in the list of songs see the console log
     }
   };
 
 //   *** DELETE AN ALBUM *** 
 export const removeAlbum = (albumId) => async (dispatch) => {
-    console.log(albumId, 'Remove Album THUNK hits')
     const res = await csrfFetch(`/api/albums/${albumId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -91,7 +84,6 @@ export const removeAlbum = (albumId) => async (dispatch) => {
 
 //   *** CREATE AN ALBUM ***
 export const createAlbum = (payload) => async (dispatch) => {
-  console.log(payload, "*** ALBUM DATA SUBMITTED* ****")
   const {title, description, images, image} = payload
   const formData = new FormData();
   formData.append("title", title);
@@ -112,10 +104,8 @@ export const createAlbum = (payload) => async (dispatch) => {
       headers: { "Content-Type": "multipart/form-data" },
       body: formData
     });
-  console.log(res, '**** ALBUM NEW RES ****')
     if (res.ok) {
       const album = await res.json();
-      console.log("🚀 ~ file: albums.js:114 ~ createAlbum ~ album:", album)
   
       dispatch(addAlbum(album.newAlbum));
       return album;
@@ -125,7 +115,6 @@ export const createAlbum = (payload) => async (dispatch) => {
 
 
   export const updateAlbum = (payload) => async (dispatch) => {
-    console.log("🚀 ~ file: albums.js:137 ~ updatealbum ~ payload:", payload)
     const {title, description, image, albumId} = payload
   
     const formData = new FormData();
@@ -156,12 +145,10 @@ const albumReducer = (state = initialState, action) => {
       action.albums.forEach((album) => {
         newState[album.id] = album;
       });
-      console.log(newState, "NEWSTATE");
       return newState;
     case ADD_ALBUM:
 
       newState[action.payload.id] = action.payload;
-      console.log(newState, "ALBUM NEWSTAT ***")
       return newState;
     case DELETE_ALBUM:
       delete newState[action.id];
@@ -171,12 +158,7 @@ const albumReducer = (state = initialState, action) => {
       return newState;
       case LOAD_ALBUM:
       newState[action.album.id] = action.album;
-      console.log(newState, "ALBUM STATE SINGLE")
       return newState;
-  //  case ADD_COMMENT:
-  //     newState[action.payload.id] = action.payload
-  //     console.log(newState, 'HELLLOOOOOOOO')
-  //     return newState
     default:
       return state;
   }

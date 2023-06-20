@@ -46,7 +46,6 @@ const CreateUser = () => {
     const file = e.target.files[0];
     if (file) setImage(file);
   };
-console.log(image, "*** IMAGE IN THE COMP ****")
   // for multiple file upload
   //   const updateFiles = (e) => {
   //     const files = e.target.files;

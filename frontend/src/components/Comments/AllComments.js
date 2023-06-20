@@ -9,11 +9,9 @@ const AllComments = ({ songs, username }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments);
   const songState = useSelector((state) => state.songs);
-  console.log(songState, "songStATEEEEEE");
   const allSongArr = Object.values(songState);
-  console.log(allSongArr, "SONG ARRRR");
   const allCommentsArr = Object.values(comments);
-  console.log(allCommentsArr, "ALL COMMENTS");
+
 
   const currentUser = useSelector((state) => state.session.user);
   // const songImage = allSongArr.map((song) => {
@@ -30,7 +28,6 @@ const AllComments = ({ songs, username }) => {
       <div id="feed">
         {allCommentsArr.map((comment) => {
           const song = allSongArr.find((song) => song.id === comment.songId);
-          console.log(comment.User, "COMENT USERRRRR *****");
           const userProfilePic =
             comment.User?.previewImage ||
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
