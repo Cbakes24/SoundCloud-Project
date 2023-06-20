@@ -52,7 +52,10 @@ const AllComments = ({ songs, username }) => {
                 </div>
                 <div className="comment-info-row">
                   <span className="comment-text">
+                  {song && song.title ? (
                     <div>Song: {song.title}</div>
+                  ) : <p>"...Loading"</p>}
+                    
                     <br></br>
                     <div>"{comment.body}"</div>
                   </span>
