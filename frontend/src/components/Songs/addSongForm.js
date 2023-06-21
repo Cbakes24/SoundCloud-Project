@@ -107,7 +107,9 @@ const AddSongForm = ({song, formType}) => {
           onChange={(e) => setDescription(e.target.value)}
         ></input>
 
-        <label className="audio-file">Song File</label>
+        <label className="audio-file">Song File
+        
+        </label>
         <input type="file" accept="audio/*" onChange={updateFile} required />
 
         <button type="submit">Submit Song</button>

@@ -21,7 +21,7 @@ const AlbumList = () => {
   const handleNew = (e) => {
     e.preventDefault();
     if (!currentUser) return window.alert("Please Login");
-    history.push(`/songs/new`);
+    history.push(`/albums/create`);
   };
   console.log(albums, "ALBUMS HI");
   return (
