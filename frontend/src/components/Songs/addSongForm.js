@@ -82,16 +82,20 @@ const AddSongForm = ({song, formType}) => {
 
       <form onSubmit={handleSubmit}>
         <h2>Song Form</h2>
-        <label>Song Name</label>
+        <label>
         <input
+        placeholder="Song Name"
           type="text"
           value={title}
           // update whatever was changed on this title target
           onChange={(e) => setTitle(e.target.value)}
         ></input>
+        </label>
 
-        <label>Album Name</label>
-        <select value={albumId} onChange={(e) => setAlbumId(e.target.value)}>
+        <label>
+            <select 
+            placeholder="Album Name"
+            value={albumId} onChange={(e) => setAlbumId(e.target.value)}>
           <option value="">Select an album</option>
           {Object.values(albums).map((album) => (
             <option key={album.id} value={album.id}>
@@ -99,9 +103,14 @@ const AddSongForm = ({song, formType}) => {
             </option>
           ))}
         </select>
+        </label>
+    
 
-        <label>Song Description</label>
+        <label>
+        
+        </label>
         <input
+        placeholder="Song Description"
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
