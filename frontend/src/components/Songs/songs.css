@@ -124,6 +124,10 @@ margin: 0px;
   padding: 0px;
 }
 
+.singleSong p {
+  margin-top: -24px;
+}
+
 .song-card-img {
   transition: transform 0.3s ease-in-out;
 }
@@ -146,20 +150,8 @@ align-items: center;
   justify-content: center;
   flex-direction: row;
   width: 200px;
-  margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: -31px;
 }
-
-.singleSong p {
-  margin: 0px
-}
-
-/* li {
-  color: black;
-  margin-left: 10px;
-} */
-
-
 
 .comment {
   margin-bottom: 10px;
