@@ -7,6 +7,7 @@ import { createAlbum, updateAlbum } from "../../store/albums";
 const CreateAlbum = ({ album }) => {
   const [title, setTitle] = useState(album?.title || "");
   const [description, setDescription] = useState(album?.description || "");
+  const [artist, setArtist] = useState(album?.artist || "");
   const [image, setImage] = useState(album?.previewImage || null);
   // for multuple file upload
   //   const [images, setImages] = useState([]);
@@ -30,10 +31,11 @@ const CreateAlbum = ({ album }) => {
       action = createAlbum;
     }
 
-    dispatch(action({ title, description, image, albumId }))
+    dispatch(action({ title, description, artist, image, albumId }))
       .then(() => {
         setTitle("");
         setDescription("");
+        setArtist("");
         setImage(null);
       })
       .catch(async (res) => {
@@ -82,7 +84,14 @@ const CreateAlbum = ({ album }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-
+        <label>
+          <input
+            type="text"
+            placeholder="Artist"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
+        </label>
         <label>
           <input type="file" onChange={updateFile} />
         </label>

@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Album.init({
     title: DataTypes.STRING,
+    artist: DataTypes.STRING,
     description: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     previewImage: DataTypes.STRING

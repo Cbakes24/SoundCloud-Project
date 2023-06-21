@@ -20,11 +20,11 @@ const SingleSong = ({ song, currentUser }) => {
   return (
     <div className="song-box">
       <ul className="singleSong">
+          <h5 className="song-title">{song.title}</h5>
         <Link className="songpage-link" to={`/songs/${song.id}`}>
-          <img src={song.previewImage} />
+          <img className='song-card-img' src={song.previewImage} />
           <p>Album: {song.Album.title}</p>
-          Song Name: {song.title}
-          <p>Description: {song.description}</p>
+       
         </Link>
         {/* <a href={song.url}>
           <button>
@@ -34,9 +34,9 @@ const SingleSong = ({ song, currentUser }) => {
       </ul>
 
       <div className="song-buttons">
-        <button className="commentButton" onClick={handleComment}>
+        {/* <button className="commentButton" onClick={handleComment}>
           Comment
-        </button>
+        </button> */}
 
         <EditDelete song={song} currentUser={currentUser} />
       </div>

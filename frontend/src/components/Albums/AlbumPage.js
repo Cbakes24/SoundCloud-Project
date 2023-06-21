@@ -53,6 +53,7 @@ const AlbumPage = () => {
           )}
 
           <h2>{album && album.title}</h2>
+          <h3>{album.artist}</h3>
           <p>Description: {album && album.description}</p>
         </div>
       </section>

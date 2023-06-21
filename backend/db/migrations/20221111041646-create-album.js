@@ -17,6 +17,9 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      artist: {
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING
       },

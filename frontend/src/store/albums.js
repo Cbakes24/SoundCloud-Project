@@ -84,10 +84,11 @@ export const removeAlbum = (albumId) => async (dispatch) => {
 
 //   *** CREATE AN ALBUM ***
 export const createAlbum = (payload) => async (dispatch) => {
-  const {title, description, images, image} = payload
+  const {title, description, artist, images, image} = payload
   const formData = new FormData();
   formData.append("title", title);
   formData.append("description", description);
+  formData.append("artist", artist);
 
 
   // for multiple files
@@ -115,11 +116,12 @@ export const createAlbum = (payload) => async (dispatch) => {
 
 
   export const updateAlbum = (payload) => async (dispatch) => {
-    const {title, description, image, albumId} = payload
+    const {title, description, artist, image, albumId} = payload
   
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("artist", artist);
   if(image) formData.append('image', image)
   
     const res = await csrfFetch(`/api/albums/${albumId}`, {

@@ -66,10 +66,14 @@ const SongPage = () => {
         <img src={song.previewImage} className='songpage-img' alt={song.title}/>
     <div className="audio-player">
     <div className="song-page-title">
-        <h1 className='songname'>{song.title}</h1>
+    <div id="songtitle"> 
+    <h1 className='songname'>{song.title} - {song.Album.artist} </h1> 
 
-        <p className="song-description">
-        Description: {song.description}</p>
+    </div>
+       
+       
+
+        <p className="song-description">Description: {song.description}</p>
       </div>
         <audio controls >
         <source src={song.url} type="audio/mp3" />

@@ -60,7 +60,7 @@ requireAuth,
 asyncHandler(async (req, res) => {
     console.log(" **** ALBUM API BACK END ****" )
     // console.log("*** REQ IN THE SIGNUP API ***")
-    const { title, description} = req.body;
+    const { title, description, artist} = req.body;
     let currUserId = req.user.id
     console.log("🚀 ~ file: albums.js:63 ~ asyncHandler ~ image:", req.file)
     // console.log(req.file, "*** TESTERR 1 ***")
@@ -73,6 +73,7 @@ asyncHandler(async (req, res) => {
     const newAlbum = await Album.create({
       title: title,
       description: description,
+      artist: artist,
       previewImage: albumImageUrl,
       userId: currUserId
     });
@@ -137,7 +138,7 @@ router.post('/:albumId/songs', requireAuth, async (req, res, next) => {
 //EDIT AN ALBUM
 router.put("/:albumId", singleMulterUpload("image"),  requireAuth,
   asyncHandler(async (req, res, next) => {
-    const { title, description } = req.body;
+    const { title, description, artist } = req.body;
     const userId = req.user.id;
     const image = await singlePublicFileUpload(req.file);
 
@@ -160,6 +161,7 @@ router.put("/:albumId", singleMulterUpload("image"),  requireAuth,
   currentAlbum.update({
       title: title,
       description: description,
+      artist: artist,
       previewImage: image,
       userId: userId,
   });
