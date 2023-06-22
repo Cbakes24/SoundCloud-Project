@@ -10,7 +10,7 @@ const EditDeleteAlbum = ({album, currentUser}) => {
   //EDIT BUTTON
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(album.userId, "USER ID");
+    
     if (!currentUser) return window.alert("Please Login");
     if (album.userId === currentUser.id) {
       history.push(`/albums/${album.id}/edit`);
@@ -24,7 +24,7 @@ const EditDeleteAlbum = ({album, currentUser}) => {
     e.preventDefault();
     if (!currentUser) return window.alert("Please Login");
     if (album.userId === currentUser.id) {
-      console.log(album, "album BEING DELETED");
+     
       dispatch(removeAlbum(album.id));
     } else {
       window.alert("This account does not have permission to delete this album");

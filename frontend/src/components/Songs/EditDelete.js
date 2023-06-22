@@ -10,7 +10,7 @@ const EditDelete = ({song, currentUser}) => {
   //EDIT BUTTON
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(song.userId, "USER ID");
+   
     if (!currentUser) return window.alert("Please Login");
     if (song.userId === currentUser.id) {
       history.push(`/songs/${song.id}/edit`);
@@ -24,7 +24,7 @@ const EditDelete = ({song, currentUser}) => {
     e.preventDefault();
     if (!currentUser) return window.alert("Please Login");
     if (song.userId === currentUser.id) {
-      console.log(song, "SONG BEING DELETED");
+     
       dispatch(removeSong(song.id));
     } else {
       window.alert("This account does not have permission to delete this song");

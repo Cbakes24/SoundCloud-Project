@@ -3,82 +3,89 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
-const { User, Song, Album, Playlist, Comment, PlaylistSong } = require('../../db/models');
+const {
+  User,
+  Song,
+  Album,
+  Playlist,
+  Comment,
+  PlaylistSong,
+} = require("../../db/models");
 const { Op } = require("sequelize");
-const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
-const asyncHandler = require('express-async-handler')
+const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
+const asyncHandler = require("express-async-handler");
 
-
-router.get('/', async (req, res) => {
-    const allAlbums = await Album.findAll()
-   return res.json(allAlbums)
+router.get("/", async (req, res) => {
+  const allAlbums = await Album.findAll();
+  return res.json(allAlbums);
 });
 
 //GET ALBUMS oF CURRENT USER
-router.get('/current', requireAuth, async (req, res, next) => {
+router.get("/current", requireAuth, async (req, res, next) => {
+  const userId = req.user.id;
+  const allUserAlbums = await Album.findAll({ where: { userId: userId } });
 
-    const userId = req.user.id
-        const allUserAlbums = await Album.findAll( {where: {userId: userId}})
-
-       return res.json(allUserAlbums)
-    })
+  return res.json(allUserAlbums);
+});
 //Get ALBUM DETAILS BASED ON ALBUM ID
-router.get('/:albumId', async (req, res, next) => {
+router.get("/:albumId", async (req, res, next) => {
+  const albumId = req.params.albumId;
 
-    const albumId = req.params.albumId
+  const album = await Album.findByPk(albumId, {
+    include: [
+      {
+        model: User,
+        as: "Artist",
+        attributes: ["id", "previewImage", "username"],
+      },
+      {
+        model: Song,
+        attributes: [
+          "id",
+          "userId",
+          "albumId",
+          "title",
+          "description",
+          "url",
+          "createdAt",
+          "updatedAt",
+          "previewImage",
+        ],
+      },
+    ],
+  });
 
-    const album = await Album.findByPk( albumId, {
-        include: [ {
-            model: User,
-            as: 'Artist',
-            attributes:['id', 'previewImage', 'username']
-        },
-        {model: Song,
-            attributes:['id', 'userId', 'albumId', 'title', 'description', 'url', 'createdAt', 'updatedAt', 'previewImage']}]
-        })
+  if (!album) {
+    const err = new Error();
+    err.status = 404;
+    err.title = "album does not exist";
+    err.message = "Album could not be found";
+    err.errors = ["Album not found"];
 
-
-    if(!album) {
-
-        const err = new Error();
-        err.status = 404;
-        err.title = "album does not exist";
-        err.message = "Album could not be found";
-        err.errors = ["Album not found"];
-
-        return next(err);
-
-    }
-   return res.json(album)
+    return next(err);
+  }
+  return res.json(album);
 });
 
-
-
 //CREATE AN ALBUM
-router.post("/create", singleMulterUpload("image"),
-requireAuth,
-asyncHandler(async (req, res) => {
-    console.log(" **** ALBUM API BACK END ****" )
-    // console.log("*** REQ IN THE SIGNUP API ***")
-    const { title, description, artist} = req.body;
-    let currUserId = req.user.id
-    console.log("🚀 ~ file: albums.js:63 ~ asyncHandler ~ image:", req.file)
-    // console.log(req.file, "*** TESTERR 1 ***")
-    console.log(title, '*** TEST FOR ALBUM TITLE ***')
-    
-    const albumImageUrl = await singlePublicFileUpload(req.file);
-    console.log(title, "*** TESTERR 2 ***")
+router.post(
+  "/create",
+  singleMulterUpload("image"),
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { title, description, artist } = req.body;
+    let currUserId = req.user.id;
 
+    const albumImageUrl = await singlePublicFileUpload(req.file);
 
     const newAlbum = await Album.create({
       title: title,
       description: description,
       artist: artist,
       previewImage: albumImageUrl,
-      userId: currUserId
+      userId: currUserId,
     });
-    console.log(newAlbum, "NEW ALBUM IN BACKENDD *****")
-    
+
     return res.json({
       newAlbum,
     });
@@ -104,73 +111,72 @@ asyncHandler(async (req, res) => {
 // });
 
 //CREATE A SONG FOR AN ALBUM
-router.post('/:albumId/songs', requireAuth, async (req, res, next) => {
-        const { title, description, url, previewImage } = req.body
+router.post("/:albumId/songs", requireAuth, async (req, res, next) => {
+  const { title, description, url, previewImage } = req.body;
 
-        const albumId = req.params.albumId
-        if (albumId) {
-            const album = await Album.findByPk(albumId)
+  const albumId = req.params.albumId;
+  if (albumId) {
+    const album = await Album.findByPk(albumId);
 
-             if (!album) {
-               //title, status, errors(array), message
-               const err = new Error()
-               err.status = 404
-               err.title = 'albumId does not exist'
-               err.message = 'Album not found'
-               err.errors = ['Album not found']
+    if (!album) {
+      //title, status, errors(array), message
+      const err = new Error();
+      err.status = 404;
+      err.title = "albumId does not exist";
+      err.message = "Album not found";
+      err.errors = ["Album not found"];
 
-               return next(err)
-
-             }
-            }
-            const newSong = await Song.create( {
-                title,
-                description,
-                url,
-                previewImage,
-                albumId
-            })
-            res.status(201)
-            res.json(newSong)
-            })
-
+      return next(err);
+    }
+  }
+  const newSong = await Song.create({
+    title,
+    description,
+    url,
+    previewImage,
+    albumId,
+  });
+  res.status(201);
+  res.json(newSong);
+});
 
 //EDIT AN ALBUM
-router.put("/:albumId", singleMulterUpload("image"),  requireAuth,
+router.put(
+  "/:albumId",
+  singleMulterUpload("image"),
+  requireAuth,
   asyncHandler(async (req, res, next) => {
     const { title, description, artist } = req.body;
     const userId = req.user.id;
     const image = await singlePublicFileUpload(req.file);
 
-    console.log(title, "*** TEST FOR AlBUM TITLE ***");
-    
     let albumId = req.params.albumId;
-    let currentAlbum = await Album.findOne({where:{id: albumId}});
+    let currentAlbum = await Album.findOne({ where: { id: albumId } });
 
-  if (!currentAlbum) {
-    //title, status, errors(array), message
-    const err = new Error();
-    err.status = 404;
-    err.title = "albumId does not exist";
-    err.message = "album could not be found";
-    err.errors = ["album not found"];
+    if (!currentAlbum) {
+      //title, status, errors(array), message
+      const err = new Error();
+      err.status = 404;
+      err.title = "albumId does not exist";
+      err.message = "album could not be found";
+      err.errors = ["album not found"];
 
-    return next(err);
-  }
+      return next(err);
+    }
 
-  currentAlbum.update({
+    currentAlbum.update({
       title: title,
       description: description,
       artist: artist,
       previewImage: image,
       userId: userId,
-  });
-  await currentAlbum.save();
+    });
+    await currentAlbum.save();
 
-  const editedAlbum = await Album.findByPk(req.params.albumId);
-  res.json(editedAlbum);
-
-}));
+    const editedAlbum = await Album.findByPk(req.params.albumId);
+    res.json(editedAlbum);
+  })
+);
 // router.put('/:albumId', async (req, res, next) => {
 // const { title, description, previewImage } = req.body
 // const album = await Album.findByPk(req.params.albumId)
@@ -200,31 +206,31 @@ router.put("/:albumId", singleMulterUpload("image"),  requireAuth,
 
 //DELETE AN ALBUM
 router.delete("/:albumId", requireAuth, async (req, res, next) => {
-    const albumId = req.params.albumId;
-    const userId = req.params.id;
-    const { body } = req.body;
+  const albumId = req.params.albumId;
+  const userId = req.params.id;
+  const { body } = req.body;
 
-    if (albumId) {
-      const album = await Album.findByPk(albumId, {
-        where: { userId: userId },
-      });
+  if (albumId) {
+    const album = await Album.findByPk(albumId, {
+      where: { userId: userId },
+    });
 
-      if (!album) {
-        const err = new Error();
-        err.status = 404;
-        err.title = "albumId does not exist";
-        err.message = "album could not be found";
-        err.errors = ["album not found"];
+    if (!album) {
+      const err = new Error();
+      err.status = 404;
+      err.title = "albumId does not exist";
+      err.message = "album could not be found";
+      err.errors = ["album not found"];
 
-        return next(err);
-      }
-
-      await album.destroy();
+      return next(err);
     }
 
-    res.json({
-      message: "Successfully deleted",
-      statusCode: 200,
-    });
+    await album.destroy();
+  }
+
+  res.json({
+    message: "Successfully deleted",
+    statusCode: 200,
   });
+});
 module.exports = router;

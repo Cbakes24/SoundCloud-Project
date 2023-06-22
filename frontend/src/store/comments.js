@@ -8,8 +8,6 @@ const EDIT_COMMENT = "edit/EDIT_COMMENT";
 
 //******* Actions *********
 
-
-
 const addComment = (payload) => {
   return {
     type: ADD_COMMENT,
@@ -42,28 +40,25 @@ export const deleteComment = (id) => {
 //******* Thunks *********
 export const loadAllComments = () => async (dispatch) => {
   const res = await csrfFetch("/api/comments");
-  console.log(res, "RESPONSE");
   if (res.ok) {
     const comments = await res.json();
-    console.log(comments, "LOADED COMMENTS");
     dispatch(loadComments(comments));
   }
 };
 
-export const createComment =  (payload) => async (dispatch) => {
-  console.log(payload, 'HERE IS THE SUBMITTED COMMENT!!!')
+export const createComment = (payload) => async (dispatch) => {
   const res = await csrfFetch(`/api/songs/${payload.songId}/comments`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-    if (res.ok) {
-      const comment = await res.json();
-      dispatch(addComment(comment));
-      return comment;
-    }
-  };
+  if (res.ok) {
+    const comment = await res.json();
+    dispatch(addComment(comment));
+    return comment;
+  }
+};
 
 export const loadSongComments = (song) => async (dispatch) => {
   const res = await csrfFetch(`/api/songs/${song.id}/comments`);
@@ -88,15 +83,14 @@ export const updateComment = (payload) => async (dispatch) => {
 };
 
 export const removeComment = (commentId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/comments/${commentId}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (res.ok) {
-      dispatch(deleteComment(commentId));
-    }
-  };
-
+  const res = await csrfFetch(`/api/comments/${commentId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (res.ok) {
+    dispatch(deleteComment(commentId));
+  }
+};
 
 const initialState = {};
 

@@ -34,12 +34,12 @@ const UserSongs = () => {
 
   const handlePageNext = () => {
     setPage(page + 1)
-    console.log(page, "*** PAGE BUTTON CLICK ")
+   
   }
 
   const handlePageBack = () => {
     setPage(page - 1)
-     console.log(page, "*** PAGE BUTTON CLICK ")
+   
   }
   return (
     <div className="song-list-page">

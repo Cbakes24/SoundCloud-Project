@@ -143,7 +143,7 @@ router.put(
     const userId = req.user.id;
     const audioFile = await singlePublicFileUpload(req.file);
     let album;
-    console.log(title, "*** TEST FOR SONG TITLE ***");
+    
 
     if (albumId) {
       album = await Album.findByPk(albumId);
@@ -188,13 +188,13 @@ router.post(
     const { title, description, albumId } = req.body;
     const userId = req.user.id;
     let album;
-    console.log(title, "*** TEST FOR SONG TITLE ***");
+    
     if (albumId) {
       album = await Album.findByPk(albumId);
     }
-    console.log(album, "**** ALBUM IN THE  BACK END FOR SONG ****");
+    
     const audioFile = await singlePublicFileUpload(req.file);
-    console.log(title, "*** TESTERR 2 ***");
+    
 
     const newSong = await Song.create({
       title: title,
@@ -204,7 +204,7 @@ router.post(
       albumId: albumId,
       userId: userId,
     });
-    console.log(newSong, "NEW SONG IN BACKENDD *****");
+    
     res.status(201);
     return res.json({ newSong });
   })

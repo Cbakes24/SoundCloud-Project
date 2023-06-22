@@ -54,25 +54,21 @@ export const deleteSong = (id) => {
 };
 
 export const getSongs = (page, size) => async (dispatch) => {
-  console.log("🚀 ~ file: songs.js:83 ~ getSongs ~ page:", page);
   let res = await fetch("/api/songs");
 
-  console.log(res, "RESPONSE");
   if (res.ok) {
     const songs = await res.json();
-    console.log(songs, "SONGSSSS");
+
     dispatch(loadSongs(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
   }
 };
 
 export const getPage = (page, size) => async (dispatch) => {
-  console.log("🚀 ~ file: songs.js:83 ~ getSongs ~ page:", page);
   let res = await fetch(`/api/songs?page=${page}&size=${9}`);
 
-  console.log(res, "RESPONSE");
   if (res.ok) {
     const songs = await res.json();
-    console.log(songs, "SONGSSSS");
+
     dispatch(changeSongPage(songs.allSongs)); //because allsongs was the initial key in the list of songs see the console log
   }
 };

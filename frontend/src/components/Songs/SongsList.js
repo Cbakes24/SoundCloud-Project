@@ -16,14 +16,9 @@ const SongsList = () => {
   const songs = useSelector((state) => state.songs);
   const songsArr = Object.values(songs);
 
-
   useEffect(() => {
-    dispatch(getPage(page))
+    dispatch(getPage(page));
   }, [dispatch, page]);
-
-
-
-
 
   const handleNew = (e) => {
     e.preventDefault();
@@ -31,32 +26,25 @@ const SongsList = () => {
     history.push(`/songs/new`);
   };
 
-
   const handlePageNext = () => {
-    setPage(page + 1)
-    console.log(page, "*** PAGE BUTTON CLICK ")
-  }
+    setPage(page + 1);
+  };
 
   const handlePageBack = () => {
-    setPage(page - 1)
-     console.log(page, "*** PAGE BUTTON CLICK ")
-  }
+    setPage(page - 1);
+  };
 
   // const handlePageOne = () => {
   //   setPage(1)
-  //    console.log(page, "*** PAGE BUTTON CLICK ")
+
   // }
-
-
 
   return (
     <div className="song-list-page">
-     <div className='song-list-title' >
-
-      <button onClick={handleNew}>Add Song</button>
-      <h2> New Songs</h2>
-
-    </div>
+      <div className="song-list-title">
+        <button onClick={handleNew}>Add Song</button>
+        <h2> New Songs</h2>
+      </div>
       <div className="songs-section">
         <div className="song-list">
           <div className="songs">
@@ -66,12 +54,11 @@ const SongsList = () => {
           </div>
         </div>
       </div>
-              <p>Page Number: {page}</p>
+      <p>Page Number: {page}</p>
       <div className="pagination">
         {/* <button onClick={() => handlePageOne()}>First</button> */}
         <button onClick={() => handlePageBack()}>Previous</button>
         <button onClick={() => handlePageNext()}>Next</button>
-       
       </div>
     </div>
   );

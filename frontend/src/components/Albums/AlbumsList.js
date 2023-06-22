@@ -11,8 +11,8 @@ const AlbumList = () => {
   const currentUser = useSelector((state) => state.session.user);
   const albums = useSelector((state) => state.albums);
   const albumArr = Object.values(albums);
-  console.log(albumArr, "ALBUM ARR");
-  console.log(albums, "ALBUMS");
+ 
+ 
 
   useEffect(() => {
     dispatch(getAlbums());
@@ -23,7 +23,7 @@ const AlbumList = () => {
     if (!currentUser) return window.alert("Please Login");
     history.push(`/albums/create`);
   };
-  console.log(albums, "ALBUMS HI");
+ 
   return (
     <div className="albums-dom">
       <button onClick={handleNew}>Add Album</button>

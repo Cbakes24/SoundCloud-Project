@@ -10,7 +10,7 @@ const EditDeleteComment = ({comment, currentUser}) => {
   //EDIT BUTTON
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(comment.userId, "USER ID");
+    
     if (!currentUser) return window.alert("Please Login");
     if (comment.userId === currentUser.id) {
       history.push(`/comments/${comment.id}/edit`);
@@ -24,7 +24,7 @@ const EditDeleteComment = ({comment, currentUser}) => {
     e.preventDefault();
     if (!currentUser) return window.alert("Please Login");
     if (comment.userId === currentUser.id) {
-      console.log(comment, "COMMENT BEING DELETED");
+     
       dispatch(removeComment(comment.id));
     } else {
       window.alert("This account does not have permission to delete this comment");

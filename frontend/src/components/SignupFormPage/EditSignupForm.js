@@ -43,14 +43,14 @@ const handleSubmit = (e) => {
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
-        console.log(data.errors, "DATAAA for ERRORSSS");
+        
       });
     }
 
 
   };
 
-console.log("HELLLOOOO ******* ******", )
+
   const handleClick = () => {
     history.replace('/login')
   }

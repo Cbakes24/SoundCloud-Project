@@ -22,7 +22,7 @@ const AddSongForm = ({song, formType}) => {
   const songId = song.id
   const user = useSelector((state) => state.session.user);
   const albums = useSelector((state) => state.albums);
-  console.log("🚀 ~ file: addSongForm.js:26 ~ AddSongForm ~ albums:", albums);
+ 
 
   const userId = user.id;
 
@@ -62,7 +62,7 @@ const AddSongForm = ({song, formType}) => {
     const file = e.target.files[0];
     if (file) setAudioFile(file);
   };
-  // console.log(audioFile, "*** MP3 IN THE COMP ****");
+
   // for multiple file upload
   //   const updateFiles = (e) => {
   //     const files = e.target.files;

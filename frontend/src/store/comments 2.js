@@ -32,21 +32,16 @@ export const deleteComment = (id) => {
 //******* Thunks *********
 export const loadAllComments = () => async (dispatch) => {
   const res = await csrfFetch("/api/comments");
-  console.log(res, "RESPONSE");
   if (res.ok) {
     const comments = await res.json();
-    console.log(comments, "LOADED COMMENTS");
     dispatch(loadComments(comments.comments));
   }
 };
 
 export const loadSongComments = (song) => async (dispatch) => {
-    console.log(song, 'THE SONGGGGG')
   const res = await csrfFetch(`/api/songs/${song.id}/comments`);
-  console.log(res, "SONG COMMENT RESPONSE");
   if (res.ok) {
     const songComments = await res.json();
-    console.log(songComments, "SONG COMMENTS");
     dispatch(loadComments(songComments));
   }
 };
@@ -66,7 +61,7 @@ export const updateComment = (payload) => async (dispatch) => {
 };
 
 export const removeComment = (commentId) => async (dispatch) => {
-    console.log(commentId, 'Remove Song THUNK hits')
+    
     const res = await csrfFetch(`/api/comments/${commentId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -84,7 +79,6 @@ const commentReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_COMMENT:
       newState[action.payload.id] = action.payload;
-      console.log(newState, "HELLLOOOOOOOO");
       return newState;
     case LOAD_COMMENTS:
       action.comments.forEach((comment) => {
