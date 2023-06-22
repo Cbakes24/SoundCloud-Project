@@ -8,6 +8,6 @@ const EditAlbumForm = () => {
   const album = albums[albumId];
 
 
-  return <CreateAlbum album={album} formType="Edit Song" />;
+  return <CreateAlbum album={album} formType="Edit Album" />;
 };
 export default EditAlbumForm;

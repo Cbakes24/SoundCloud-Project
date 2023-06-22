@@ -60,14 +60,17 @@ const SongPage = () => {
       setBody('')
   };
 
-  return song ? (
+  return !song ? ( <p>...loading</p> ) : (
+
+
+  
     <div>
       <section className="song-page-section">
         <img src={song.previewImage} className='songpage-img' alt={song.title}/>
     <div className="audio-player">
     <div className="song-page-title">
     <div id="songtitle"> 
-    <h1 className='songname'>{song.title} - {song.Album.artist} </h1> 
+    <h1 className='songname'>{song.title} - {song.Album?.artist} </h1> 
 
     </div>
        
@@ -108,7 +111,7 @@ const SongPage = () => {
         </div>
       </section>
     </div>
-  ) : null;
+  ) 
 };
 
 export default SongPage;

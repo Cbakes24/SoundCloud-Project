@@ -33,31 +33,31 @@ const AddSongForm = ({song, formType}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = [];
-    let action;
-    if(songId) {
-      action = updateSong
-    } else {
-      action = createSong
-    }
 
+
+    const action = song?.id ? updateSong : createSong;
       const data = await dispatch(action({ title, description, albumId, audioFile, songId }))
-        .then(() => {
-          setTitle("");
-          setDescription("");
-          setAlbumId("");
-          setAudioFile(null);
-        })
-        .catch(async (res) => {
-          const data = await res.json();
+    
+       
           if (data && data.errors) {
             newErrors = data.errors;
             setErrors(newErrors);
-          }
-        });
-        history.push(`/songs/${song.id}`)
+          } else {
+
+            if(action === updateSong) {
+              console.log(data.id, "*** DATAAAAA IN EDIT****")
+              history.push(`/songs/${data.id}`)
+            } else {
+              const songId = data?.newSong?.id;
+              history.push(`/songs/${songId}`);
+            }
+
+
+
+          
     };
     
-
+  }
   const updateFile = (e) => {
     const file = e.target.files[0];
     if (file) setAudioFile(file);

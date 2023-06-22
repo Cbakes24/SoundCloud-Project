@@ -20,12 +20,13 @@ const EditDeleteAlbum = ({album, currentUser}) => {
   };
 
   //DELETE BUTTON
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
     if (!currentUser) return window.alert("Please Login");
     if (album.userId === currentUser.id) {
      
-      dispatch(removeAlbum(album.id));
+     await dispatch(removeAlbum(album.id));
+     history.push(`/albums`)
     } else {
       window.alert("This account does not have permission to delete this album");
     }

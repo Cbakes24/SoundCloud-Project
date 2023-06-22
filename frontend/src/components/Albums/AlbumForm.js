@@ -35,11 +35,18 @@ const CreateAlbum = ({ album }) => {
         } else {
 
           console.log(data, "*** DATAAAAA ****")
-          const albumId = data?.newAlbum?.id;
-          if (albumId) {
-            history.push(`/albums/${albumId}`);
+          if(action === updateAlbum) {
+              console.log(data.id, "*** DATAAAAA IN EDIT****")
+              history.push(`/albums/${data.id}`)
+            } else {
+              const albumId = data?.newAlbum?.id;
+              history.push(`/albums/${albumId}`);
+            }
+
+
+
           }
-        }
+        
   };
 
   const updateFile = (e) => {
@@ -55,7 +62,7 @@ const CreateAlbum = ({ album }) => {
 
   return (
     <div>
-      <h1>Create Album</h1>
+      <h1>Album Form</h1>
       {errors.length > 0 &&
         errors.map((error) => <div key={error}>{error}</div>)}
       <form
@@ -96,7 +103,7 @@ const CreateAlbum = ({ album }) => {
               multiple
               onChange={updateFiles} />
           </label> */}
-        <button type="submit">Create Album</button>
+        <button type="submit">Submit Album</button>
       </form>
       {/* <div>
         {user && (
