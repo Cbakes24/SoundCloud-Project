@@ -139,12 +139,15 @@ router.put(
   singleMulterUpload("audioFile"),
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const { title, description, albumId } = req.body;
+    const { title, description, albumId, audioFile } = req.body;
     const userId = req.user.id;
-    const audioFile = await singlePublicFileUpload(req.file);
-    let album;
-    
 
+    let songFile = audioFile
+    if(req.file) {
+      songFile = await singlePublicFileUpload(req.file);
+    }
+
+    let album;
     if (albumId) {
       album = await Album.findByPk(albumId);
     }
@@ -167,7 +170,7 @@ router.put(
     currentSong.update({
       title: title,
       description: description,
-      url: audioFile,
+      url: songFile,
       previewImage: album.previewImage,
       albumId: albumId,
       userId: userId,

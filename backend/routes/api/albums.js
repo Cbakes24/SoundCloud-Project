@@ -146,9 +146,13 @@ router.put(
   singleMulterUpload("image"),
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const { title, description, artist } = req.body;
+    const { title, description, artist, image } = req.body;
     const userId = req.user.id;
-    const image = await singlePublicFileUpload(req.file);
+
+    let albumImage = image
+    if(req.file) {
+      albumImage = await singlePublicFileUpload(req.file);
+    }
 
     let albumId = req.params.albumId;
     let currentAlbum = await Album.findOne({ where: { id: albumId } });
@@ -168,7 +172,7 @@ router.put(
       title: title,
       description: description,
       artist: artist,
-      previewImage: image,
+      previewImage: albumImage,
       userId: userId,
     });
     await currentAlbum.save();

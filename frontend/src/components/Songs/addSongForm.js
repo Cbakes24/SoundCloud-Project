@@ -119,7 +119,7 @@ const AddSongForm = ({song, formType}) => {
         <label className="audio-file">Song File
         
         </label>
-        <input type="file" accept="audio/*" onChange={updateFile} required />
+        <input type="file" accept="audio/*" onChange={updateFile}/>
 
         <button type="submit">Submit Song</button>
         <button type="button" onClick={handleCancelClick}>

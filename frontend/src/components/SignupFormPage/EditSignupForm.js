@@ -127,6 +127,7 @@ const handleSubmit = (e) => {
             required
           />
         </label>
+        
         <label className="label">
           Confirm Password
           <input
@@ -137,9 +138,12 @@ const handleSubmit = (e) => {
             required
           />
         </label>
+
         <label>
           <input type="file" onChange={updateFile} />
         </label>
+
+
         <button className="formbuttons" id='signupButton' type="submit">Submit</button>
         {/* <button className="formbuttons" id='loginButton' onClick={handleClick}>Log In</button> */}
       </form>

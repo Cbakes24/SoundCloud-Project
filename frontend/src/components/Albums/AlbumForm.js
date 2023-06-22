@@ -93,9 +93,13 @@ const CreateAlbum = ({ album }) => {
             onChange={(e) => setArtist(e.target.value)}
           />
         </label>
+
         <label>
           <input type="file" onChange={updateFile} />
         </label>
+
+
+        
         {/* <label>
             Multiple Upload
             <input
@@ -105,18 +109,6 @@ const CreateAlbum = ({ album }) => {
           </label> */}
         <button type="submit">Submit Album</button>
       </form>
-      {/* <div>
-        {user && (
-          <div>
-            <h1>{user.username}</h1>
-            <img
-              style={{ width: "150px" }}
-              src={user.image}
-              alt="profile"
-            />
-          </div>
-        )}
-      </div> */}
     </div>
   );
 };
