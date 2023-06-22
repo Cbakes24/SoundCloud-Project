@@ -21,31 +21,25 @@ const CreateAlbum = ({ album }) => {
     albumId = album.id;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = [];
-    let action;
-    if (albumId) {
-      action = updateAlbum;
-    } else {
-      action = createAlbum;
-    }
 
-    dispatch(action({ title, description, artist, image, albumId }))
-      .then(() => {
-        setTitle("");
-        setDescription("");
-        setArtist("");
-        setImage(null);
-      })
-      .catch(async (res) => {
-        const data = await res.json();
+
+   const action = album?.id ? updateAlbum : createAlbum;
+   const data = await dispatch(action({ title, description, artist, image, albumId }))
+
         if (data && data.errors) {
           newErrors = data.errors;
           setErrors(newErrors);
+        } else {
+
+          console.log(data, "*** DATAAAAA ****")
+          const albumId = data?.newAlbum?.id;
+          if (albumId) {
+            history.push(`/albums/${albumId}`);
+          }
         }
-      });
-    history.push(`/albums/${albumId}`);
   };
 
   const updateFile = (e) => {

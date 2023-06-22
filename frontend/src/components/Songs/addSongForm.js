@@ -30,7 +30,7 @@ const AddSongForm = ({song, formType}) => {
     dispatch(getAlbums());
   }, [dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = [];
     let action;
@@ -40,7 +40,7 @@ const AddSongForm = ({song, formType}) => {
       action = createSong
     }
 
-      dispatch(action({ title, description, albumId, audioFile, songId }))
+      const data = await dispatch(action({ title, description, albumId, audioFile, songId }))
         .then(() => {
           setTitle("");
           setDescription("");
@@ -54,7 +54,7 @@ const AddSongForm = ({song, formType}) => {
             setErrors(newErrors);
           }
         });
-        history.push(`/songs`)
+        history.push(`/songs/${song.id}`)
     };
     
 

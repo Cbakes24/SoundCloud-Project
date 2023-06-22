@@ -41,8 +41,8 @@ const AlbumPage = () => {
   //     setActiveAudio(songId); // Clicked on a different audio, set it as active
   //   }
   // };
-  return (
-    <div className="album-page">
+  return !album ? (<p>...Loading</p>) : (
+<div className="album-page">
       Album Page
       <section className="album-section">
         <div className="album-info">
@@ -85,7 +85,11 @@ const AlbumPage = () => {
       </a>
       <EditDeleteAlbum album={album} currentUser={currentUser}/>
     </div>
-  );
+
+
+  ) 
+    
+  ;
 };
 
 export default AlbumPage;

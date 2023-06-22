@@ -107,7 +107,8 @@ export const createAlbum = (payload) => async (dispatch) => {
     });
     if (res.ok) {
       const album = await res.json();
-  
+      console.log(album, "**** ALBUM **** THUNK")
+      console.log(album.newAlbum, "**** ALBUM.NEWALBUM **** THUNK")
       dispatch(addAlbum(album.newAlbum));
       return album;
     }
@@ -149,7 +150,6 @@ const albumReducer = (state = initialState, action) => {
       });
       return newState;
     case ADD_ALBUM:
-
       newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_ALBUM:
