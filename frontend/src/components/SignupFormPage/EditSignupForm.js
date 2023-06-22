@@ -12,8 +12,8 @@ function EditSignupForm() {
   const [username, setUsername] = useState(sessionUser?.username || "");
   const [firstName, setFirstName] = useState(sessionUser?.firstName || "");
   const [lastName, setLastName] = useState(sessionUser?.lastName || "");
-  const [password, setPassword] = useState(sessionUser?.password || "");
-  
+  const [password, setPassword] = useState(sessionUser?.hashedPassword || "");
+  const [image, setImage] = useState(sessionUser?.previewImage || null);
   const [confirmPassword, setConfirmPassword] = useState(sessionUser?.confirmPassword || "");
   const [errors, setErrors] = useState([]);
 
@@ -35,6 +35,7 @@ const handleSubmit = (e) => {
         username,
         email,
         password,
+        image
       }
      dispatch(sessionActions.updateUser(payload))
 
@@ -48,6 +49,11 @@ const handleSubmit = (e) => {
     }
 
 
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
   };
 
 
@@ -130,6 +136,9 @@ const handleSubmit = (e) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+        </label>
+        <label>
+          <input type="file" onChange={updateFile} />
         </label>
         <button className="formbuttons" id='signupButton' type="submit">Submit</button>
         {/* <button className="formbuttons" id='loginButton' onClick={handleClick}>Log In</button> */}
