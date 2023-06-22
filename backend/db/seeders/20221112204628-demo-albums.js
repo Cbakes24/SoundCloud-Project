@@ -1,5 +1,5 @@
 'use strict';
-const { User } = require('../models'); // Import the User model
+const { Album, Comment, Playlist, PlaylistSong, Song, User } = require('../models');
  
 let options = {};
 if (process.env.NODE_ENV === 'production') {
