@@ -144,12 +144,15 @@ router.get("/:userId/playlists", requireAuth, async (req, res, next) => {
 // AWS USER SIGNUP
 router.post("/", singleMulterUpload("image"),
   validateSignup,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
    
     const { email, password, username, firstName, lastName } = req.body;
    
-    
-    const profileImageUrl = await singlePublicFileUpload(req.file);
+    let profileImageUrl = "https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png"
+    if(req.file) {
+
+      profileImageUrl = await singlePublicFileUpload(req.file);
+    }
    
 
     const existUsers = await User.findOne({
