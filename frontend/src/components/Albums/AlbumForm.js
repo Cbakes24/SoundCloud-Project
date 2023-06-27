@@ -34,10 +34,8 @@ const CreateAlbum = ({ album }) => {
           setErrors(newErrors);
         } else {
 
-          console.log(data, "*** DATAAAAA ****")
           if(action === updateAlbum) {
-              console.log(data.id, "*** DATAAAAA IN EDIT****")
-              history.push(`/albums/${data.id}`)
+                        history.push(`/albums/${data.id}`)
             } else {
               const albumId = data?.newAlbum?.id;
               history.push(`/albums/${albumId}`);
@@ -99,7 +97,7 @@ const CreateAlbum = ({ album }) => {
         </label>
 
 
-        
+
         {/* <label>
             Multiple Upload
             <input

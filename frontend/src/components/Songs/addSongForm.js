@@ -17,7 +17,7 @@ const AddSongForm = ({song, formType}) => {
   // for multuple file upload
   //   const [images, setImages] = useState([]);
 
-  
+
   const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
@@ -47,8 +47,7 @@ const AddSongForm = ({song, formType}) => {
           } else {
 
             if(action === updateSong) {
-              console.log(data.id, "*** DATAAAAA IN EDIT****")
-              history.push(`/songs/${data.id}`)
+                         history.push(`/songs/${data.id}`)
             } else {
               const songId = data?.newSong?.id;
               history.push(`/songs/${songId}`);
