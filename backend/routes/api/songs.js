@@ -105,9 +105,9 @@ router.get("/:songId(\\d+)", async (req, res, next) => {
     //title, status, errors(array), message
     const err = new Error();
     err.status = 404;
-    err.title = "songId does not exist";
-    err.message = "Song could not be found";
-    err.errors = ["Song not found"];
+    err.title = "songId does not exist.";
+    err.message = "Song could not be found.";
+    err.errors = ["Song not found."];
 
     return next(err);
   }
