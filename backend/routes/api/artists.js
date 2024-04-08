@@ -9,7 +9,7 @@ const validateSignup = [
     check('email')
       .exists({ checkFalsy: true })
       .isEmail()
-      .withMessage('Please provide a valid email.'),
+      .withMessage('Please provide a valid email. Thank you.'),
     check('username')
       .exists({ checkFalsy: true })
       .isLength({ min: 4 })
