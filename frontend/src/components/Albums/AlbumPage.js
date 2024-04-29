@@ -20,7 +20,7 @@ const AlbumPage = () => {
   const albumState = useSelector((state) => state.albums);
   const album = albumState[albumId];
 
-
+console.log("album", album)
 
 
   useEffect(() => {
