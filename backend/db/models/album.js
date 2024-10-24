@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: 'albumId', onDelete: 'cascade',  hooks: true })
 
         Album.belongsTo(models.User, 
-          { as: 'Artist', foreignKey: 'userId', targetKey: 'id' })
+          { as: 'Users', foreignKey: 'userId', targetKey: 'id' })
 
       
     }
