@@ -19,6 +19,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('corysoloman'),
         previewImage: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/goomba-pic.jpeg'
       },
+      console.log("User seed completed!");
       {
         firstName: 'Ayla',
         lastName: 'Baker',
@@ -49,3 +50,5 @@ module.exports = {
 
   }
 };
+
+console.log('seeded users', )
