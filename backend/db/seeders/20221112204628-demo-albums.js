@@ -16,7 +16,7 @@ module.exports = {
       {
         title: 'Dookie',
         description: 'Best Green Day Album everrrr',
-        userId: 1,
+        userId: 2,
         previewImage: 'https://upload.wikimedia.org/wikipedia/en/4/4b/Green_Day_-_Dookie_cover.jpg',
         artist: 'Green Day'
       },
