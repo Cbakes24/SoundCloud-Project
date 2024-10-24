@@ -11,19 +11,8 @@ module.exports = {
 
 
   async up (queryInterface, Sequelize) {
-    const users = await queryInterface.sequelize.query(
-      'SELECT id FROM "Users";'
-    );
-    
-    const userIds = users[0].map(user => user.id);  // Extract user IDs
-console.log(userIds, 'userIds*********************');
-    if (userIds.length === 0) {
-      throw new Error('No users found for seeding albums');
-    }
-
     options.tableName = 'Albums'
 
-    
     await queryInterface.bulkInsert(options, [
       {
         title: 'Dookie',
