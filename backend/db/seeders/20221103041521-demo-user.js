@@ -37,7 +37,9 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('leonross'),
         previewImage: 'https://corysoundcloudawsbucket.s3.us-west-1.amazonaws.com/mario-pic.png'
       }
-    ], {});
+    ], {returning: true});
+        console.log("Users created: ", users);  // Log the users to see if they exist
+  
   },
 
   async down (queryInterface, Sequelize) {
