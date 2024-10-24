@@ -12,6 +12,7 @@ module.exports = {
     options.tableName = 'Users'
     await queryInterface.bulkInsert(options, [
       {
+        userId: 1,
         firstName: 'Cory',
         lastName: 'Baker',
         email: 'cory@gmail.com',
@@ -50,5 +51,3 @@ module.exports = {
 
   }
 };
-
-
