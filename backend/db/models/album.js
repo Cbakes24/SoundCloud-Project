@@ -1,9 +1,7 @@
 'use strict';
-
 const {
   Model
 } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
   class Album extends Model {
     /**
@@ -25,14 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     artist: DataTypes.STRING,
     description: DataTypes.STRING,
-    // userId: DataTypes.INTEGER,
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "Users",
-        key: 'id',
-      },
-    },
+    userId: DataTypes.INTEGER,
     previewImage: DataTypes.STRING
   }, {
     sequelize,
