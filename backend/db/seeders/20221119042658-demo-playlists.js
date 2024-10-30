@@ -1,6 +1,4 @@
 'use strict';
-const { userMap, users } = require('./seederFunctions.js');  // Use require instead of import
-const { Album, Comment, Playlist, PlaylistSong, Song, User } = require('../models');
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
