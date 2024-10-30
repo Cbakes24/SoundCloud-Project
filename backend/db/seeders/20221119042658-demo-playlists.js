@@ -10,20 +10,23 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Playlists'
+
+    
+    
     await queryInterface.bulkInsert(options, [
       {
         name: 'Gym Workout',
-        userId: userMap["corybaker24"],
+        userId: 1,
         previewImage: 'image url'
       },
       {
         name: 'My chill jam sessions',
-        userId: userMap["aylarey"],
+        userId: 2,
         previewImage: 'image url'
       },
       {
         name: 'BANGERSSSS',
-        userId: userMap["corybaker24"],
+        userId: 3,
         previewImage: 'image url'
       },
     ])
