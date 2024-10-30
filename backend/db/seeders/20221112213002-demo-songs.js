@@ -21,7 +21,13 @@ module.exports = {
       return acc;
     }, {});
     
-    
+    const albums = await Album.findAll({
+      // where: {
+      //   username: { [Sequelize.Op.in]: ['corybaker24', 'aylarey', 'LeonLegend'] },
+      // },
+      raw: true,  // Return plain data instead of Sequelize instances
+    });
+    console.log("Albums: ", albums)
     await queryInterface.bulkInsert(options, [
       {
         // 1
