@@ -1,3 +1,5 @@
+const { Album, Comment, Playlist, PlaylistSong, Song, User } = require('../models');
+
 export const users = await User.findAll({
     where: {
       username: { [Sequelize.Op.in]: ['corybaker24', 'aylarey', 'LeonLegend'] },

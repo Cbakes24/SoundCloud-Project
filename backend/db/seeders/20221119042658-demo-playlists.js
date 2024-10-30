@@ -1,6 +1,5 @@
 'use strict';
-import { userMap } from './seederFunctions.js';
-import { users } from './seederFunctions.js';
+const { userMap, users } = require('./seederFunctions.js');  // Use require instead of import
 const { Album, Comment, Playlist, PlaylistSong, Song, User } = require('../models');
 let options = {};
 if (process.env.NODE_ENV === 'production') {
