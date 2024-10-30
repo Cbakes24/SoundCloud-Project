@@ -23,6 +23,7 @@ module.exports = {
       acc[user.username] = user.id;  // Map usernames to their corresponding IDs
       return acc;
     }, {});
+    
     console.log("User IDs in production: ", userMap);  
     await queryInterface.bulkInsert(options, [
       {

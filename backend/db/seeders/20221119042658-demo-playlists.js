@@ -1,4 +1,6 @@
 'use strict';
+import { userMap } from './seederFunctions.js';
+import { users } from './seederFunctions.js';
 const { Album, Comment, Playlist, PlaylistSong, Song, User } = require('../models');
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -12,17 +14,17 @@ module.exports = {
     await queryInterface.bulkInsert(options, [
       {
         name: 'Gym Workout',
-        userId: 1,
+        userId: userMap[corybaker24],
         previewImage: 'image url'
       },
       {
         name: 'My chill jam sessions',
-        userId: 2,
+        userId: userMap[aylarey],
         previewImage: 'image url'
       },
       {
         name: 'BANGERSSSS',
-        userId: 3,
+        userId: userMap[corybaker24],
         previewImage: 'image url'
       },
     ])
