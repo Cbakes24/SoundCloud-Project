@@ -14,17 +14,17 @@ module.exports = {
     await queryInterface.bulkInsert(options, [
       {
         name: 'Gym Workout',
-        userId: userMap[corybaker24],
+        userId: userMap["corybaker24"],
         previewImage: 'image url'
       },
       {
         name: 'My chill jam sessions',
-        userId: userMap[aylarey],
+        userId: userMap["aylarey"],
         previewImage: 'image url'
       },
       {
         name: 'BANGERSSSS',
-        userId: userMap[corybaker24],
+        userId: userMap["corybaker24"],
         previewImage: 'image url'
       },
     ])

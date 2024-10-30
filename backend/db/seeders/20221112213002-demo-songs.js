@@ -27,6 +27,8 @@ module.exports = {
       // },
       raw: true,  // Return plain data instead of Sequelize instances
     });
+
+    
     console.log("Albums: ", albums)
     await queryInterface.bulkInsert(options, [
       {
@@ -169,3 +171,6 @@ module.exports = {
 
   }
 };
+
+// npm install && npm run render-postbuild && npm run build && npm run sequelize --prefix backend db:migrate:undo:all && npm run sequelize --prefix backend db:seed:undo:all && npm run sequelize --prefix backend db:migrate && npm run sequelize --prefix backend db:seed:all
+//deploy hook https://api.render.com/deploy/srv-cehu2l1gp3jvlf0me100?key=ep-9XOMn9fM
