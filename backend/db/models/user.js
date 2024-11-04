@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   //instance method
   class User extends Model {
     toSafeObject() {
-      const { id, username, email, firstName, lastName } = this; // context will be the User instance
-      return { id, username, email, firstName, lastName };
+      const { id, username, email, firstName, lastName, previewImage } = this; // context will be the User instance
+      return { id, username, email, firstName, lastName, previewImage };
     }
 
     validatePassword(password) {

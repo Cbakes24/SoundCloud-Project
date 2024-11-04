@@ -29,7 +29,7 @@ const validateLogin = [
 
 //SIGN UP USER
 router.post("/signup", validateLogin, async (req, res) => {
-  const { firstName, lastName, username, email, password } = req.body;
+  const { firstName, lastName, username, email, password, previewImage } = req.body;
   //create or User.signup
 
   const newUser = await User.create({
@@ -38,6 +38,7 @@ router.post("/signup", validateLogin, async (req, res) => {
     username: username,
     email: email,
     password: password,
+    previewImage: previewImage
   });
 
   if (newUser) {
