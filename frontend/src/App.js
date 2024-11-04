@@ -22,17 +22,20 @@ import AlbumPage from "./components/Albums/AlbumPage";
 import CreateUser from "./components/SignupFormPage/AWS-SignupForm";
 import CreateAlbum from "./components/Albums/AlbumForm";
 import EditAlbumForm from "./components/Albums/EditAllbumForm";
+import InstaGallery from "./components/Gallery/InstaGallery";
 
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
+    <h1>Hello</h1>
       <div>
         <Navigation isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
       </div>
@@ -88,6 +91,9 @@ function App() {
           </Route>
           <Route exact path={`/users`}>
             <CreateUser />
+          </Route>
+          <Route exact path={`/gallery`}>
+            <InstaGallery />
           </Route>
         </Switch>
       )}

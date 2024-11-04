@@ -1,15 +1,15 @@
 
 #main-header{
     display: flex;
-    padding: 15px;
+    /* padding: 15px; */
     margin: auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #34ccaa;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 #main-header #mylinks{
-    padding: 15px;
-    margin-left: 99px;
+    /* padding: 15px; */
+    /* margin-left: 99px; */
     background-color: #34ccaa;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
@@ -23,22 +23,44 @@ width: 100px;
 }
 
 
-#navbar {
-width: 100%
-}
+.profileButton {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    top: 100%; /* Position below the button */
+    right: 0; /* Align to the right */
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1000; /* Ensure it appears above other content */
+    display: flex;
+    flex-direction: column;
+    min-width: 150px; /* Set a minimum width */
+  }
+  
+  .profile-dropdown .listItem {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .profile-dropdown .listItem:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+  }
+  
+  #navbar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Set a fixed height */
+    background-color: #333; /* Adjust as needed */
+  }
+  
 
-#navbar ul {
-padding: 0;
-text-decoration: none;
-width: 100%;
-}
-
-#navbar li{
- display: inline-block;
- font-size: 22px;
- padding-right: 15px;
- text-decoration: none;
-}
 
 #navbar a:hover {
     background-color: black;
@@ -48,7 +70,9 @@ width: 100%;
 }
 
 .navList {
-    background-color: rgb(246, 75, 75);
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
 }
 #navbar a{
     text-decoration: none;
@@ -57,55 +81,23 @@ width: 100%;
    }
 
 .container {
-    background-color: rgb(246, 75, 75);
-    padding: 1px;
+    background-color: rgb(106, 75, 246);
+    position: relative;
     height: 100%;
-    width: auto;
+    /* width: auto; */
     
 }
 
-#signup-button {
-    margin-left: 20px
-}
 
-.active {
-
-margin: 10px;
-color: rgb(0, 0, 0);
-border-width: 3px;
-border-style: solid;
-border-color: rgb(255, 255, 255);
-border-radius: 5px;
-padding-left: 15px;
-padding-right: 15px;
+.listItem{
+padding: 3px;
+text-align: center;
 }
 
 
-/* PROFILE BUTTON */
-#profilediv {
-    margin: 0;
-    padding: 0;
-}
-.profileButton:hover {
-    background-color: black;
-    color: white
-}
-
-.profile-dropdown {
- display: inline-flex;
- flex-direction: column;
-}
-
-i {
-    padding-left: 10px;
-}
-
-.listItem {
-    list-style-type: none;
-}
-
- ul .listItem:hover {
-    background-color: black;
-    color: white;
-    cursor:pointer
- }
+.nav-profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0px
+  }

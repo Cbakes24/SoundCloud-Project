@@ -8,17 +8,12 @@ import "./Navigation.css";
 function Navigation({ isLoaded, setIsLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   let sessionLinks;
+
   if (sessionUser) {
     sessionLinks = (
-      <div className="container">
+      <div className="">
         <div className="navList">
-          <NavLink
-            activeClassName="active"
-            exact
-            to={`/songs/users/${sessionUser.id}`}
-          >
-            My Songs
-          </NavLink>{" "}
+         { console.log(sessionUser, "SESSION USERRRRRR")}
           <ProfileButton user={sessionUser} />
         </div>
       </div>
@@ -58,34 +53,50 @@ function Navigation({ isLoaded, setIsLoaded }) {
       </header>
 
       <nav id="navbar">
-        <div className="container">
-          <ol>
-            <li className="navList">
+       
+          <div className="navList">
+            <div className="listItem">
               {" "}
               <NavLink activeClassName="active" exact to="/">
                 Home
               </NavLink>
-            </li>
-            <li className="navList">
+            </div>
+            <div className="listItem">
               {" "}
               <NavLink activeClassName="active" to="/comments">
                 Feed
               </NavLink>
-            </li>
-            <li className="navList">
+            </div>
+            <div className="listItem">
               <NavLink activeClassName="active" exact to="/songs">
                 Songs
               </NavLink>
-            </li>
-            <li className="navList">
+            </div>
+            <div className="listItem">
               <NavLink activeClassName="active" exact to="/albums">
                 Albums
               </NavLink>
-            </li>
+            </div>
+            <div className="listItem">
+              <NavLink activeClassName="active" exact to="/gallery">
+                Gallery
+              </NavLink>
+            </div>
+            {sessionUser ? (
+              <div className="listItem">
+                <NavLink
+                  activeClassName="active"
+                  exact
+                  to={`/songs/users/${sessionUser.id}`}
+                >
+                  My Songs
+                </NavLink>{" "}
+              </div>
+            ) : null}
 
-            <li className="navList"> {isLoaded && sessionLinks}</li>
-          </ol>
-        </div>
+            <div className=""> {isLoaded && sessionLinks}</div>
+          </div>
+        
       </nav>
     </>
   );

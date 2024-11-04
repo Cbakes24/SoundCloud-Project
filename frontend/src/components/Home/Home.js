@@ -1,38 +1,40 @@
 import { useDispatch, useSelector } from "react-redux";
 import LoginFormPage from "../LoginFormPage";
 import SignupFormPage from "../SignupFormPage";
-import SongsList from "../Songs/SongsList"
+import SongsList from "../Songs/SongsList";
 import AllComments from "../Comments/AllComments";
-import "./Home.css"
+import "./Home.css";
 import CreateUser from "../SignupFormPage/AWS-SignupForm";
-
+import Gallery from "../Gallery/InstaGallery";
 const Home = () => {
-    const currentUser = useSelector((state) => state.session.user);
+  const currentUser = useSelector((state) => state.session.user);
 
-    return currentUser ? (
+  return currentUser ? (
+    <div className="homepage">
+      <h2> Welcome!</h2>
+      <h3>Check Out The Newest Songs</h3>
+      <span className="songfeed">
+        <div>
+          <SongsList className="song-list-home" />
         
-        <div className="homepage">
-            <h2> Welcome!</h2>
-            <h3>Check Out The Newest Songs</h3>
-            <span className="songfeed">
+        </div>
+        <div>
 
-            <div>
-            <SongsList  className='song-list-home'/>
-            </div>
-            <div>
-            <AllComments  />
-            </div>
-            </span>
-
+        <Gallery />
         </div>
 
-    ) :
-<div id='loginsignup'>
-        <LoginFormPage />
-      
-        <CreateUser />
-</div>
+        <div>
+          <AllComments />
+        </div>
+      </span>
+    </div>
+  ) : (
+    <div id="loginsignup">
+      <LoginFormPage />
 
-}
+      <CreateUser />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
